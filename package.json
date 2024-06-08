@@ -75,6 +75,15 @@
 			"require": "./dist/symbols.cjs"
 		}
 	},
+	"typesVersions": {
+		"*": {
+			"handlers": ["./dist/handlers"],
+			"utils": ["./dist/utils"],
+			"stores": ["./dist/stores"],
+			"registry": ["./dist/registry"],
+			"symbols": ["./dist/symbols.d.ts"]
+		}
+	},
 	"contributors": ["vamuse <vamusedam@gmail.com>"],
 	"repository": {
 		"type": "git",
