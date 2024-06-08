@@ -1,15 +1,79 @@
-# sunar
+# Sunar
 
-To install dependencies:
+> [!WARNING]  
+> This project is still actively in development. Expect ongoing updates and improvements. Use with caution.
 
+## Current support
+
+- ✅ Slash commands
+- ✅ Signals handling (events)
+- ✅ Context menu commands
+- ✅ Button handlers
+- ✅ Protectors (middlewares)
+- ✅ Modal handlers
+- ❌ Autocomplete handlers
+- ❌ Select menu handlers
+- ❌ External plugins
+
+## About
+
+Sunar emerges as a finely-tuned [discord.js](https://discord.js.org) framework, meticulously engineered to prioritize ease of use and efficiency.
+
+- Lightweight and easy syntax
+- Fully typed parameters
+- Written in TypeScript
+
+## Installation
+
+[discord.js](https://www.npmjs.com/package/discord.js) library is required for sunar to work.
 ```bash
-bun install
+npm install sunar discord.js
+yarn add sunar discord.js
+pnpm add sunar discord.js
+bun add sunar discord.js
 ```
 
-To run:
+## Basic example usage
 
-```bash
-bun run src/index.ts
+```js
+// path: src/index.js
+
+import { Client, load } from 'sunar';
+import { registerGlobalCommands } from 'sunar/registry';
+import { handleInteraction } from 'sunar/handlers';
+import { GatewayIntentBits } from 'discord.js';
+
+const start = async () => {
+    const client = new Client({ intents: [] });
+
+    client.on('ready', (c) => {
+        await registerGlobalCommands(c.application);
+
+        console.log('Bot ready!')
+    });
+
+    client.on('interactionCreate', (interaction) => {
+        await handleInteraction(interaction)
+    });
+    
+    await load('src/{commands,signals}/**/*.{js,ts}'); // stores all sunar modules
+
+    client.login(); // uses by default process.env.DISCORD_TOKEN
+}
+
+start();
 ```
 
-This project was created using `bun init` in bun v1.1.10. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
+```js
+// path: src/commands/ping.js
+
+import { Slash, execute } from 'sunar';
+
+const slash = new Slash({ name: 'ping', description: 'ping pong' });
+
+execute(slash, (interaction) => {
+    interaction.reply({ content: `Client WS Ping: ${interaction.client.ws.ping}` });
+});
+
+export { slash }
+```

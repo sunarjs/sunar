@@ -7,10 +7,11 @@
 		"enabled": true,
 		"rules": {
 			"complexity": {
-				"all": true
+				"all": true,
+				"noExcessiveCognitiveComplexity": "off"
 			},
 			"correctness": {
-				"all": true
+				"recommended": true
 			},
 			"nursery": {
 				"all": true,
@@ -30,7 +31,8 @@
 			},
 			"suspicious": {
 				"all": true,
-				"noEmptyBlockStatements": "off"
+				"noEmptyBlockStatements": "off",
+				"noExplicitAny": "off"
 			}
 		}
 	},
@@ -39,7 +41,6 @@
 		"indentStyle": "tab",
 		"indentWidth": 2,
 		"lineWidth": 80
-		
 	},
 	"javascript": {
 		"formatter": {
@@ -53,6 +54,6 @@
 	},
 	"files": {
 		"include": ["**/*"],
-		"ignore": ["node_modules", "build", "demos"]
+		"ignore": ["node_modules", "dist"]
 	}
 }

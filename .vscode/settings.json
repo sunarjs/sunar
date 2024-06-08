@@ -3,5 +3,21 @@
 	"typescript.tsdk": "node_modules\\typescript\\lib",
 
 	"conventionalCommits.scopes": ["readme", "vscode", "jsdoc"],
-	"cSpell.words": ["biomejs", "commitlint", "sunar", "treeshake"]
+	"cSpell.words": [
+		"biomejs",
+		"commitlint",
+		"Protectable",
+		"sunar",
+		"treeshake"
+	],
+	"exportall.config.folderListener": [
+		"/src/types",
+		"/src/stores",
+		"/src/builders",
+		"/src/mutators",
+		"/src/registry",
+		"/src/handlers",
+		"/src/modules",
+		"/src/utils"
+	]
 }
