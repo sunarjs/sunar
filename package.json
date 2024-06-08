@@ -1,0 +1,27 @@
+{
+  "name": "sunar",
+  "module": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsup",
+    "lint": "biome lint ./src",
+    "format": "biome format --write .",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.7.3",
+    "@commitlint/cli": "19.3.0",
+    "@commitlint/config-conventional": "19.2.2",
+    "esbuild-plugin-file-path-extensions": "2.1.1",
+    "esbuild-plugin-version-injector": "1.2.1",
+    "husky": "9.0.11",
+    "tsup": "8.0.2",
+    "typescript": "5.4.5"
+  },
+  "dependencies": {
+    "discord.js": "14.15.2"
+  },
+  "peerDependencies": {
+    "discord.js": "14.14.x"
+  }
+}

@@ -1,0 +1,7 @@
+{
+	"editor.defaultFormatter": "biomejs.biome",
+	"typescript.tsdk": "node_modules\\typescript\\lib",
+
+	"conventionalCommits.scopes": ["readme", "vscode", "jsdoc"],
+	"cSpell.words": ["biomejs", "commitlint", "sunar", "treeshake"]
+}
