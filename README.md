@@ -41,18 +41,17 @@ bun add sunar discord.js
 import { Client, load } from 'sunar';
 import { registerGlobalCommands } from 'sunar/registry';
 import { handleInteraction } from 'sunar/handlers';
-import { GatewayIntentBits } from 'discord.js';
 
 const start = async () => {
     const client = new Client({ intents: [] });
 
-    client.on('ready', (c) => {
+    client.on('ready', async (c) => {
         await registerGlobalCommands(c.application);
 
         console.log('Bot ready!')
     });
 
-    client.on('interactionCreate', (interaction) => {
+    client.on('interactionCreate', async (interaction) => {
         await handleInteraction(interaction)
     });
     
