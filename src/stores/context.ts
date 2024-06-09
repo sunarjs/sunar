@@ -6,5 +6,5 @@ export interface Context {
 }
 
 export const context = {
-	config: '',
+	config: {},
 } as Context;
