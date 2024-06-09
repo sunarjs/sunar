@@ -9,13 +9,13 @@ import type {
 	ModalSubmitInteraction,
 } from 'discord.js';
 
-import type { Builder, Command, Component, Components, NextFunction } from '../../types';
+import type { Builder, CommandKey, ComponentKey, Components, NextFunction } from '../../types';
 import { Builders, Commands } from '../../types';
 
 export interface ProtectorOptions {
 	signals?: (keyof ClientEvents)[];
-	commands?: Command[];
-	components?: Component[];
+	commands?: CommandKey[];
+	components?: ComponentKey[];
 }
 
 export class Protector<TOptions extends ProtectorOptions = ProtectorOptions>
