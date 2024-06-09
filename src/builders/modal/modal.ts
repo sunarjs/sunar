@@ -6,20 +6,20 @@ import { type AcceptsArgs, type Builder, Builders, type InteractionAccepts } fro
 
 export interface ModalAccepts extends InteractionAccepts {}
 
-export interface ModalComponentData {
+export interface ModalOptions {
 	id: string | RegExp;
 }
 
 export class Modal implements Builder {
 	public readonly type = Builders.Modal;
-	public readonly data: ModalComponentData;
+	public readonly options: ModalOptions;
 
 	public accepts?: ModalAccepts;
 	public execute?: (interaction: ModalSubmitInteraction) => Awaitable<unknown>;
 	public protectors?: Protector<{ components: 'modal'[] }>[] | undefined;
 
-	constructor(data: ModalComponentData) {
-		this.data = data;
+	constructor(options: ModalOptions) {
+		this.options = options;
 	}
 }
 

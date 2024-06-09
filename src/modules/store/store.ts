@@ -1,6 +1,14 @@
-import { buttons, contextMenuCommands, modals, signals, slashCommands } from '../../stores';
-import { isButtonBuilder, isContextMenuBuilder, isObject, isSignalBuilder, isSlashBuilder } from '../../utils';
-import { isModalBuilder } from '../../utils/isModalBuilder';
+import { autocompletes, buttons, contextMenuCommands, modals, selectMenus, signals, slashCommands } from '../../stores';
+import {
+	isAutocompleteBuilder,
+	isButtonBuilder,
+	isContextMenuBuilder,
+	isModalBuilder,
+	isObject,
+	isSelectMenuBuilder,
+	isSignalBuilder,
+	isSlashBuilder,
+} from '../../utils';
 
 export function storeModules(modules: unknown[]) {
 	for (const module of modules) {
@@ -14,6 +22,8 @@ export function storeModules(modules: unknown[]) {
 			if (isContextMenuBuilder(value)) contextMenuCommands.set(value.data.name, value);
 			if (isButtonBuilder(value)) buttons.set(Symbol(), value);
 			if (isModalBuilder(value)) modals.set(Symbol(), value);
+			if (isSelectMenuBuilder(value)) selectMenus.set(Symbol(), value);
+			if (isAutocompleteBuilder(value)) autocompletes.set(Symbol(), value);
 		}
 	}
 }

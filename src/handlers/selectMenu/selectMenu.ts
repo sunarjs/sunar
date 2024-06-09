@@ -1,11 +1,12 @@
-import type { ModalSubmitInteraction } from 'discord.js';
+import type { AnySelectMenuInteraction } from 'discord.js';
 import { handleAccepts } from '..';
-import { modalAcceptsArgs } from '../../builders';
-import { modals } from '../../stores';
+import { selectMenuAcceptsArgs } from '../../builders';
+import { selectMenus } from '../../stores';
 import { handleProtectors } from '../protectors';
 
-export async function handleModal(interaction: ModalSubmitInteraction) {
-	const component = modals.find(({ options }) => {
+export async function handleSelectMenu(interaction: AnySelectMenuInteraction) {
+	const component = selectMenus.find(({ options }) => {
+		if (options.type !== interaction.componentType) return false;
 		if (options.id instanceof RegExp) return options.id.test(interaction.customId);
 		return options.id === interaction.customId;
 	});
@@ -14,7 +15,7 @@ export async function handleModal(interaction: ModalSubmitInteraction) {
 
 	if (typeof component.execute !== 'function') return;
 
-	const accepted = await handleAccepts({ interaction, accepts: component.accepts, args: modalAcceptsArgs });
+	const accepted = await handleAccepts({ interaction, accepts: component.accepts, args: selectMenuAcceptsArgs });
 	if (!accepted) return; // TODO: Add the ability to handle when not accepted
 
 	const canContinue = await handleProtectors({ protectors: component.protectors, data: interaction });

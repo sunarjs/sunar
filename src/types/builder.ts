@@ -1,10 +1,11 @@
 import { type Awaitable, Events } from 'discord.js';
-import type { Button, ContextMenu, Protector, Signal, Slash } from '../builders';
+import type { Autocomplete, Button, ContextMenu, Modal, Protector, Signal, Slash } from '../builders';
+import type { SelectMenu } from '../builders';
 
-export type ProtectableBuilder = Button | Signal | Slash | ContextMenu;
-export type AcceptableBuilder = Button | Slash | ContextMenu;
-export type ExecutableBuilder = Builder | Slash | ContextMenu | Signal;
-export type AnyBuilder = Protector | ProtectableBuilder;
+export type ProtectableBuilder = Signal | Slash | ContextMenu | Modal | Button | SelectMenu | Autocomplete;
+export type AcceptableBuilder = Slash | ContextMenu | SelectMenu | Modal | Button | Autocomplete;
+export type ExecutableBuilder = Signal | Slash | ContextMenu | SelectMenu | Modal | Button | Protector | Autocomplete;
+export type AnyBuilder = Protector | ProtectableBuilder | ExecutableBuilder | AcceptableBuilder;
 
 export interface Builder {
 	readonly type: Builders;
@@ -21,7 +22,7 @@ export const Commands = {
 	Autocomplete: 'autocomplete',
 } as const;
 
-export type Command = (typeof Commands)[keyof typeof Commands];
+export type CommandKey = (typeof Commands)[keyof typeof Commands];
 
 export const Components = {
 	Button: 'button',
@@ -29,7 +30,7 @@ export const Components = {
 	SelectMenu: 'selectMenu',
 } as const;
 
-export type Component = (typeof Components)[keyof typeof Components];
+export type ComponentKey = (typeof Components)[keyof typeof Components];
 
 export enum Builders {
 	Slash = 0,

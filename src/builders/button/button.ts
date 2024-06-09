@@ -5,22 +5,22 @@ import { interactionAcceptsArgs } from '../../accepts';
 import type { AcceptsArgs, Builder } from '../../types';
 import { Builders, type InteractionAccepts } from '../../types';
 
-export interface ButtonAccepts extends InteractionAccepts {}
-
-export interface ButtonComponentData {
+export interface ButtonOptions {
 	id: string | RegExp;
 }
 
+export interface ButtonAccepts extends InteractionAccepts {}
+
 export class Button implements Builder {
 	public readonly type = Builders.Button;
-	public readonly data: ButtonComponentData;
+	public readonly options: ButtonOptions;
 
 	public accepts?: ButtonAccepts;
 	public protectors?: Protector<{ components: 'button'[] }>[];
 	public execute?: (interaction: ButtonInteraction) => Awaitable<unknown>;
 
-	constructor(data: ButtonComponentData) {
-		this.data = data;
+	constructor(options: ButtonOptions) {
+		this.options = options;
 	}
 }
 

@@ -1,11 +1,11 @@
-import type { ModalSubmitInteraction } from 'discord.js';
+import type { ButtonInteraction } from 'discord.js';
 import { handleAccepts } from '..';
-import { modalAcceptsArgs } from '../../builders';
-import { modals } from '../../stores';
+import { buttonAcceptsArgs } from '../../builders';
+import { buttons } from '../../stores';
 import { handleProtectors } from '../protectors';
 
-export async function handleModal(interaction: ModalSubmitInteraction) {
-	const component = modals.find(({ options }) => {
+export async function handleButton(interaction: ButtonInteraction) {
+	const component = buttons.find(({ options }) => {
 		if (options.id instanceof RegExp) return options.id.test(interaction.customId);
 		return options.id === interaction.customId;
 	});
@@ -14,7 +14,7 @@ export async function handleModal(interaction: ModalSubmitInteraction) {
 
 	if (typeof component.execute !== 'function') return;
 
-	const accepted = await handleAccepts({ interaction, accepts: component.accepts, args: modalAcceptsArgs });
+	const accepted = await handleAccepts({ interaction, accepts: component.accepts, args: buttonAcceptsArgs });
 	if (!accepted) return; // TODO: Add the ability to handle when not accepted
 
 	const canContinue = await handleProtectors({ protectors: component.protectors, data: interaction });
