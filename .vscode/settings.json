@@ -4,6 +4,7 @@
 
 	"conventionalCommits.scopes": ["readme", "vscode", "jsdoc"],
 	"cSpell.words": [
+		"autocompletes",
 		"biomejs",
 		"commitlint",
 		"Protectable",
