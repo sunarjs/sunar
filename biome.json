@@ -54,6 +54,6 @@
 	},
 	"files": {
 		"include": ["**/*"],
-		"ignore": ["node_modules", "dist"]
+		"ignore": ["node_modules", "dist", "src/demos"]
 	}
 }
