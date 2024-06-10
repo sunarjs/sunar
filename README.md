@@ -195,9 +195,9 @@ import { Autocomplete, Slash, execute } from 'sunar';
 import { ApplicationCommandOptionType } from 'discord.js';
 
 const slash = new Slash({
-	name: 'eat',
-	description: 'Eat a fruit',
-	options: [{
+    name: 'eat',
+    description: 'Eat a fruit',
+    options: [{
         name: 'fruit',
         description: 'Select the fruit',
         type: ApplicationCommandOptionType.String,
@@ -218,7 +218,7 @@ const autocomplete = new Autocomplete({
 });
 
 execute(autocomplete, (interaction, option) => {
-	const data = [
+    const data = [
         { name: 'Apple', value: 'apple' },
         { name: 'Kiwi', value: 'kiwi' },
         { name: 'Watermelon', value: 'watermelon' },
@@ -227,9 +227,7 @@ execute(autocomplete, (interaction, option) => {
     ];
 
     const results = data.filter(
-        (e) => e.name.toLowerCase().includes(
-            option.value.toLowerCase()
-        )
+        (e) => e.name.toLowerCase().includes(option.value.toLowerCase())
     );
 
     interaction.respond(results);
@@ -464,12 +462,12 @@ execute(onlyAdmins, (arg, next) => {
         }
 
         return interaction.isRepliable() && interaction.reply({ content, ephemeral: true });
-	}
+    }
 
 	if (arg.isChatInputCommand()) {
-		if (arg.memberPermissions && isAdmin(arg.memberPermissions)) {
+        if (arg.memberPermissions && isAdmin(arg.memberPermissions)) {
             return next();
-        } 
+        }
 
         return arg.reply({ content, ephemeral: true });
     }
@@ -503,7 +501,7 @@ const slash = new Slash({
     description: 'Remove a role',
     dmPermission: false,
     defaultMemberPermissions: [PermissionFlagsBits.ManageRoles],
-	options: [{
+    options: [{
         name: 'target',
         description: 'Target role',
         type: ApplicationCommandOptionType.Role,
