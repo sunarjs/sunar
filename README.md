@@ -176,9 +176,9 @@ const signal = new Signal('guildMemberAdd');
 execute(signal, (member) => {
     const channel = member.guild.channels.cache.find((c) => c.name === 'welcomes');
 
-	if (!(channel instanceof TextChannel)) return;
+    if (!(channel instanceof TextChannel)) return;
 
-	channel.send({ content: `${member} just joined!` });
+    channel.send({ content: `${member} just joined!` });
 });
 
 export { signal };
