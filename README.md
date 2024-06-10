@@ -107,9 +107,7 @@ const slash = new Slash({
 });
 
 execute(slash, (interaction) => {
-    interaction.reply({
-        content: `Client WS Ping: ${interaction.client.ws.ping}`
-    });
+    interaction.reply({ content: `Client WS Ping: ${interaction.client.ws.ping}` });
 });
 
 export { slash };
@@ -176,9 +174,7 @@ import { TextChannel } from 'discord.js';
 const signal = new Signal('guildMemberAdd');
 
 execute(signal, (member) => {
-	const channel = member.guild.channels.cache.find(
-        (c) => c.name === 'welcomes'
-    );
+    const channel = member.guild.channels.cache.find((c) => c.name === 'welcomes');
 
 	if (!(channel instanceof TextChannel)) return;
 
@@ -213,9 +209,7 @@ const slash = new Slash({
 execute(slash, (interaction) => {
     const fruit = interaction.options.getString('fruit', true);
 
-	interaction.reply({
-        content: `You ate the **${fruit}**.`
-    });
+    interaction.reply({ content: `You ate the **${fruit}**.` });
 });
 
 const autocomplete = new Autocomplete({
@@ -225,20 +219,20 @@ const autocomplete = new Autocomplete({
 
 execute(autocomplete, (interaction, option) => {
 	const data = [
-		{ name: 'Apple', value: 'apple' },
-		{ name: 'Kiwi', value: 'kiwi' },
-		{ name: 'Watermelon', value: 'watermelon' },
-		{ name: 'Banana', value: 'banana' },
-		{ name: 'Strawberry', value: 'strawberry' },
-	];
+        { name: 'Apple', value: 'apple' },
+        { name: 'Kiwi', value: 'kiwi' },
+        { name: 'Watermelon', value: 'watermelon' },
+        { name: 'Banana', value: 'banana' },
+        { name: 'Strawberry', value: 'strawberry' },
+    ];
 
-	const results = data.filter(
+    const results = data.filter(
         (e) => e.name.toLowerCase().includes(
             option.value.toLowerCase()
         )
     );
 
-	interaction.respond(results);
+    interaction.respond(results);
 });
 
 export { slash, autocomplete };
@@ -257,12 +251,12 @@ const contextMenu = new ContextMenu({
 });
 
 execute(contextMenu, (interaction) => {
-	const avatarURL = interaction.targetUser.displayAvatarURL({
+    const avatarURL = interaction.targetUser.displayAvatarURL({
         size: 1024,
         forceStatic: false,
     });
 
-	interaction.reply({
+    interaction.reply({
         content: `Avatar of user **${interaction.user.username}**`,
         files: [avatarURL],
     });
@@ -279,9 +273,9 @@ import { Slash, execute } from 'sunar';
 import { ApplicationCommandOptionType } from 'discord.js';
 
 const slash = new Slash({
-	name: 'avatar',
-	description: 'Show user avatar',
-	options: [{
+    name: 'avatar',
+    description: 'Show user avatar',
+    options: [{
         name: 'target',
         description: 'Target user',
         type: ApplicationCommandOptionType.User,
@@ -289,14 +283,14 @@ const slash = new Slash({
 });
 
 execute(slash, (interaction) => {
-	const user = interaction.options.getUser('target') ?? interaction.user;
+    const user = interaction.options.getUser('target') ?? interaction.user;
 
-	const avatarURL = user.displayAvatarURL({
+    const avatarURL = user.displayAvatarURL({
         size: 1024,
         forceStatic: false,
     });
 
-	interaction.reply({
+    interaction.reply({
         content: `Avatar of user **${interaction.user.username}**`,
         files: [avatarURL],
     });
@@ -316,22 +310,22 @@ import { Button, Slash, execute } from 'sunar';
 import { ActionRowBuilder, ButtonBuilder, ButtonStyle, PermissionFlagsBits } from 'discord.js';
 
 const slash = new Slash({
-	name: 'leave',
-	description: 'Make the bot leave the server',
-	dmPermission: false,
-	defaultMemberPermissions: [PermissionFlagsBits.Administrator],
+    name: 'leave',
+    description: 'Make the bot leave the server',
+    dmPermission: false,
+    defaultMemberPermissions: [PermissionFlagsBits.Administrator],
 });
 
 execute(slash, (interaction) => {
-	const button = new ButtonBuilder()
+    const button = new ButtonBuilder()
         .setCustomId('confirmLeave')
         .setLabel('Leave')
         .setStyle(ButtonStyle.Danger);
 
-	const row = new ActionRowBuilder()
+    const row = new ActionRowBuilder()
         .setComponents(button);
 
-	interaction.reply({
+    interaction.reply({
         content: 'Are you certain about my leaving the server?',
         components: [row],
     });
@@ -340,12 +334,12 @@ execute(slash, (interaction) => {
 const button = new Button({ id: 'confirmLeave' });
 
 execute(button, async (interaction) => {
-	await interaction.reply({
+    await interaction.reply({
         content: 'Leaving...',
         ephemeral: true,
     });
 
-	interaction.guild.leave();
+    interaction.guild.leave();
 });
 
 export { slash, button };
@@ -364,22 +358,22 @@ const slash = new Slash({
 });
 
 execute(slash, (interaction) => {
-	const contentInput = new TextInputBuilder()
-		.setCustomId('content')
-		.setLabel('Content')
-		.setStyle(TextInputStyle.Paragraph)
-		.setPlaceholder('Your feedback content...')
-		.setRequired(true);
+    const contentInput = new TextInputBuilder()
+        .setCustomId('content')
+        .setLabel('Content')
+        .setStyle(TextInputStyle.Paragraph)
+        .setPlaceholder('Your feedback content...')
+        .setRequired(true);
 
-	const row = new ActionRowBuilder()
+    const row = new ActionRowBuilder()
         .setComponents(contentInput);
 
-	const modal = new ModalBuilder()
+    const modal = new ModalBuilder()
         .setCustomId('feedback')
         .setTitle('Submit your feedback')
         .setComponents(row);
 
-	interaction.showModal(modal);
+    interaction.showModal(modal);
 });
 
 const modal = new Modal({ id: 'feedback' });
@@ -387,9 +381,9 @@ const modal = new Modal({ id: 'feedback' });
 execute(modal, (interaction) => {
     const feedback = interaction.fields.getTextInputValue('content');
 
-	// Send feedback somewhere...
+    // Send feedback somewhere...
 
-	interaction.reply({
+    interaction.reply({
         content: 'Thanks for the feedback!',
         ephemeral: true,
     });
@@ -411,20 +405,20 @@ const slash = new Slash({
 });
 
 execute(slash, (interaction) => {
-	const select = new StringSelectMenuBuilder()
-		.setCustomId('buy')
-		.setOptions(
-			{ label: 'Laptop', value: 'laptop' },
-			{ label: 'Smart TV', value: 'smart-tv' },
-			{ label: 'Tablet', value: 'tablet' },
-			{ label: 'Smartphone', value: 'smartphone' },
-		)
-		.setPlaceholder('Select an item to purchase');
+    const select = new StringSelectMenuBuilder()
+        .setCustomId('buy')
+        .setOptions(
+            { label: 'Laptop', value: 'laptop' },
+            { label: 'Smart TV', value: 'smart-tv' },
+            { label: 'Tablet', value: 'tablet' },
+            { label: 'Smartphone', value: 'smartphone' },
+        )
+        .setPlaceholder('Select an item to purchase');
 
-	const row = new ActionRowBuilder()
+    const row = new ActionRowBuilder()
         .setComponents(select);
 
-	interaction.reply({ components: [row] });
+    interaction.reply({ components: [row] });
 });
 
 const select = new SelectMenu({
@@ -433,13 +427,11 @@ const select = new SelectMenu({
 });
 
 execute(select, (interaction) => {
-	const item = interaction.values.at(0);
+    const item = interaction.values.at(0);
 
-	// Do something with the item...
+    // Do something with the item...
 
-	interaction.reply({
-        content: `You have purchased the **${item}** item`,
-    });
+    interaction.reply({ content: `You have purchased the **${item}** item` });
 });
 
 export { slash, select };
@@ -453,37 +445,34 @@ import { Protector, Slash, execute, protect } from 'sunar';
 import { PermissionFlagsBits } from 'discord.js';
 
 const onlyAdmins = new Protector({
-	commands: ['slash'],
-	signals: ['interactionCreate'],
+    commands: ['slash'],
+    signals: ['interactionCreate'],
 });
 
 function isAdmin(permissions) {
-	return permissions.has(PermissionFlagsBits.Administrator);
+    return permissions.has(PermissionFlagsBits.Administrator);
 }
 
 execute(onlyAdmins, (arg, next) => {
     const content = 'This command can only be used by administrators';
 
-	if (Array.isArray(arg)) {
-		const interaction = arg[0];
+    if (Array.isArray(arg)) {
+        const interaction = arg[0];
 
-		if (
-            interaction.memberPermissions &&
-            isAdmin(interaction.memberPermissions)
-        ) return next();
+        if (interaction.memberPermissions && isAdmin(interaction.memberPermissions)) {
+            return next();
+        }
 
-		return interaction.isRepliable() &&
-            interaction.reply({ content, ephemeral: true });
+        return interaction.isRepliable() && interaction.reply({ content, ephemeral: true });
 	}
 
 	if (arg.isChatInputCommand()) {
-		if (
-            arg.memberPermissions &&
-            isAdmin(arg.memberPermissions)
-        ) return next();
+		if (arg.memberPermissions && isAdmin(arg.memberPermissions)) {
+            return next();
+        } 
 
-		return arg.reply({ content, ephemeral: true });
-	}
+        return arg.reply({ content, ephemeral: true });
+    }
 });
 
 const slash = new Slash({
@@ -496,7 +485,7 @@ const slash = new Slash({
 protect(slash, [onlyAdmins]);
 
 execute(slash, (interaction) => {
-	interaction.reply({ content: 'You are an admin!' });
+    interaction.reply({ content: 'You are an admin!' });
 });
 
 export { slash, onlyAdmins };
@@ -510,12 +499,10 @@ import { Slash, accepts, execute } from 'sunar';
 import { ApplicationCommandOptionType, PermissionFlagsBits, Role } from 'discord.js';
 
 const slash = new Slash({
-	name: 'remove-role',
-	description: 'Remove a role',
-	dmPermission: false,
-	defaultMemberPermissions: [
-        PermissionFlagsBits.ManageRoles
-    ],
+    name: 'remove-role',
+    description: 'Remove a role',
+    dmPermission: false,
+    defaultMemberPermissions: [PermissionFlagsBits.ManageRoles],
 	options: [{
         name: 'target',
         description: 'Target role',
@@ -525,23 +512,19 @@ const slash = new Slash({
 });
 
 accepts(slash, {
-	clientPermissions: ['ManageRoles'],
+    clientPermissions: ['ManageRoles'],
 });
 
 execute(slash, async (interaction) => {
-	const role = interaction.options.getRole('target', true);
+    const role = interaction.options.getRole('target', true);
 
-	if (!(role instanceof Role)) {
-        return interaction.reply({
-            content: 'Invalid role.'
-        });
+    if (!(role instanceof Role)) {
+        return interaction.reply({ content: 'Invalid role.' });
     }
 
-	role.editable && (await role.delete());
+    role.editable && (await role.delete());
 
-	interaction.reply({
-        content: `**${role.name}** deleted.`,
-    });
+    interaction.reply({ content: `**${role.name}** deleted.` });
 });
 
 export { slash };
