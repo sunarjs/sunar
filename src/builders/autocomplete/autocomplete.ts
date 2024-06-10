@@ -2,7 +2,7 @@ import type { AutocompleteFocusedOption, AutocompleteInteraction, Awaitable } fr
 
 import type { Protector } from '..';
 import { interactionAcceptsArgs } from '../../accepts';
-import type { AcceptsArgs, Builder } from '../../types';
+import type { AcceptsArgs, ExecutableBuilder } from '../../types';
 import { Builders, type InteractionAccepts } from '../../types';
 
 export interface AutocompleteOptions {
@@ -12,7 +12,7 @@ export interface AutocompleteOptions {
 
 export interface AutocompleteAccepts extends InteractionAccepts {}
 
-export class Autocomplete implements Builder {
+export class Autocomplete implements ExecutableBuilder {
 	public readonly type = Builders.Autocomplete;
 	public readonly options: AutocompleteOptions;
 

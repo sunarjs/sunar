@@ -10,13 +10,13 @@ import type {
 
 import type { Protector } from '..';
 import { interactionAcceptsArgs } from '../../accepts';
-import { type AcceptsArgs, type Builder, Builders, type InteractionAccepts } from '../../types';
+import { type AcceptsArgs, Builders, type ExecutableBuilder, type InteractionAccepts } from '../../types';
 
 export type ContextMenuData = MessageApplicationCommandData | UserApplicationCommandData;
 
 export interface ContextMenuAccepts extends InteractionAccepts {}
 
-export class ContextMenu<TData extends ContextMenuData = ContextMenuData> implements Builder {
+export class ContextMenu<TData extends ContextMenuData = ContextMenuData> implements ExecutableBuilder {
 	public readonly type = Builders.ContextMenu;
 	public readonly data: TData;
 

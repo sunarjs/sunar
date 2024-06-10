@@ -2,7 +2,7 @@ import type { Awaitable, ButtonInteraction } from 'discord.js';
 
 import type { Protector } from '..';
 import { interactionAcceptsArgs } from '../../accepts';
-import type { AcceptsArgs, Builder } from '../../types';
+import type { AcceptsArgs, ExecutableBuilder } from '../../types';
 import { Builders, type InteractionAccepts } from '../../types';
 
 export interface ButtonOptions {
@@ -11,7 +11,7 @@ export interface ButtonOptions {
 
 export interface ButtonAccepts extends InteractionAccepts {}
 
-export class Button implements Builder {
+export class Button implements ExecutableBuilder {
 	public readonly type = Builders.Button;
 	public readonly options: ButtonOptions;
 

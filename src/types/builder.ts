@@ -4,13 +4,15 @@ import type { SelectMenu } from '../builders';
 
 export type ProtectableBuilder = Signal | Slash | ContextMenu | Modal | Button | SelectMenu | Autocomplete;
 export type AcceptableBuilder = Slash | ContextMenu | SelectMenu | Modal | Button | Autocomplete;
-export type ExecutableBuilder = Signal | Slash | ContextMenu | SelectMenu | Modal | Button | Protector | Autocomplete;
-export type AnyBuilder = Protector | ProtectableBuilder | ExecutableBuilder | AcceptableBuilder;
+export type AnyBuilder = Protector | ProtectableBuilder | AcceptableBuilder;
 
 export interface Builder {
 	readonly type: Builders;
 	accepts?: object;
 	protectors?: Protector[];
+}
+
+export interface ExecutableBuilder extends Builder {
 	execute?: (...args: any) => Awaitable<unknown>;
 }
 

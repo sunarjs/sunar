@@ -2,11 +2,11 @@ import type { Awaitable, ChatInputApplicationCommandData, ChatInputCommandIntera
 
 import type { Protector } from '..';
 import { interactionAcceptsArgs } from '../../accepts';
-import { type AcceptsArgs, type Builder, Builders, type InteractionAccepts } from '../../types';
+import { type AcceptsArgs, Builders, type ExecutableBuilder, type InteractionAccepts } from '../../types';
 
 export interface SlashAccepts extends InteractionAccepts {}
 
-export class Slash implements Builder {
+export class Slash implements ExecutableBuilder {
 	public readonly type = Builders.Slash;
 	public readonly data: ChatInputApplicationCommandData;
 

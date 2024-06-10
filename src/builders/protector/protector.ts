@@ -9,7 +9,7 @@ import type {
 	ModalSubmitInteraction,
 } from 'discord.js';
 
-import type { Builder, CommandKey, ComponentKey, Components, NextFunction } from '../../types';
+import type { CommandKey, ComponentKey, Components, ExecutableBuilder, NextFunction } from '../../types';
 import { Builders, Commands } from '../../types';
 
 export interface ProtectorOptions {
@@ -19,7 +19,7 @@ export interface ProtectorOptions {
 }
 
 export class Protector<TOptions extends ProtectorOptions = ProtectorOptions>
-	implements Omit<Builder, 'protectors' | 'accepts'>
+	implements Omit<ExecutableBuilder, 'protectors' | 'accepts'>
 {
 	public readonly type = Builders.Protector;
 

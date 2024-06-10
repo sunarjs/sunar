@@ -2,7 +2,7 @@ import type { Awaitable, ModalSubmitInteraction } from 'discord.js';
 
 import type { Protector } from '..';
 import { interactionAcceptsArgs } from '../../accepts';
-import { type AcceptsArgs, type Builder, Builders, type InteractionAccepts } from '../../types';
+import { type AcceptsArgs, Builders, type ExecutableBuilder, type InteractionAccepts } from '../../types';
 
 export interface ModalAccepts extends InteractionAccepts {}
 
@@ -10,7 +10,7 @@ export interface ModalOptions {
 	id: string | RegExp;
 }
 
-export class Modal implements Builder {
+export class Modal implements ExecutableBuilder {
 	public readonly type = Builders.Modal;
 	public readonly options: ModalOptions;
 

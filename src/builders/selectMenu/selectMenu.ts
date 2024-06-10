@@ -12,7 +12,7 @@ import type {
 
 import type { Protector } from '..';
 import { interactionAcceptsArgs } from '../../accepts';
-import { type AcceptsArgs, type Builder, Builders, type InteractionAccepts } from '../../types';
+import { type AcceptsArgs, Builders, type ExecutableBuilder, type InteractionAccepts } from '../../types';
 
 export interface SelectMenuOptions {
 	id: string | RegExp;
@@ -21,7 +21,7 @@ export interface SelectMenuOptions {
 
 export interface SelectMenuAccepts extends InteractionAccepts {}
 
-export class SelectMenu<TOptions extends SelectMenuOptions = SelectMenuOptions> implements Builder {
+export class SelectMenu<TOptions extends SelectMenuOptions = SelectMenuOptions> implements ExecutableBuilder {
 	public readonly type = Builders.SelectMenu;
 	public readonly options: TOptions;
 
