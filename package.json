@@ -1,8 +1,8 @@
 {
 	"name": "sunar",
-	"version": "0.0.22",
+	"version": "0.0.3",
 	"description": "A simple and easy to use discord.js framework.",
-	"author": "vamuse <vamusedam@gmail.com> (https://github.com/vamuse)",
+	"author": "tai (https://github.com/taii03)",
 	"license": "MIT",
 	"main": "dist/index.cjs",
 	"types": "dist/index.d.ts",
