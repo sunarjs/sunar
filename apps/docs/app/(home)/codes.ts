@@ -56,10 +56,7 @@ export { modal };`;
 
 export const selectMenuCode = `import { SelectMenu, execute } from 'sunar';
  
-const selectMenu = new SelectMenu({
-    id: 'my-select-menu',
-    type: 3,
-});
+const selectMenu = new SelectMenu({ id: 'my-select-menu', type: 3 });
  
 execute(selectMenu, (interaction) => {
 	interaction.reply({ content: 'Pong!' });

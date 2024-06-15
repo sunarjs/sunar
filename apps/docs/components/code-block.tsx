@@ -60,7 +60,11 @@ export function CodeBlock({
 	);
 
 	return (
-		<Base.CodeBlock {...wrapper}>
+		<Base.CodeBlock
+			allowCopy={false}
+			{...wrapper}
+			className={cn('m-0 mt-2 bg-muted/50', wrapper?.className)}
+		>
 			<Base.Pre {...props} dangerouslySetInnerHTML={{ __html: html }} />
 		</Base.CodeBlock>
 	);
@@ -83,7 +87,7 @@ export function PrettyCodeBlock({
 		<div
 			{...container}
 			className={cn(
-				'relative flex h-80 w-[593px] overflow-hidden rounded-lg',
+				'relative flex h-80 overflow-hidden rounded-lg sm:w-full xl:w-[593px] [&>div>canvas]:hidden [&>div>canvas]:sm:block',
 				container?.className
 			)}
 		>
@@ -93,7 +97,7 @@ export function PrettyCodeBlock({
 				wrapper={{
 					allowCopy: false,
 					className:
-						'bg-muted/50 dark:bg-muted/60 absolute mx-auto top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 my-auto w-11/12 backdrop-blur-xl border-none',
+						'bg-muted/50 dark:bg-muted/60 absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 m-auto w-11/12 backdrop-blur-xl border-none',
 					...props.wrapper,
 				}}
 			/>

@@ -18,19 +18,15 @@
 		"geist": "^1.3.0",
 		"lucide-react": "^0.394.0",
 		"next": "^14.2.4",
-		"npm-to-yarn": "^2.2.1",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
-		"react-fast-marquee": "^1.6.4",
 		"shiki": "^1.6.4",
 		"sunar": "workspace:*",
 		"tailwind-merge": "^2.3.0",
-		"unist-util-visit": "^5.0.0",
-		"uvcanvas": "^0.2.1"
+		"uvcanvas": "^0.2.1",
+		"zod": "^3.23.8"
 	},
 	"devDependencies": {
-		"@types/estree": "^1.0.5",
-		"@types/mdast": "^4.0.4",
 		"@types/mdx": "^2.0.13",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
@@ -40,7 +36,6 @@
 		"prettier-plugin-tailwindcss": "^0.6.4",
 		"tailwindcss": "^3.4.4",
 		"tsx": "^4.15.4",
-		"typescript": "^5.4.5",
-		"unified": "^11.0.4"
+		"typescript": "^5.4.5"
 	}
 }

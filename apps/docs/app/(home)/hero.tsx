@@ -1,11 +1,12 @@
 import { CopyInstall } from '@/components/copy-install';
 import { GridPattern } from '@/components/grid-pattern';
+import { Button } from '@/components/ui/button';
 import { cn } from '@/utils/cn';
 import Link from 'next/link';
 
 export function HomeHero() {
 	return (
-		<section className="relative flex flex-col items-center justify-center border p-20 text-center">
+		<section className="relative flex flex-col items-center justify-center border px-2 py-16 text-center md:py-20 lg:px-0">
 			<GridPattern
 				width={30}
 				height={30}
@@ -18,7 +19,7 @@ export function HomeHero() {
 			/>
 			<h1
 				className={cn(
-					'mb-4 flex flex-col text-balance text-8xl font-extrabold tracking-tight',
+					'mb-2 flex flex-col text-balance text-4xl font-extrabold tracking-tight sm:text-5xl md:mb-4 md:text-6xl lg:text-7xl xl:text-8xl',
 					'[&>span]:dark:bg-gradient-to-t [&>span]:dark:from-muted-foreground [&>span]:dark:to-foreground',
 					'[&>span]:dark:to-40% [&>span]:dark:bg-clip-text [&>span]:dark:text-transparent'
 				)}
@@ -26,7 +27,7 @@ export function HomeHero() {
 				<span>Make Overpowered</span>
 				<span>Discord Bots.</span>
 			</h1>
-			<p className="max-w-5xl text-balance text-3xl font-medium text-muted-foreground">
+			<p className="max-w-5xl text-balance text-base font-medium text-muted-foreground sm:text-lg md:text-xl lg:text-3xl">
 				Sunar emerges as a finely-tuned discord.js framework, meticulously
 				engineered to prioritize{' '}
 				<span className="text-secondary-foreground">
@@ -34,15 +35,9 @@ export function HomeHero() {
 				</span>
 				.
 			</p>
-			<div className="mt-[35px] flex translate-x-[1.5px] space-x-4">
-				<Link
-					href="/docs"
-					className={cn(
-						'rounded-full border bg-foreground px-6 py-3 font-medium text-background transition-opacity hover:opacity-90 dark:font-semibold',
-						'to-70% dark:bg-gradient-to-t dark:from-muted-foreground dark:to-foreground'
-					)}
-				>
-					Getting started
+			<div className="mt-4 flex translate-x-[1.5px] flex-col gap-x-4 gap-y-2 sm:flex-row md:mt-[35px]">
+				<Link href="/docs">
+					<Button>Getting started</Button>
 				</Link>
 
 				<CopyInstall />

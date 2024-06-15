@@ -6,7 +6,12 @@ import { useState } from 'react';
 
 const content = 'npm install sunar';
 
-export function CopyInstall() {
+export function CopyInstall(
+	props: React.DetailedHTMLProps<
+		React.HTMLAttributes<HTMLButtonElement>,
+		HTMLButtonElement
+	>
+) {
 	const [copied, setCopied] = useState(false);
 
 	const handleClick = async () => {
@@ -27,20 +32,26 @@ export function CopyInstall() {
 	return (
 		<button
 			onClick={handleClick}
-			className="flex items-center gap-x-3 rounded-full border bg-secondary px-6 py-3 text-start font-mono font-medium outline-none transition-colors hover:bg-white dark:bg-muted dark:hover:bg-secondary"
+			{...props}
+			className={cn(
+				'flex items-center gap-x-3 rounded-full border bg-secondary px-6 py-2 text-start outline-none transition-colors hover:bg-white dark:bg-muted dark:hover:bg-secondary md:py-3',
+				props.className
+			)}
 		>
-			<TerminalIcon className="size-5" />
-			{content}
+			<TerminalIcon className="hidden size-4 sm:block md:size-5" />
+			<span className="font-mono text-sm font-medium sm:text-base">
+				{content}
+			</span>
 			<div className="relative pl-1 text-muted-foreground">
 				<CopyIcon
 					className={cn(
-						'size-4 opacity-100 transition-opacity',
+						'size-3 opacity-100 transition-opacity md:size-4',
 						copied && 'opacity-0'
 					)}
 				/>
 				<CheckIcon
 					className={cn(
-						'absolute inset-0 size-4 opacity-0 transition-opacity',
+						'absolute inset-0 size-3 opacity-0 transition-opacity md:size-4',
 						copied && 'opacity-100'
 					)}
 				/>
