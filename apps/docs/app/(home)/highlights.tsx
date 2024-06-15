@@ -2,7 +2,7 @@ import { Cross } from '@/icons/cross';
 import {
 	FolderTreeIcon,
 	GlobeIcon,
-	LucideIcon,
+	type LucideIcon,
 	MousePointerClickIcon,
 	RabbitIcon,
 	ScaleIcon,

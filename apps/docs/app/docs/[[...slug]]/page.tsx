@@ -1,14 +1,16 @@
-import { getPage, getPages } from '@/utils/source';
-import { DocsPage, DocsBody } from 'fumadocs-ui/page';
-import { notFound } from 'next/navigation';
-import { createMetadata } from '@/utils/metadata';
 import { GitHubIcon } from '@/icons';
+import { createMetadata } from '@/utils/metadata';
+import { getPage, getPages } from '@/utils/source';
+import { DocsBody, DocsPage } from 'fumadocs-ui/page';
+import { notFound } from 'next/navigation';
 
-export default async function Page({
-	params,
-}: {
-	params: { slug?: string[] };
-}) {
+interface Params {
+	slug: string[];
+}
+
+export const dynamicParams = false;
+
+export default function Page({ params }: { params: Params }) {
 	const page = getPage(params.slug);
 
 	if (page == null) {
@@ -33,6 +35,7 @@ export default async function Page({
 	return (
 		<DocsPage
 			toc={page.data.exports.toc}
+			lastUpdate={page.data.exports.lastModified}
 			tableOfContent={{
 				enabled: true,
 				footer,
@@ -47,8 +50,8 @@ export default async function Page({
 	);
 }
 
-export async function generateStaticParams() {
-	return getPages().map((page) => ({
+export function generateStaticParams(): Params[] {
+	return getPages().map<Params>((page) => ({
 		slug: page.slugs,
 	}));
 }

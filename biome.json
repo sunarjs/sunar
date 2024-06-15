@@ -35,7 +35,8 @@
 				"noEmptyBlockStatements": "off",
 				"noExplicitAny": "off"
 			}
-		}
+		},
+		"ignore": ["apps/docs"]
 	},
 	"formatter": {
 		"enabled": true,
