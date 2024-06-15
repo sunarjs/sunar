@@ -1,0 +1,139 @@
+---
+title: Getting started
+description: Your first document
+icon: Rocket
+---
+
+<Steps>
+<Step>
+
+## Installation
+
+Ensure you have [Node.js](https://nodejs.org) (16.11.0 or newer) installed on your machine. Sunar requires [discord.js](https://npmjs.com/package/discord.js) as a peer dependency.
+
+```package-install
+sunar discord.js
+```
+
+</Step>
+
+<Step>
+## Initialize the client
+
+Create a new file, e.g., `index.js`, and set up your Discord bot using Sunar.
+
+```js title="src/index.js"
+import { Client, load } from 'sunar';
+
+const start = async () => {
+	const client = new Client({ intents: [] });
+
+	// stores all sunar modules, you can add more
+	// directories by passing them after the "signals"
+	// with a comma (e.g. signals,buttons,autocompletes)
+	await load('src/{commands,signals}/**/*.{js,ts}');
+
+	client.login('YOUR_DISCORD_BOT_TOKEN');
+};
+
+start();
+```
+
+Replace `'YOUR_DISCORD_BOT_TOKEN'` with your actual bot token obtained from the
+[Discord Developer Portal](https://discord.com/developers/applications).
+
+</Step>
+
+<Step>
+## Create your first signal
+
+Signals handle events in your Discord bot. Let's create a basic 'ready' signal to log when the bot is online and ready.
+
+```js title="src/signals/ready.js"
+import { Signal, execute } from 'sunar';
+import { registerCommands } from 'sunar/registry';
+
+const signal = new Signal('ready', { once: true });
+
+execute(signal, async (client) => {
+	await registerCommands(client.application);
+	console.log(`Logged in as ${client.user.tag}`);
+});
+
+export { signal };
+```
+
+</Step>
+
+<Step>
+
+## Create your first command
+
+Let's create a simple `ping` command that responds with the bot's ping when invoked.
+
+```js title="src/commands/ping.js"
+import { Slash, execute } from 'sunar';
+
+const slash = new Slash({
+	name: 'ping',
+	description: 'Show client ws ping',
+});
+
+execute(slash, (interaction) => {
+	interaction.reply({
+		content: `Client WS Ping: ${interaction.client.ws.ping}`,
+	});
+});
+
+export { slash };
+```
+
+</Step>
+
+<Step>
+
+## Handle interactions
+
+To make the ping command work, add the `interactionCreate` signal to your project to handle interactions:
+
+```js title="src/signals/interaction-create.js"
+import { Signal, execute } from 'sunar';
+import { handleInteraction } from 'sunar/handlers';
+
+const signal = new Signal('interactionCreate');
+
+execute(signal, async (interaction) => {
+	await handleInteraction(interaction);
+});
+
+export { signal };
+```
+
+</Step>
+
+</Steps>
+
+## File structure
+
+Here's an overview of the project's file structure to help you visualize how files are organized within Sunar.
+
+<Files>
+  	<Folder name="src" defaultOpen>
+		<Folder name="commands" defaultOpen>
+			<File name="ping.js" />
+		</Folder>
+
+    	<Folder name="signals" defaultOpen>
+    		<File name="interaction-create.js" />
+    		<File name="ready.js" />
+    	</Folder>
+
+  	</Folder>
+	<File name="index.js" />
+</Files>
+
+## Next steps
+
+- Customize and expand your commands and signals based on your bot's functionality.
+- Dive deeper into command options such as subcommands, options, and permissions to create more complex and versatile interactions.
+- Explore comprehensive features like context menu commands, buttons, modals, and more.

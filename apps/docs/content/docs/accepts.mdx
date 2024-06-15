@@ -1,0 +1,69 @@
+---
+title: Accepts
+description: Accepts in Sunar offer a fast and straightforward method to add basic restrictions to commands. They function like protectors but with simpler syntax, making them ideal for enforcing permissions and other basic requirements without needing to write complete middleware functions.
+---
+
+<Callout title="Not fully supported" type="warn">
+	Validation failure handling is currently not supported directly by Accepts in
+	Sunar. For the moment, it is recommended to use [protectors](protectors.mdx).
+</Callout>
+
+Accepts in Sunar offer a fast and straightforward method to add basic restrictions to commands. They function like protectors but with simpler syntax, making them ideal for enforcing permissions and other basic requirements without needing to write complete middleware functions.
+
+<Links>
+	<Link
+		label="Accept Mutator"
+		icon="github"
+		link="https://github.com/sunarjs/sunar/blob/main/src/mutators/accepts/accepts.ts"
+	/>
+</Links>
+
+## Implementation
+
+The following example demonstrates how to implement an Accepts middleware using Sunar:
+
+```js title="src/commands/remove-role.js"
+import { Slash, accepts, execute } from 'sunar';
+import {
+	ApplicationCommandOptionType,
+	PermissionFlagsBits,
+	Role,
+} from 'discord.js';
+
+const slash = new Slash({
+	name: 'remove-role',
+	description: 'Remove a role',
+	dmPermission: false,
+	defaultMemberPermissions: [PermissionFlagsBits.ManageRoles],
+	options: [
+		{
+			name: 'target',
+			description: 'Target role',
+			type: ApplicationCommandOptionType.Role,
+			required: true,
+		},
+	],
+});
+
+accepts(slash, {
+	clientPermissions: ['ManageRoles'],
+});
+
+execute(slash, async (interaction) => {
+	const role = interaction.options.getRole('target', true);
+
+	if (!(role instanceof Role)) {
+		return interaction.reply({ content: 'Invalid role.' });
+	}
+
+	if (!role.editable) {
+		return interaction.reply({ content: "I don't have enough permissions." });
+	}
+
+	await role.delete();
+
+	interaction.reply({ content: `**${role.name}** deleted.` });
+});
+
+export { slash };
+```

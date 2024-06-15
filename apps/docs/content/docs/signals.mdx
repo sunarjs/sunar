@@ -1,0 +1,58 @@
+---
+title: Signals
+description: Signals in Sunar correspond to events in [discord.js](https://www.npmjs.com/package/discord.js). They allow you to handle various actions and responses that occur within your Discord bot, such as messages being sent, users joining or leaving, and more.
+---
+
+Signals in Sunar correspond to events in [discord.js](https://www.npmjs.com/package/discord.js). They allow you to handle various actions and responses that occur within your Discord bot, such as messages being sent, users joining or leaving, and more.
+
+<Links>
+	<Link
+		label="Signal Builder"
+		icon="github"
+		link="https://github.com/sunarjs/sunar/blob/main/src/builders/signal/signal.ts"
+	/>
+	<Link
+		label="Signals"
+		icon="discordjs"
+		link="https://discord.js.org/docs/packages/discord.js/main/Events:Enum"
+	/>
+	<Link
+		label="API Reference"
+		icon="discord"
+		link="https://discord.com/developers/docs/topics/gateway#gateway-events"
+	/>
+</Links>
+
+## Implementation
+
+The following example demonstrates how to implement a Signal using Sunar:
+
+```js
+import { Signal, execute } from 'sunar';
+import { TextChannel } from 'discord.js';
+
+const signal = new Signal('guildMemberAdd');
+
+execute(signal, (member) => {
+	const channel = member.guild.channels.cache.find(
+		(c) => c.name === 'welcomes'
+	);
+
+	if (!(channel instanceof TextChannel)) return;
+
+	channel.send({ content: `${member} just joined!` });
+});
+
+export { signal };
+```
+
+## Reference
+
+### SignalOptions
+
+```json doc-gen:typescript
+{
+	"file": "./content/docs/props.ts",
+	"name": "SignalOptions"
+}
+```

@@ -1,0 +1,22 @@
+{
+	"$schema": "https://turbo.build/schema.json",
+	"remoteCache": {
+		"enabled": true
+	},
+	"tasks": {
+		"build": {
+			"dependsOn": ["^build"],
+			"outputs": [".next/**", "!.next/cache/**", "dist/**"],
+			"outputLogs": "errors-only"
+		},
+		"lint": {
+			"dependsOn": ["^build"],
+			"inputs": ["../../.prettierrc", "src/**", "package.json"],
+			"outputs": [],
+			"outputLogs": "errors-only"
+		},
+		"format": {
+			"dependsOn": ["^format"]
+		}
+	}
+}

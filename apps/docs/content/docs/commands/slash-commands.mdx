@@ -1,0 +1,66 @@
+---
+title: Slash Commands
+description: Slash commands are one of the primary ways users interact with bots. They provide a structured way for users to issue commands directly within the chat interface.
+---
+
+Slash commands are one of the primary ways users interact with bots. They provide a structured way for users to issue commands directly within the chat interface.
+
+<Links>
+	<Link
+		label="Slash Builder"
+		icon="github"
+		link="https://github.com/sunarjs/sunar/blob/main/src/builders/slash/slash.ts"
+	/>
+	<Link
+		label="ChatInputApplicationCommandData"
+		icon="discordjs"
+		link="https://discord.js.org/docs/packages/discord.js/main/ChatInputApplicationCommandData:Interface"
+	/>
+	<Link
+		label="ChatInputCommandInteraction"
+		icon="discordjs"
+		link="https://discord.js.org/docs/packages/discord.js/main/ChatInputCommandInteraction:Class"
+	/>
+	<Link
+		label="API Reference"
+		icon="discord"
+		link="https://discord.com/developers/docs/interactions/application-commands#slash-commands"
+	/>
+</Links>
+
+## Implementation
+
+The following example demonstrates how to implement a Slash command using Sunar:
+
+```js
+import { Slash, execute } from 'sunar';
+import { ApplicationCommandOptionType } from 'discord.js';
+
+const slash = new Slash({
+	name: 'avatar',
+	description: 'Show user avatar',
+	options: [
+		{
+			name: 'target',
+			description: 'Target user',
+			type: ApplicationCommandOptionType.User,
+		},
+	],
+});
+
+execute(slash, (interaction) => {
+	const user = interaction.options.getUser('target') ?? interaction.user;
+
+	const avatarURL = user.displayAvatarURL({
+		size: 1024,
+		forceStatic: false,
+	});
+
+	interaction.reply({
+		content: `Avatar of user **${interaction.user.username}**`,
+		files: [avatarURL],
+	});
+});
+
+export { slash };
+```

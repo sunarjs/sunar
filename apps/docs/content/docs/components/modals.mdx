@@ -1,0 +1,87 @@
+---
+title: Modals
+description: Modals are popup forms that can collect detailed user input. They are particularly useful for complex interactions that require multiple fields or steps.
+---
+
+Modals are popup forms that can collect detailed user input. They are particularly useful for complex interactions that require multiple fields or steps.
+
+<Links>
+	<Link
+		label="Modal Builder"
+		icon="github"
+		link="https://github.com/sunarjs/sunar/blob/main/src/builders/modal/modal.ts"
+	/>
+	<Link
+		label="ModalSubmitInteraction"
+		icon="discordjs"
+		link="https://discord.js.org/docs/packages/discord.js/main/ModalSubmitInteraction:Class"
+	/>
+	<Link
+		label="API Reference"
+		icon="discord"
+		link="https://discord.com/developers/docs/interactions/overview#modals"
+	/>
+</Links>
+
+## Implementation
+
+The following example demonstrates how to implement a Modal using Sunar:
+
+```js
+import { Modal, Slash, execute } from 'sunar';
+import {
+	ActionRowBuilder,
+	ModalBuilder,
+	TextInputBuilder,
+	TextInputStyle,
+} from 'discord.js';
+
+const slash = new Slash({
+	name: 'feedback',
+	description: 'Send us feedback',
+});
+
+execute(slash, (interaction) => {
+	const contentInput = new TextInputBuilder()
+		.setCustomId('content')
+		.setLabel('Content')
+		.setStyle(TextInputStyle.Paragraph)
+		.setPlaceholder('Your feedback content...')
+		.setRequired(true);
+
+	const row = new ActionRowBuilder().setComponents(contentInput);
+
+	const modal = new ModalBuilder()
+		.setCustomId('feedback')
+		.setTitle('Submit your feedback')
+		.setComponents(row);
+
+	interaction.showModal(modal);
+});
+
+const modal = new Modal({ id: 'feedback' });
+
+execute(modal, (interaction) => {
+	const feedback = interaction.fields.getTextInputValue('content');
+
+	// Send feedback somewhere...
+
+	interaction.reply({
+		content: 'Thanks for the feedback!',
+		ephemeral: true,
+	});
+});
+
+export { slash, modal };
+```
+
+## Reference
+
+### ModalOptions
+
+```json doc-gen:typescript
+{
+	"file": "./content/docs/props.ts",
+	"name": "ModalOptions"
+}
+```

@@ -1,0 +1,84 @@
+---
+title: Select Menus
+description: Select menus allow users to choose from a list of options. They are useful for forms, surveys, or any scenario where the user needs to make a selection from multiple choices.
+---
+
+Select menus allow users to choose from a list of options. They are useful for forms, surveys, or any scenario where the user needs to make a selection from multiple choices.
+
+<Links>
+	<Link
+		label="SelectMenu Builder"
+		icon="github"
+		link="https://github.com/sunarjs/sunar/blob/main/src/builders/selectMenu/selectMenu.ts"
+	/>
+	<Link
+		label="SelectMenu Interactions"
+		icon="discordjs"
+		link="https://discord.js.org/docs/packages/discord.js/main/AnySelectMenuInteraction:TypeAlias"
+	/>
+	<Link
+		label="API Reference"
+		icon="discord"
+		link="https://discord.com/developers/docs/interactions/message-components#select-menus"
+	/>
+</Links>
+
+## Implementation
+
+The following example demonstrates how to implement a Select Menu using Sunar:
+
+```js
+import { SelectMenu, Slash, execute } from 'sunar';
+import {
+	ActionRowBuilder,
+	ComponentType,
+	StringSelectMenuBuilder,
+} from 'discord.js';
+
+const slash = new Slash({
+	name: 'buy',
+	description: 'Buy something',
+});
+
+execute(slash, (interaction) => {
+	const select = new StringSelectMenuBuilder()
+		.setCustomId('buy')
+		.setOptions(
+			{ label: 'Laptop', value: 'laptop' },
+			{ label: 'Smart TV', value: 'smart-tv' },
+			{ label: 'Tablet', value: 'tablet' },
+			{ label: 'Smartphone', value: 'smartphone' }
+		)
+		.setPlaceholder('Select an item to purchase');
+
+	const row = new ActionRowBuilder().setComponents(select);
+
+	interaction.reply({ components: [row] });
+});
+
+const select = new SelectMenu({
+	id: 'buy',
+	type: ComponentType.StringSelect,
+});
+
+execute(select, (interaction) => {
+	const item = interaction.values.at(0);
+
+	// Do something with the item...
+
+	interaction.reply({ content: `You have purchased the **${item}** item` });
+});
+
+export { slash, select };
+```
+
+## Reference
+
+### SelectMenuOptions
+
+```json doc-gen:typescript
+{
+	"file": "./content/docs/props.ts",
+	"name": "SelectMenuOptions"
+}
+```

@@ -1,0 +1,62 @@
+---
+title: Context Menus
+description: Context menu commands are available directly in the right-click context menu for users or messages. These commands are convenient for quick actions without needing to type a command.
+---
+
+Context menu commands are available directly in the right-click context menu for users or messages. These commands are convenient for quick actions without needing to type a command.
+
+<Links>
+	<Link
+		label="Context Menu Builder"
+		icon="github"
+		link="https://github.com/sunarjs/sunar/blob/main/src/builders/contextMenu/contextMenu.ts"
+	/>
+	<Link
+		label="MessageApplicationCommandData"
+		icon="discordjs"
+		link="https://discord.js.org/docs/packages/discord.js/main/MessageApplicationCommandData:Interface"
+	/>
+	<Link
+		label="UserApplicationCommandData"
+		icon="discordjs"
+		link="https://discord.js.org/docs/packages/discord.js/main/UserApplicationCommandData:Interface"
+	/>
+	<Link
+		label="ContextMenuCommandInteraction"
+		icon="discordjs"
+		link="https://discord.js.org/docs/packages/discord.js/main/ContextMenuCommandInteraction:Class"
+	/>
+	<Link
+		label="API Reference"
+		icon="discord"
+		link="https://discord.com/developers/docs/interactions/application-commands#user-commands"
+	/>
+</Links>
+
+## Implementation
+
+The following example demonstrates how to implement a Context Menu command using Sunar:
+
+```js copy
+import { ContextMenu, execute } from 'sunar';
+import { ApplicationCommandType } from 'discord.js';
+
+const contextMenu = new ContextMenu({
+	name: 'Show avatar',
+	type: ApplicationCommandType.User,
+});
+
+execute(contextMenu, (interaction) => {
+	const avatarURL = interaction.targetUser.displayAvatarURL({
+		size: 1024,
+		forceStatic: false,
+	});
+
+	interaction.reply({
+		content: `Avatar of user **${interaction.user.username}**`,
+		files: [avatarURL],
+	});
+});
+
+export { contextMenu };
+```

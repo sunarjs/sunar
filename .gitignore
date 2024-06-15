@@ -1,9 +1,54 @@
+# Packages
 node_modules
-dist
 
+# Log files
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+
+# Env
 .env
-.env.development
 
-src/demos
+# Dist
+dist
+dist-docs
 
+# Miscellaneous
+.tmp
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+.idea
+.DS_Store
+.turbo
+tsconfig.tsbuildinfo
+coverage
+out
+package.tgz
+tsup.config.bundled*
+vitest.config.ts.timestamp*
+
+# Deno
+deno.lock
+
+# Bun
 bun.lockb
+
+# yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Cache
+.prettiercache
+.eslintcache
+.vercel

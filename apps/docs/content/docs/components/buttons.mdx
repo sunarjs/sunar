@@ -1,0 +1,83 @@
+---
+title: Buttons
+description: Buttons are interactive elements users can click to trigger specific actions. They are ideal for creating interactive messages, such as confirmation prompts or menu navigation.
+---
+
+Buttons are interactive elements users can click to trigger specific actions. They are ideal for creating interactive messages, such as confirmation prompts or menu navigation.
+
+<Links>
+	<Link
+		label="Button Builder"
+		icon="github"
+		link="https://github.com/sunarjs/sunar/blob/main/src/builders/button/button.ts"
+	/>
+	<Link
+		label="ButtonInteraction"
+		icon="discordjs"
+		link="https://discord.js.org/docs/packages/discord.js/main/ButtonInteraction:Class"
+	/>
+	<Link
+		label="API Reference"
+		icon="discord"
+		link="https://discord.com/developers/docs/interactions/message-components#buttons"
+	/>
+</Links>
+
+## Implementation
+
+The following example demonstrates how to implement a Button using Sunar:
+
+```js
+import { Button, Slash, execute } from 'sunar';
+import {
+	ActionRowBuilder,
+	ButtonBuilder,
+	ButtonStyle,
+	PermissionFlagsBits,
+} from 'discord.js';
+
+const slash = new Slash({
+	name: 'leave',
+	description: 'Make the bot leave the server',
+	dmPermission: false,
+	defaultMemberPermissions: [PermissionFlagsBits.Administrator],
+});
+
+execute(slash, (interaction) => {
+	const button = new ButtonBuilder()
+		.setCustomId('confirmLeave')
+		.setLabel('Leave')
+		.setStyle(ButtonStyle.Danger);
+
+	const row = new ActionRowBuilder().setComponents(button);
+
+	interaction.reply({
+		content: 'Are you certain about my leaving the server?',
+		components: [row],
+	});
+});
+
+const button = new Button({ id: 'confirmLeave' });
+
+execute(button, async (interaction) => {
+	await interaction.reply({
+		content: 'Leaving...',
+		ephemeral: true,
+	});
+
+	interaction.guild.leave();
+});
+
+export { slash, button };
+```
+
+## Reference
+
+### ButtonOptions
+
+```json doc-gen:typescript
+{
+	"file": "./content/docs/props.ts",
+	"name": "ButtonOptions"
+}
+```

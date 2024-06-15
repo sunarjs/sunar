@@ -1,0 +1,19 @@
+{
+	"title": "mdx",
+	"root": true,
+	"pages": [
+		"---General---",
+		"index",
+		"getting-started",
+		"---Guide---",
+		"signals",
+		"commands",
+		"components",
+		"protectors",
+		"accepts",
+		"---Other---",
+		"[discord.js](https://discord.js.org)",
+		"[Ko-fi](https://ko-fi.com/tai03)",
+		"[Buy Me a Coffee](https://buymeacoffee.com/tai03)"
+	]
+}

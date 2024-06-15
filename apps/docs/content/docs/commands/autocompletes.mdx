@@ -1,0 +1,86 @@
+---
+title: Autocompletes
+description: Autocomplete commands enhance the user experience by providing suggestions while the user is typing. They are particularly useful for commands with multiple options or extensive inputs.
+---
+
+Autocomplete commands enhance the user experience by providing suggestions while the user is typing. They are particularly useful for commands with multiple options or extensive inputs.
+
+<Links>
+	<Link
+		label="Autocomplete Builder"
+		icon="github"
+		link="https://github.com/sunarjs/sunar/blob/main/src/builders/autocomplete/autocomplete.ts"
+	/>
+	<Link
+		label="Autocomplete Interaction"
+		icon="discordjs"
+		link="https://discord.js.org/docs/packages/discord.js/main/AutocompleteInteraction:Class"
+	/>
+	<Link
+		label="API Reference"
+		icon="discord"
+		link="https://discord.com/developers/docs/interactions/application-commands#autocomplete"
+	/>
+</Links>
+
+## Implementation
+
+The following example demonstrates how to implement an autocomplete command using Sunar:
+
+```js
+import { Autocomplete, Slash, execute } from 'sunar';
+import { ApplicationCommandOptionType } from 'discord.js';
+
+const slash = new Slash({
+	name: 'eat',
+	description: 'Eat a fruit',
+	options: [
+		{
+			name: 'fruit',
+			description: 'Select the fruit',
+			type: ApplicationCommandOptionType.String,
+			autocomplete: true,
+			required: true,
+		},
+	],
+});
+
+execute(slash, (interaction) => {
+	const fruit = interaction.options.getString('fruit', true);
+	interaction.reply({ content: `You ate the **${fruit}**.` });
+});
+
+const autocomplete = new Autocomplete({
+	name: 'fruit',
+	commandName: 'eat', // optional
+});
+
+execute(autocomplete, (interaction, option) => {
+	const data = [
+		{ name: 'Apple', value: 'apple' },
+		{ name: 'Kiwi', value: 'kiwi' },
+		{ name: 'Watermelon', value: 'watermelon' },
+		{ name: 'Banana', value: 'banana' },
+		{ name: 'Strawberry', value: 'strawberry' },
+	];
+
+	const results = data.filter((e) =>
+		e.name.toLowerCase().includes(option.value.toLowerCase())
+	);
+
+	interaction.respond(results);
+});
+
+export { slash, autocomplete };
+```
+
+## Reference
+
+### AutocompleteOptions
+
+```json doc-gen:typescript
+{
+	"file": "./content/docs/props.ts",
+	"name": "AutocompleteOptions"
+}
+```
