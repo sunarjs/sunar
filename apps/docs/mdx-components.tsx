@@ -1,7 +1,8 @@
 import type { MDXComponents } from 'mdx/types';
 import defaultComponents from 'fumadocs-ui/mdx';
+import { TabsContentProps } from '@radix-ui/react-tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
-import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Tab, Tabs, TabsProps } from 'fumadocs-ui/components/tabs';
 import { TypeTable } from 'fumadocs-ui/components/type-table';
 import { Steps, Step } from 'fumadocs-ui/components/steps';
 import { File, Folder, Files } from 'fumadocs-ui/components/files';
@@ -22,8 +23,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 		File,
 		Links,
 		Link,
-		InstallTab: ({ value }: { value: string }) => (
-			<Tab title="Terminal" value={value} />
+		InstallTab: (props: TabsContentProps) => (
+			<Tab title="Terminal" {...props} />
 		),
 		InstallTabs: ({
 			items,
