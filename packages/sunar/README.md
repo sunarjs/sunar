@@ -1,12 +1,14 @@
 <div align="center">
 	<br />
 	<p>
-		<a href="https://github.com/sunarjs/sunar"><img src="https://raw.githubusercontent.com/sunarjs/content/main/banner.png" alt="sunar" /></a>
+		<a href="https://sunar.vercel.app"><img src="https://sunar.vercel.app/simple-banner.png" alt="sunar" /></a>
 	</p>
 </div>
 
 > ⚠️ WARNING: This project is still actively in development. Expect ongoing updates and improvements. Use with caution.
 
+
+- **Go to the [website](https://sunar.vercel.app) for detailed info!**
 
 ## Table of contents
 
