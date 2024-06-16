@@ -1,14 +1,14 @@
 <div align="center">
 	<br />
 	<p>
-		<a href="https://sunar.vercel.app"><img src="https://sunar.vercel.app/simple-banner.png" alt="sunar" /></a>
+		<a href="https://sunar.js.org"><img src="https://sunar.js.org/simple-banner.png" alt="sunar" /></a>
 	</p>
 </div>
 
 # About
 Sunar emerges as a finely-tuned [discord.js](https://discord.js.org) framework, meticulously engineered to prioritize ease of use and efficiency.
 
-- **Go to the [website](https://sunar.vercel.app) for more info!**
+- **Go to the [website](https://sunar.js.org) for more info!**
 
 # Credits
 The source code structure is heavily inspired by the [Valibot](https://github.com/fabian-hiller/valibot) package.
