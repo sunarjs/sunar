@@ -33,6 +33,9 @@ package.tgz
 tsup.config.bundled*
 vitest.config.ts.timestamp*
 
+# pnpm
+pnpm-lock.yaml
+
 # Deno
 deno.lock
 

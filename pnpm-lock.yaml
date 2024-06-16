@@ -41,6 +41,9 @@ importers:
       next:
         specifier: ^14.2.4
         version: 14.2.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      npm-to-yarn:
+        specifier: ^2.2.1
+        version: 2.2.1
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -56,6 +59,9 @@ importers:
       tailwind-merge:
         specifier: ^2.3.0
         version: 2.3.0
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.0.0
       uvcanvas:
         specifier: ^0.2.1
         version: 0.2.1(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)

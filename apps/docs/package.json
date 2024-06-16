@@ -18,11 +18,13 @@
 		"geist": "^1.3.0",
 		"lucide-react": "^0.394.0",
 		"next": "^14.2.4",
+		"npm-to-yarn": "^2.2.1",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"shiki": "^1.6.4",
 		"sunar": "workspace:*",
 		"tailwind-merge": "^2.3.0",
+		"unist-util-visit": "^5.0.0",
 		"uvcanvas": "^0.2.1",
 		"zod": "^3.23.8"
 	},

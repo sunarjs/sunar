@@ -23,9 +23,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 		File,
 		Links,
 		Link,
-		InstallTab: (props: TabsContentProps) => (
-			<Tab {...props} title="Terminal" />
-		),
 		InstallTabs: ({
 			items,
 			children,
