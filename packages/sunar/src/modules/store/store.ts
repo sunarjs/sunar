@@ -10,6 +10,10 @@ import {
 	isSlashBuilder,
 } from '../../utils';
 
+/**
+ * Store all the builders in the sunar collections.
+ * @param modules The modules to store
+ */
 export function storeModules(modules: unknown[]) {
 	for (const module of modules) {
 		if (!isObject(module)) return;

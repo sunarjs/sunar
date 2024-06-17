@@ -4,6 +4,10 @@ import { contextMenuAcceptsArgs } from '../../builders';
 import { contextMenuCommands } from '../../stores';
 import { handleProtectors } from '../protectors';
 
+/**
+ * Handle a context menu interaction.
+ * @param interaction The context menu interaction to handle
+ */
 export async function handleContextMenu(interaction: ContextMenuCommandInteraction) {
 	const command = contextMenuCommands.get(interaction.commandName);
 

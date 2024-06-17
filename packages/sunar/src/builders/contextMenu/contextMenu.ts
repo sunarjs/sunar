@@ -20,6 +20,11 @@ export interface ContextMenuAccepts extends InteractionAccepts {}
 
 export interface ContextMenuConfig extends CommandConfig {}
 
+/**
+ * Context menu commands are available directly in the right-click context menu for users or messages. These commands are convenient for quick actions without needing to type a command.
+ *
+ * @see https://sunar.js.org/docs/commands/context-menus
+ */
 export class ContextMenu<TData extends ContextMenuData = ContextMenuData> implements Builder {
 	public readonly type = Builders.ContextMenu;
 	public readonly data: TData;

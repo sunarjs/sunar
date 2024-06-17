@@ -4,6 +4,10 @@ import { autocompleteAcceptsArgs } from '../../builders';
 import { autocompletes } from '../../stores';
 import { handleProtectors } from '../protectors';
 
+/**
+ * Handle an autocomplete interaction.
+ * @param interaction The autocomplete interaction to handle
+ */
 export async function handleAutocomplete(interaction: AutocompleteInteraction) {
 	const focused = interaction.options.getFocused(true);
 

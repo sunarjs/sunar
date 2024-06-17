@@ -14,11 +14,19 @@ import type { Builder, CommandKey, ComponentKey, NextFunction } from '../../type
 import { Builders, Commands, Components } from '../../utils';
 
 export interface ProtectorOptions {
+	/** The signals that can be protected by this protector. */
 	signals?: (keyof ClientEvents)[];
+	/** The commands types that can be protected by this protector. */
 	commands?: CommandKey[];
+	/** The components types that can be protected by this protector. */
 	components?: ComponentKey[];
 }
 
+/**
+ * Protectors in Sunar act as middleware, allowing you to intercept and control the flow of commands and interactions within your Discord bot. They provide a flexible way to enforce permissions, validate inputs, or perform pre-processing before executing commands.
+ *
+ * @see https://sunar.js.org/docs/protectors
+ */
 export class Protector<TOptions extends ProtectorOptions = ProtectorOptions>
 	implements Pick<Builder, 'type' | 'execute'>
 {

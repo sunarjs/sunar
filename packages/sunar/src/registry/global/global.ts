@@ -1,11 +1,17 @@
-import type { ClientApplication } from 'discord.js';
+import type { ApplicationCommand, ClientApplication, Collection } from 'discord.js';
 
 import { getApplicationCommands } from '../../utils';
 
-export async function registerGlobalCommands(application: ClientApplication) {
+/**
+ * Register all commands as global.
+ *
+ * @param application The client application where the commands will be registered.
+ * @returns A registered application commands collection
+ */
+export function registerGlobalCommands(
+	application: ClientApplication,
+): Promise<Collection<string, ApplicationCommand>> {
 	const applicationCommands = getApplicationCommands();
 
-	if (applicationCommands.length <= 0) return;
-
-	await application.commands.set(applicationCommands);
+	return application.commands.set(applicationCommands.length > 0 ? applicationCommands : []);
 }

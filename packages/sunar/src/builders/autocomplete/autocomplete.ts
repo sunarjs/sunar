@@ -7,12 +7,19 @@ import type { AcceptsArgs, Builder, InteractionAccepts } from '../../types';
 import { Builders } from '../../utils';
 
 export interface AutocompleteOptions {
+	/** The name of the command option that has autocomplete enabled. */
 	name: string | RegExp;
+	/** Filters the autocomplete execution by the command name. */
 	commandName?: string | RegExp;
 }
 
 export interface AutocompleteAccepts extends InteractionAccepts {}
 
+/**
+ * Autocomplete commands enhance the user experience by providing suggestions while the user is typing. They are particularly useful for commands with multiple options or extensive inputs.
+ *
+ * @see https://sunar.js.org/docs/commands/autocompletes
+ */
 export class Autocomplete implements Omit<Builder, 'config'> {
 	public readonly type = Builders.Autocomplete;
 	public readonly options: AutocompleteOptions;

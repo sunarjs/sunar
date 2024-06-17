@@ -5,6 +5,10 @@ import { slashCommands } from '../../stores';
 import { handleAccepts } from '../accepts';
 import { handleProtectors } from '../protectors';
 
+/**
+ * Handle a chat input interaction.
+ * @param interaction The chat input interaction to handle
+ */
 export async function handleSlash(interaction: ChatInputCommandInteraction) {
 	const command = slashCommands.get(interaction.commandName);
 

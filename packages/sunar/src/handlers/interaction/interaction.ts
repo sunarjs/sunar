@@ -4,6 +4,10 @@ import { handleAutocomplete, handleModal, handleSelectMenu, handleSlash } from '
 import { handleButton } from '../button';
 import { handleContextMenu } from '../contextMenu';
 
+/**
+ * Handle all the interactions supported by Sunar.
+ * @param interaction The interaction to handle
+ */
 export async function handleInteraction(interaction: Interaction) {
 	if (interaction.isChatInputCommand()) await handleSlash(interaction);
 	if (interaction.isContextMenuCommand()) await handleContextMenu(interaction);

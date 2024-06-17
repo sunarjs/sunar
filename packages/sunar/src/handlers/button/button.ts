@@ -4,6 +4,10 @@ import { buttonAcceptsArgs } from '../../builders';
 import { buttons } from '../../stores';
 import { handleProtectors } from '../protectors';
 
+/**
+ * Handle a button interaction.
+ * @param interaction The button interaction to handle
+ */
 export async function handleButton(interaction: ButtonInteraction) {
 	const component = buttons.find(({ options }) => {
 		if (options.id instanceof RegExp) return options.id.test(interaction.customId);

@@ -8,9 +8,15 @@ import { Builders } from '../../utils';
 type SignalName = keyof ClientEvents;
 
 export interface SignalOptions {
+	/** If the signal only has to be emitted once. */
 	once?: boolean;
 }
 
+/**
+ * Signals in Sunar correspond to events in discord.js. They allow you to handle various actions and responses that occur within your Discord bot, such as messages being sent, users joining or leaving, and more.
+ *
+ * @see https://sunar.js.org/docs/signals
+ */
 export class Signal<TName extends SignalName = SignalName> implements Pick<Builder, 'type' | 'protectors' | 'execute'> {
 	public readonly type = Builders.Signal;
 	public readonly name: TName;

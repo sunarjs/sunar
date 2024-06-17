@@ -9,6 +9,7 @@ import { Builders } from '../../utils';
 export interface ModalAccepts extends InteractionAccepts {}
 
 export interface ModalOptions {
+	/** The modal custom ID to target. */
 	id: string | RegExp;
 }
 
@@ -16,6 +17,11 @@ export interface ModalConfig {
 	cooldown?: CooldownResolvable;
 }
 
+/**
+ * Modals are popup forms that can collect detailed user input. They are particularly useful for complex interactions that require multiple fields or steps.
+ *
+ * @see https://sunar.js.org/docs/components/modals
+ */
 export class Modal implements Builder {
 	public readonly type = Builders.Modal;
 	public readonly options: ModalOptions;

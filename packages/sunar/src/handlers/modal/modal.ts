@@ -4,6 +4,10 @@ import { modalAcceptsArgs } from '../../builders';
 import { modals } from '../../stores';
 import { handleProtectors } from '../protectors';
 
+/**
+ * Handle a modal interaction.
+ * @param interaction The modal interaction to handle
+ */
 export async function handleModal(interaction: ModalSubmitInteraction) {
 	const component = modals.find(({ options }) => {
 		if (options.id instanceof RegExp) return options.id.test(interaction.customId);

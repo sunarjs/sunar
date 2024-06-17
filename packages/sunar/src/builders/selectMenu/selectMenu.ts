@@ -17,7 +17,9 @@ import type { AcceptsArgs, Builder, CooldownResolvable, InteractionAccepts } fro
 import { Builders } from '../../utils';
 
 export interface SelectMenuOptions {
+	/** The select menu custom ID to target. */
 	id: string | RegExp;
+	/** The type of select menu to target. */
 	type: SelectMenuType;
 }
 
@@ -27,6 +29,11 @@ export interface SelectMenuConfig {
 	cooldown?: CooldownResolvable;
 }
 
+/**
+ * Select menus allow users to choose from a list of options. They are useful for forms, surveys, or any scenario where the user needs to make a selection from multiple choices.
+ *
+ * @see https://sunar.js.org/docs/components/select-menus
+ */
 export class SelectMenu<TOptions extends SelectMenuOptions = SelectMenuOptions> implements Builder {
 	public readonly type = Builders.SelectMenu;
 	public readonly options: TOptions;

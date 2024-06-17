@@ -4,6 +4,10 @@ import { selectMenuAcceptsArgs } from '../../builders';
 import { selectMenus } from '../../stores';
 import { handleProtectors } from '../protectors';
 
+/**
+ * Handle a select menu interaction.
+ * @param interaction The select menu interaction to handle
+ */
 export async function handleSelectMenu(interaction: AnySelectMenuInteraction) {
 	const component = selectMenus.find(({ options }) => {
 		if (options.type !== interaction.componentType) return false;
