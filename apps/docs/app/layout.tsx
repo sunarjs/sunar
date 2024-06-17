@@ -2,6 +2,7 @@ import '@/app/global.css';
 
 import { RootProvider } from 'fumadocs-ui/provider';
 import type { ReactNode } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 
 import { baseUrl, createMetadata } from '@/utils/metadata';
 import { GeistSans } from 'geist/font/sans';
@@ -26,6 +27,7 @@ export default function Layout({ children }: { children: ReactNode }) {
 		>
 			<body>
 				<RootProvider>{children}</RootProvider>
+				<Analytics />
 			</body>
 		</html>
 	);
