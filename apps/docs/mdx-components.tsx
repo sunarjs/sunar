@@ -1,6 +1,5 @@
 import type { MDXComponents } from 'mdx/types';
 import defaultComponents from 'fumadocs-ui/mdx';
-import { TabsContentProps } from '@radix-ui/react-tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Tab, Tabs, TabsProps } from 'fumadocs-ui/components/tabs';
 import { TypeTable } from 'fumadocs-ui/components/type-table';
