@@ -26,11 +26,9 @@
 		"sunar": "workspace:*",
 		"tailwind-merge": "^2.3.0",
 		"unist-util-visit": "^5.0.0",
-		"uvcanvas": "^0.2.1",
 		"zod": "^3.23.8"
 	},
 	"devDependencies": {
-		"@radix-ui/react-tabs": "^1.0.4",
 		"@types/mdx": "^2.0.13",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
