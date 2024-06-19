@@ -37,7 +37,7 @@ export function HomeHero() {
 			</p>
 			<div className="mt-4 flex translate-x-[1.5px] flex-col gap-x-4 gap-y-2 sm:flex-row md:mt-[35px]">
 				<Link href="/docs">
-					<Button>Getting started</Button>
+					<Button>Read the docs</Button>
 				</Link>
 
 				<CopyInstall />
