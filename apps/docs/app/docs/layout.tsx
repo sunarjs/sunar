@@ -6,7 +6,11 @@ import { baseOptions } from '@/app/layout.config';
 
 export default function Layout({ children }: { children: ReactNode }) {
 	return (
-		<DocsLayout tree={pageTree} {...baseOptions}>
+		<DocsLayout
+			sidebar={{ defaultOpenLevel: 0 }}
+			tree={pageTree}
+			{...baseOptions}
+		>
 			{children}
 		</DocsLayout>
 	);
