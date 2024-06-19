@@ -8,7 +8,9 @@
 	"types": "dist/index.d.ts",
 	"module": "dist/index.js",
 	"type": "module",
-	"files": ["dist"],
+	"files": [
+		"dist"
+	],
 	"scripts": {
 		"build": "tsup",
 		"lint": "biome lint ./src",
@@ -35,6 +37,7 @@
 		"@commitlint/cli": "19.3.0",
 		"@commitlint/config-conventional": "19.2.2",
 		"@types/node": "^20.14.2",
+		"dotenv": "^16.4.5",
 		"esbuild-plugin-file-path-extensions": "2.1.2",
 		"esbuild-plugin-version-injector": "1.2.1",
 		"husky": "9.0.11",
@@ -79,11 +82,21 @@
 	},
 	"typesVersions": {
 		"*": {
-			"handlers": ["./dist/handlers"],
-			"utils": ["./dist/utils"],
-			"stores": ["./dist/stores"],
-			"registry": ["./dist/registry"],
-			"symbols": ["./dist/symbols.d.ts"]
+			"handlers": [
+				"./dist/handlers"
+			],
+			"utils": [
+				"./dist/utils"
+			],
+			"stores": [
+				"./dist/stores"
+			],
+			"registry": [
+				"./dist/registry"
+			],
+			"symbols": [
+				"./dist/symbols.d.ts"
+			]
 		}
 	},
 	"repository": {
