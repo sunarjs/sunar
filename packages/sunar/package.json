@@ -8,9 +8,7 @@
 	"types": "dist/index.d.ts",
 	"module": "dist/index.js",
 	"type": "module",
-	"files": [
-		"dist"
-	],
+	"files": ["dist"],
 	"scripts": {
 		"build": "tsup",
 		"lint": "biome lint ./src",
@@ -82,21 +80,11 @@
 	},
 	"typesVersions": {
 		"*": {
-			"handlers": [
-				"./dist/handlers"
-			],
-			"utils": [
-				"./dist/utils"
-			],
-			"stores": [
-				"./dist/stores"
-			],
-			"registry": [
-				"./dist/registry"
-			],
-			"symbols": [
-				"./dist/symbols.d.ts"
-			]
+			"handlers": ["./dist/handlers"],
+			"utils": ["./dist/utils"],
+			"stores": ["./dist/stores"],
+			"registry": ["./dist/registry"],
+			"symbols": ["./dist/symbols.d.ts"]
 		}
 	},
 	"repository": {
@@ -106,7 +94,7 @@
 	"bugs": {
 		"url": "https://github.com/sunarjs/sunar/issues"
 	},
-	"homepage": "https://github.com/sunarjs/sunar",
+	"homepage": "https://sunar.js.org",
 	"publishConfig": {
 		"access": "public",
 		"registry": "https://registry.npmjs.org"
