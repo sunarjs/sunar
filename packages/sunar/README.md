@@ -12,10 +12,10 @@
 
 ### Table of contents
 - [Simple example](#simple-example)
-  - [Initialize the client](#initialize-the-client)
-  - [Create your first signal](#create-your-first-signal)
-  - [Create your first command](#create-your-first-command)
-  - [Handle interactions](#handle-interactions)
+	- [Initialize the client](#initialize-the-client)
+	- [Create your first signal](#create-your-first-signal)
+	- [Create your first command](#create-your-first-command)
+	- [Handle interactions](#handle-interactions)
 - [Credits](#credits)
 - [License](#license)
 
@@ -36,14 +36,14 @@ Create a new file, e.g., `index.js`, and set up your Discord bot using Sunar.
 import { Client, load } from 'sunar';
 
 const start = async () => {
-	const client = new Client({ intents: [] });
+    const client = new Client({ intents: [] });
 
-	// stores all sunar modules, you can add more
-	// directories by passing them after the "signals"
-	// with a comma (e.g. signals,buttons,autocompletes)
-	await load('src/{commands,signals}/**/*.{js,ts}');
+    // stores all sunar modules, you can add more
+    // directories by passing them after the "signals"
+    // with a comma (e.g. signals,buttons,autocompletes)
+    await load('src/{commands,signals}/**/*.{js,ts}');
 
-	client.login('YOUR_DISCORD_BOT_TOKEN');
+    client.login('YOUR_DISCORD_BOT_TOKEN');
 };
 
 start();
@@ -62,8 +62,8 @@ import { registerCommands } from 'sunar/registry';
 const signal = new Signal('ready', { once: true });
 
 execute(signal, async (client) => {
-	await registerCommands(client.application);
-	console.log(`Logged in as ${client.user.tag}`);
+    await registerCommands(client.application);
+    console.log(`Logged in as ${client.user.tag}`);
 });
 
 export { signal };
@@ -79,14 +79,14 @@ Let's create a simple `ping` command that responds with the bot's ping when invo
 import { Slash, execute } from 'sunar';
 
 const slash = new Slash({
-	name: 'ping',
-	description: 'Show client ws ping',
+    name: 'ping',
+    description: 'Show client ws ping',
 });
 
 execute(slash, (interaction) => {
-	interaction.reply({
-		content: `Client WS Ping: ${interaction.client.ws.ping}`,
-	});
+    interaction.reply({
+        content: `Client WS Ping: ${interaction.client.ws.ping}`,
+    });
 });
 
 export { slash };
@@ -105,7 +105,7 @@ import { handleInteraction } from 'sunar/handlers';
 const signal = new Signal('interactionCreate');
 
 execute(signal, async (interaction) => {
-	await handleInteraction(interaction);
+    await handleInteraction(interaction);
 });
 
 export { signal };
