@@ -1,5 +1,5 @@
 ---
-title: Buttons
+title: Button
 description: Buttons are interactive elements users can click to trigger specific actions. They are ideal for creating interactive messages, such as confirmation prompts or menu navigation.
 ---
 
@@ -7,7 +7,7 @@ Buttons are interactive elements users can click to trigger specific actions. Th
 
 <Links>
 	<Link
-		label="Button Builder"
+		label="Source"
 		icon="github"
 		link="https://github.com/sunarjs/sunar/blob/main/src/builders/button/button.ts"
 	/>
@@ -22,6 +22,20 @@ Buttons are interactive elements users can click to trigger specific actions. Th
 		link="https://discord.com/developers/docs/interactions/message-components#buttons"
 	/>
 </Links>
+
+## Usage
+
+```js
+import { Button, execute } from 'sunar';
+
+const button = new Button({ id: 'example' });
+
+execute(button, (interaction) => {
+	// handle execution
+});
+
+export { button };
+```
 
 ## Implementation
 
@@ -73,11 +87,20 @@ export { slash, button };
 
 ## Reference
 
-### ButtonOptions
+### ButtonOptions [#button-options]
 
 ```json doc-gen:typescript
 {
 	"file": "./content/docs/props.ts",
 	"name": "ButtonOptions"
+}
+```
+
+### ButtonConfig [#button-config]
+
+```json doc-gen:typescript
+{
+	"file": "./content/docs/props.ts",
+	"name": "ButtonConfig"
 }
 ```

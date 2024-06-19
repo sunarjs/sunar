@@ -1,5 +1,5 @@
 ---
-title: Slash Commands
+title: Slash
 description: Slash commands are one of the primary ways users interact with bots. They provide a structured way for users to issue commands directly within the chat interface.
 ---
 
@@ -7,7 +7,7 @@ Slash commands are one of the primary ways users interact with bots. They provid
 
 <Links>
 	<Link
-		label="Slash Builder"
+		label="Source"
 		icon="github"
 		link="https://github.com/sunarjs/sunar/blob/main/src/builders/slash/slash.ts"
 	/>
@@ -27,6 +27,23 @@ Slash commands are one of the primary ways users interact with bots. They provid
 		link="https://discord.com/developers/docs/interactions/application-commands#slash-commands"
 	/>
 </Links>
+
+## Usage
+
+```js
+import { Slash, execute } from 'sunar';
+
+const slash = new Slash({
+	name: 'example',
+	description: 'example description',
+});
+
+execute(slash, (interaction) => {
+	// handle execution
+});
+
+export { slash };
+```
 
 ## Implementation
 
@@ -63,4 +80,15 @@ execute(slash, (interaction) => {
 });
 
 export { slash };
+```
+
+## Reference
+
+### SlashConfig [#slash-config]
+
+```json doc-gen:typescript
+{
+	"file": "./content/docs/props.ts",
+	"name": "SlashConfig"
+}
 ```

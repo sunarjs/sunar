@@ -1,5 +1,5 @@
 ---
-title: Context Menus
+title: ContextMenu
 description: Context menu commands are available directly in the right-click context menu for users or messages. These commands are convenient for quick actions without needing to type a command.
 ---
 
@@ -7,7 +7,7 @@ Context menu commands are available directly in the right-click context menu for
 
 <Links>
 	<Link
-		label="Context Menu Builder"
+		label="Source"
 		icon="github"
 		link="https://github.com/sunarjs/sunar/blob/main/src/builders/contextMenu/contextMenu.ts"
 	/>
@@ -32,6 +32,24 @@ Context menu commands are available directly in the right-click context menu for
 		link="https://discord.com/developers/docs/interactions/application-commands#user-commands"
 	/>
 </Links>
+
+## Usage
+
+```js
+import { ContextMenu, execute } from 'sunar';
+import { ApplicationCommandType } from 'discord.js';
+
+const contextMenu = new ContextMenu({
+	name: 'example',
+	type: ApplicationCommandType.User,
+});
+
+execute(contextMenu, (interaction) => {
+	// handle execution
+});
+
+export { contextMenu };
+```
 
 ## Implementation
 
@@ -59,4 +77,15 @@ execute(contextMenu, (interaction) => {
 });
 
 export { contextMenu };
+```
+
+## Reference
+
+### ContextMenuConfig [#context-menu-config]
+
+```json doc-gen:typescript
+{
+	"file": "./content/docs/props.ts",
+	"name": "ContextMenuConfig"
+}
 ```

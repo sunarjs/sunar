@@ -1,8 +1,10 @@
 ---
 title: Getting started
-description: Start building your discord bot with sunar and discord.js!
+description: If you're new to Sunar, you can follow these steps to get started building your discord bot!
 icon: Rocket
 ---
+
+If you're new to Sunar, you can follow these steps to get started.
 
 <Steps>
 <Step>
@@ -39,15 +41,17 @@ const start = async () => {
 start();
 ```
 
-Replace `'YOUR_DISCORD_BOT_TOKEN'` with your actual bot token obtained from the
-[Discord Developer Portal](https://discord.com/developers/applications).
+<Callout>
+	Replace `'YOUR_DISCORD_BOT_TOKEN'` with your actual bot token obtained from
+	the [Discord Developer Portal](https://discord.com/developers/applications).
+</Callout>
 
 </Step>
 
 <Step>
 ## Create your first signal
 
-Signals handle events in your Discord bot. Let's create a basic 'ready' signal to log when the bot is online and ready.
+Signals handle events in your Discord bot. Let's create a basic `ready` signal to log when the bot is online and ready.
 
 ```js title="src/signals/ready.js"
 import { Signal, execute } from 'sunar';
@@ -62,6 +66,10 @@ execute(signal, async (client) => {
 
 export { signal };
 ```
+
+<Callout>
+This basically register all loaded application commands (by default globally). If you want to change this behavior read the [registering commands guide](/docs/guides/registering-commands).
+</Callout>
 
 </Step>
 
@@ -108,6 +116,10 @@ execute(signal, async (interaction) => {
 
 export { signal };
 ```
+
+<Callout>
+	For more information about the interaction handling, see [handle interactions guide](/docs/guides/interactions-handling).
+</Callout>
 
 </Step>
 

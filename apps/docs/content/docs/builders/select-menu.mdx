@@ -1,5 +1,5 @@
 ---
-title: Select Menus
+title: SelectMenu
 description: Select menus allow users to choose from a list of options. They are useful for forms, surveys, or any scenario where the user needs to make a selection from multiple choices.
 ---
 
@@ -7,7 +7,7 @@ Select menus allow users to choose from a list of options. They are useful for f
 
 <Links>
 	<Link
-		label="SelectMenu Builder"
+		label="Source"
 		icon="github"
 		link="https://github.com/sunarjs/sunar/blob/main/src/builders/selectMenu/selectMenu.ts"
 	/>
@@ -22,6 +22,23 @@ Select menus allow users to choose from a list of options. They are useful for f
 		link="https://discord.com/developers/docs/interactions/message-components#select-menus"
 	/>
 </Links>
+
+## Usage
+
+```js
+import { SelectMenu, execute } from 'sunar';
+
+const select = new SelectMenu({
+	id: 'example',
+	type: ComponentType.StringSelect,
+});
+
+execute(select, (interaction) => {
+	// handle execution
+});
+
+export { select };
+```
 
 ## Implementation
 
@@ -47,7 +64,7 @@ execute(slash, (interaction) => {
 			{ label: 'Laptop', value: 'laptop' },
 			{ label: 'Smart TV', value: 'smart-tv' },
 			{ label: 'Tablet', value: 'tablet' },
-			{ label: 'Smartphone', value: 'smartphone' }
+			{ label: 'Smartphone', value: 'smartphone' },
 		)
 		.setPlaceholder('Select an item to purchase');
 
@@ -74,11 +91,20 @@ export { slash, select };
 
 ## Reference
 
-### SelectMenuOptions
+### SelectMenuOptions [#select-menu-options]
 
 ```json doc-gen:typescript
 {
 	"file": "./content/docs/props.ts",
 	"name": "SelectMenuOptions"
+}
+```
+
+### SelectMenuConfig [#select-menu-config]
+
+```json doc-gen:typescript
+{
+	"file": "./content/docs/props.ts",
+	"name": "SelectMenuConfig"
 }
 ```

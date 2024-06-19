@@ -1,0 +1,71 @@
+---
+title: config
+description: Configure builders and fine-tune your discord bot's functionality with the flexible "config" mutator in Sunar. Customize settings, adjust parameters, and optimize your bot's behavior seamlessly.
+---
+
+Configure builders and fine-tune your discord bot's functionality with the flexible "config" mutator in Sunar. Customize settings, adjust parameters, and optimize your bot's behavior seamlessly.
+
+<Links>
+<Link label="Source" icon="github" link="https://github.com/sunarjs/sunar/blob/main/packages/sunar/src/mutators/config/config.ts" />
+</Links>
+
+## Usage
+
+```js title="src/commands/ping.js"
+import { Slash, execute, config } from 'sunar';
+
+const slash = new Slash({
+	name: 'ping',
+	description: "Ping the bot to check if it's online.",
+});
+
+config(slash, { // [!code highlight]
+    cooldown: 5000, // [!code highlight]
+    guildsIds: [/* ... */], // [!code highlight]
+}); // [!code highlight]
+ 
+execute(slash, (interaction) => {
+	interaction.reply('Pong!');
+});
+
+export { slash };
+```
+
+import { Hourglass, Boxes } from 'lucide-react'
+
+## Implementation
+
+<Cards>
+    <Card
+        icon={<Hourglass />}
+        title="Implementing cooldowns"
+        description="Learn how to effectively manage command usage by implementing cooldowns to prevent spam and control interaction frequency."
+        href="/docs/guides/implementing-cooldowns"
+    />
+    <Card
+        icon={<Boxes />}
+        title="Dynamic registration"
+        description="Explore dynamic command registration methods tailored for specific guilds or IDs, enabling flexible bot customization and interaction management."
+        href="/docs/guides/registering-commands/dynamic#specific-guilds-ids-commands"
+    />
+</Cards>
+
+## Reference
+
+### config [#mutator]
+
+```json doc-gen:typescript
+{
+	"file": "./content/docs/props.ts",
+	"name": "IConfigMut"
+}
+```
+
+### CooldownConfig [#cooldown-config]
+
+```json doc-gen:typescript
+{
+	"file": "./content/docs/props.ts",
+	"name": "CooldownConfig"
+}
+```

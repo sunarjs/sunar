@@ -1,0 +1,10 @@
+{
+    "pages": [
+        "load-modules",
+        "working-with-signals",
+        "interactions-handling",
+        "registering-commands",
+        "implementing-cooldowns",
+        "middlewares"
+    ]
+}

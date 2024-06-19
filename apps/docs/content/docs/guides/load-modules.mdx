@@ -1,0 +1,53 @@
+---
+title: Load modules
+description: Modules in Sunar encapsulate related commands, signals and components, enabling efficient organization and management of your bot's capabilities. Learn how to leverage Sunar's modular architecture to streamline development and scalability.
+---
+
+Modules in Sunar encapsulate related commands, signals and components, enabling efficient organization and management of your bot's capabilities. Learn how to leverage Sunar's modular architecture to streamline development and scalability.
+
+## Example
+
+All you have to do is use the `load` function and use a [glob](https://www.npmjs.com/package/glob) pattern:
+
+```js title="src/index.js"
+import { Client, load } from 'sunar';
+
+const client = new Client(/* your options */);
+
+const start = async () => {
+	// you can add more directories to load by
+	// passing them with a comma after "signals"
+	await load('src/{commands,signals}/**/*.{js,ts}'); // [!code highlight]
+
+	return client.login('YOUR_DISCORD_BOT_TOKEN');
+};
+
+start();
+```
+
+<Callout>
+	Replace `'YOUR_DISCORD_BOT_TOKEN'` with your actual bot token obtained from the [Discord Developer Portal](https://discord.com/developers/applications).
+</Callout>
+
+<Callout>
+	If you are using ECMAScript modules, you can use the [top-level await](https://v8.dev/features/top-level-await) feature and avoid the `start` function.
+</Callout>
+
+## File structure
+
+Here's an overview of the project's file structure to help you visualize how files are organized within Sunar.
+
+<Files>
+  	<Folder name="src" defaultOpen>
+		<Folder name="commands" defaultOpen>
+			<File name="ping.js" />
+		</Folder>
+
+    	<Folder name="signals" defaultOpen>
+    		<File name="interaction-create.js" />
+    		<File name="ready.js" />
+    	</Folder>
+
+  	</Folder>
+	<File name="index.js" />
+</Files>

@@ -1,5 +1,5 @@
 ---
-title: Autocompletes
+title: Autocomplete
 description: Autocomplete commands enhance the user experience by providing suggestions while the user is typing. They are particularly useful for commands with multiple options or extensive inputs.
 ---
 
@@ -22,6 +22,22 @@ Autocomplete commands enhance the user experience by providing suggestions while
 		link="https://discord.com/developers/docs/interactions/application-commands#autocomplete"
 	/>
 </Links>
+
+## Usage
+
+```js
+import { Autocomplete, execute } from 'sunar';
+
+const autocomplete = new Autocomplete({
+	name: 'example',
+});
+
+execute(autocomplete, (interaction, option) => {
+	// handle execution
+});
+
+export { autocomplete };
+```
 
 ## Implementation
 
@@ -76,7 +92,7 @@ export { slash, autocomplete };
 
 ## Reference
 
-### AutocompleteOptions
+### AutocompleteOptions [#autocomplete-options]
 
 ```json doc-gen:typescript
 {

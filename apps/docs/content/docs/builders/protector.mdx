@@ -1,0 +1,39 @@
+---
+title: Protector
+description: Protectors in Sunar act as middleware, allowing you to intercept and control the flow of commands and interactions within your Discord bot. They provide a flexible way to enforce permissions, validate inputs, or perform pre-processing before executing commands.
+---
+
+Protectors in Sunar act as middleware, allowing you to intercept and control the flow of commands and interactions within your Discord bot. They provide a flexible way to enforce permissions, validate inputs, or perform pre-processing before executing commands.
+
+<Links>
+	<Link
+		label="Source"
+		icon="github"
+		link="https://github.com/sunarjs/sunar/blob/main/src/builders/protector/protector.ts"
+	/>
+	<Link
+		label="Protect Mutator"
+		icon="github"
+		link="https://github.com/sunarjs/sunar/blob/main/src/mutators/protect/protect.ts"
+	/>
+</Links>
+
+## Usage
+
+```js
+import { Protector, execute } from 'sunar';
+
+const protector = new Protector({
+	commands: ['slash'],
+});
+
+execute(protector, (arg) => {
+	// handle execution
+});
+
+export { protector };
+```
+
+## Implementation
+
+In the [middlewares guide](/docs/guides/middlewares#protectors) you can find a detailed example of the implementation of protectors.

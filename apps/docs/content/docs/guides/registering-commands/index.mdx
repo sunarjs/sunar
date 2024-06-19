@@ -1,0 +1,96 @@
+---
+title: Registering commands
+description: This section covers the essential steps and methods for registering commands in your Discord bot using Sunar.
+---
+
+This section covers the essential steps and methods for registering commands in your Discord bot using Sunar.
+
+<Steps>
+
+<Step>
+## Create a command
+
+Define a new [slash command](/docs/builders/slash-command) or a [context menu](/docs/builders/context-menu) using Sunar's intuitive API and configure its properties such as name, description, options (if applicable), and permissions.
+
+```js title="src/commands/ping.js"
+import { Slash, execute } from 'sunar';
+
+const slash = new Slash({
+	name: 'ping',
+	description: "Ping the bot to check if it's online.",
+});
+
+execute(slash, (interaction) => {
+	interaction.reply('Pong!');
+});
+
+export { slash };
+```
+
+</Step>
+
+<Step>
+## Listen for the `ready` signal
+
+Wait for the `ready` signal from discord.js, indicating that the bot is connected and ready to register commands.
+
+```js title="src/signals/ready.js"
+import { Signal, execute } from 'sunar';
+
+const signal = new Signal('ready', { once: true });
+
+execute(signal, (client) => {
+	console.log(`${client.user.tag} logged!`);
+});
+
+export { signal };
+```
+
+</Step>
+
+<Step>
+## Register the commands
+
+Now you can add the `registerCommands` function provided by Sunar to dynamically register all the stored commands.
+
+```js title="src/signals/ready.js"
+import { Signal, execute } from 'sunar';
+import { registerCommands } from 'sunar/registry'; // [!code highlight]
+
+const signal = new Signal('ready', { once: true });
+
+// [!code word:async]
+execute(signal, async (client) => {
+	await registerCommands(client.application); // [!code highlight]
+
+	console.log(`${client.user.tag} logged!`);
+});
+
+export { signal };
+```
+
+<Callout>
+	For more information about the `registerCommands` function, see [dynamic
+	registration](/docs/guides/registering-commands/dynamic).
+</Callout>
+
+</Step>
+
+</Steps>
+
+## See more
+
+For global or specific server registration instructions, refer to the following links:
+
+<Cards>
+	<Card
+		title="Global Commands Registration"
+		description="Global registration makes commands available across all servers."
+		href="/docs/guides/registering-commands/global"
+	/>
+	<Card
+		title="Guilds Commands Registration"
+		description="Guilds registration involves registering all commands specifically for a list of servers."
+		href="/docs/guides/registering-commands/guilds"
+	/>
+</Cards>

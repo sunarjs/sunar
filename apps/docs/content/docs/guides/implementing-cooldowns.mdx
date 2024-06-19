@@ -1,0 +1,257 @@
+---
+title: Implementing cooldowns
+description: Learn how to implement and manage cooldowns for commands and components in your Discord bot using Sunar. This guide will walk you through the steps to ensure your bot handles cooldowns effectively, preventing command spam and enhancing user experience.
+---
+
+Learn how to implement and manage cooldowns for commands and components in your Discord bot using Sunar. This guide will walk you through the steps to ensure your bot handles cooldowns effectively, preventing command spam and enhancing user experience.
+
+<Callout>
+    Cooldowns can be used only for [repliable interactions](https://discord.js.org/docs/packages/discord.js/main/RepliableInteraction:TypeAlias).
+</Callout>
+
+## Simple usage
+
+<Steps>
+    <Step>
+        ### Create a command or component
+
+        Start by creating the command or component you want to apply a cooldown to. This can be any type of command or interactive component within your bot.
+
+        For this example, we'll create a simple avatar command that responds with the user avatar when invoked. The same process can be applied to components like buttons or select menus.
+
+        ```js title="src/commands/avatar.js"
+        import { Slash, execute } from 'sunar';
+
+        const slash = new Slash({ name: 'avatar', description: 'Show your user avatar' });
+
+        execute(slash, (interaction) => {
+            const avatarURL = interaction.user.displayAvatarURL();
+
+            interaction.reply({
+                content: `Showing ${interaction.user} avatar!`,
+                files: [avatarURL],
+            });
+        });
+
+        export { slash };
+        ```
+    </Step>
+
+    <Step>
+        ### Implement and configure the cooldown
+        
+        Next, implement and configure the cooldown for your command or component using the [config mutator](/docs/mutators/config). The `cooldown` property can be set using a `number` for a simple cooldown period or a [CooldownConfig](/docs/mutators/config#cooldown-config) object for more advanced configuration.
+
+        Here's an example of setting a simple cooldown of 5 seconds:
+
+        ```js title="src/commands/avatar.js"
+        import { Slash, execute, config } from 'sunar';
+
+        const slash = new Slash({ name: 'avatar', description: 'Show your user avatar' });
+
+        config(slash, { // [!code highlight]
+        /* [!code highlight] */    cooldown: 5_000, // 5000 miliseconds = 5 seconds
+        }); // [!code highlight]
+
+        execute(slash, (interaction) => {
+            const avatarURL = interaction.user.displayAvatarURL();
+
+            interaction.reply({
+                content: `Showing ${interaction.user} avatar!`,
+                files: [avatarURL],
+            });
+        });
+
+        export { slash };
+        ```
+    </Step>
+
+    <Step>
+        ### Detect when a user is on cooldown
+
+        To handle scenarios when a user attempts to use a command or component while still in the cooldown period, you can listen for the `cooldown` signal provided by Sunar. This signal passes the interaction and a [`CooldownContext`](https://github.com/search?q=repo%3Asunarjs%2Fsunar+path%3Apackages%2Fsunar%2Fsrc%2Ftypes%cooldown.ts+CooldownContext&type=code) object as arguments.
+
+        Here's how you can set it up:
+
+        ```js title="src/signals/cooldown.js"
+        import { Signal, execute } from 'sunar';
+
+        const signal = new Signal('cooldown');
+
+        execute(signal, (interaction, context) => {
+            interaction.reply({
+                content: `You need to wait ${context.remaining} milliseconds before using this again.`
+            });
+        });
+
+        export { signal };
+        ```
+        In this example, the cooldown signal helps you notify users when they attempt to use a command or component before the cooldown period has expired.
+        
+        The [`CooldownContext`](https://github.com/search?q=repo%3Asunarjs%2Fsunar+path%3Apackages%2Fsunar%2Fsrc%2Ftypes%cooldown.ts+CooldownContext&type=code) object contains information such as the remaining cooldown time, which you can use to inform the user accordingly.
+    </Step>
+</Steps>
+
+## Advanced usage
+
+In this section, you'll learn how to implement more complex cooldown logic.
+
+### Using cooldowns with different scopes
+
+Sunar supports different cooldown scopes through the [`CooldownScope`](https://github.com/search?q=repo%3Asunarjs%2Fsunar+path%3Apackages%2Fsunar%2Fsrc%2Futils%2Fenums.ts+CooldownScope&type=code) enum, allowing you to manage cooldown periods based on various contexts. By default, cooldowns are applied at the user level, ensuring fair usage of commands across different users.
+
+#### Scopes
+
+1. **User**: Limits the frequency of command execution to once every specified interval per user.
+2. **Channel**: Limits the frequency of command execution to once every specified interval per channel.
+3. **Guild**: Limits the frequency of command execution to once every specified interval per server.
+4. **Global**: Limits the frequency of command execution to once every specified interval globally across all users, channels, and servers.
+
+#### Example
+
+This configuration restricts the command to execute only once every 3 seconds per server.
+
+```js title="src/commands/avatar.js"
+import { CooldownScope, Slash, execute, config } from 'sunar';
+
+const slash = new Slash({ name: 'avatar', description: 'Show your user avatar' });
+
+config(slash, {
+    cooldown: {
+        time: 3_000, // 3 seconds
+        scope: CooldownScope.Guild, // [!code highlight]
+    },
+});
+
+execute(slash, (interaction) => {
+    const avatarURL = interaction.user.displayAvatarURL();
+
+    interaction.reply({
+        content: `Showing ${interaction.user} avatar!`,
+        files: [avatarURL],
+    });
+});
+
+export { slash };
+```
+
+### Cooldown Capping
+
+Learn how to set specific limits on how many times a command or component can be used before triggering a cooldown period. By default, commands and components have a usage limit of 1, after which a cooldown period goes into effect. This feature helps you manage command usage effectively and maintain precise control over bot interactions in Discord.
+
+```js title="src/commands/avatar.js"
+import { Slash, execute, config } from 'sunar';
+ 
+const slash = new Slash({ name: 'avatar', description: 'Show your user avatar' });
+ 
+config(slash, { 
+    cooldown: { 
+        time: 5_000, // 5 seconds
+        limit: 3, // [!code highlight]
+    },
+}); 
+ 
+execute(slash, (interaction) => {
+    const avatarURL = interaction.user.displayAvatarURL();
+ 
+    interaction.reply({
+        content: `Showing ${interaction.user} avatar!`,
+        files: [avatarURL],
+    });
+});
+ 
+export { slash };
+```
+
+This example demonstrates how to implement a cooldown with a usage cap for a slash command in Sunar. In this case, the `avatar` command is configured to have a cooldown period of 5 seconds (`time: 5_000` milliseconds) and a usage limit of 3 (`limit: 3`). This means the command can be used up to 3 times within the cooldown period before subsequent uses trigger the cooldown. Adjust the `time` and `limit` values as needed to suit your bot's requirements for command usage management.
+
+### Excluding target IDs
+
+Learn how to exclude specific IDs from cooldown restrictions based on different scopes using the exclude property in Sunar. This feature allows you to bypass cooldown limits for certain entities, such as excluding server IDs in a Guild scope configuration or excluding user IDs in a User scope configuration.
+
+```js title="src/commands/avatar.js"
+import { Slash, execute, config } from 'sunar';
+ 
+const slash = new Slash({ name: 'avatar', description: 'Show your user avatar' });
+ 
+config(slash, { 
+    cooldown: { 
+        time: 5_000, // 5 seconds
+        exclude: ['SOME_USER_ID'], // [!code highlight]
+        // scope: CooldownScope.User (default)
+    },
+}); 
+ 
+execute(slash, (interaction) => {
+    const avatarURL = interaction.user.displayAvatarURL();
+ 
+    interaction.reply({
+        content: `Showing ${interaction.user} avatar!`,
+        files: [avatarURL],
+    });
+});
+ 
+export { slash };
+```
+
+In this example, the `avatar` command is configured with a User scope cooldown of 5 seconds. The exclude property is used to exclude specific user IDs from the cooldown restrictions. Adjust the exclude array and other parameters according to your bot's requirements to manage command usage effectively across different contexts.
+
+### Advanced handling of the `cooldown` signal
+
+Learn how to leverage the `cooldown` signal in Sunar for advanced bot interaction management. This section covers configuring, customizing, and integrating cooldown signals to optimize command usage and user experience.
+
+```js title="src/signals/cooldown.js"
+import { Signal, CooldownScope, execute } from 'sunar';
+
+const signal = new Signal('cooldown');
+
+execute(signal, (interaction, { remaining, scope }) => {
+    const type = interaction.isCommand() ? 'command' : 'component';
+
+    const remainingSeconds = remaining / 1000;
+
+    let content;
+
+    switch(scope) {
+        case CooldownScope.User:
+            content = `You need to wait ${remainingSeconds} seconds before using this ${type} again.`;
+            break;
+        case CooldownScope.Channel:
+            content = `You need to wait ${remainingSeconds} seconds in this channel before using this ${type} again.`;
+            break;
+        case CooldownScope.Guild:
+            content = `You need to wait ${remainingSeconds} seconds in this server before using this ${type} again.`;
+            break;
+        case CooldownScope.Global:
+            content = `This ${type} is on cooldown globally, you need to wait ${remainingSeconds} seconds.`;
+            break;
+        default:
+            content = `This ${type} is on cooldown, you need to wait ${remainingSeconds} seconds.`;
+            break;
+    }
+
+    interaction.reply({ content });
+});
+
+export { signal };
+```
+
+- **Cooldown Management**: The `cooldown` signal in Sunar manages cooldown periods for Discord bot interactions. When triggered, it determines how long users must wait before executing a command again.
+- **Execution Callback**: When the `cooldown` signal is triggered, it executes a callback function. This function informs users about the remaining cooldown time based on the scope of the cooldown (`User`, `Channel`, `Guild`, `Global`).
+- **User Experience**: By regulating command usage, cooldowns ensure fair interaction within Discord servers. This prevents overuse of commands and maintains a balanced user experience.
+
+This setup allows developers to configure cooldowns based on specific needs, ensuring smooth bot operation and enhancing community engagement on Discord platforms.
+
+### Conclusion
+
+Implementing cooldowns in your discord bot using Sunar is essential for maintaining a balanced user experience and preventing command abuse. By configuring cooldowns, you ensure that commands and interactive components are used responsibly across different contexts, such as users, channels, servers, and globally.
+
+Through this guide, you've learned how to:
+
+- Set up simple cooldowns for commands and components to regulate their usage frequency.
+- Configure advanced cooldown settings like scopes (`User`, `Channel`, `Guild`, `Global`) to tailor restrictions based on specific contexts.
+- Cap command usage to a defined limit before triggering cooldown periods, ensuring controlled interaction.
+- Exclude specific IDs from cooldown restrictions to accommodate special cases or privileged users.
+- Utilize the `cooldown` signal for advanced management, notifying users about remaining cooldown times dynamically.
+
+By applying these techniques, you can effectively manage command usage in your bot, maintain server integrity, and enhance overall user satisfaction on Discord. Experiment with different configurations and adapt them to your bot's needs to optimize interaction and engagement across Discord communities.

@@ -4,26 +4,69 @@ description: Sunar is a lightweight and efficient framework for building Discord
 icon: Presentation
 ---
 
-Sunar is a lightweight and efficient framework for building Discord bots using [discord.js](https://discord.js.org). Designed with simplicity and ease of use in mind, Sunar streamlines your bot development process while providing powerful features and a clean API.
-
 import Image from 'next/image';
 
-<img src="/simple-banner.png" alt="Sunar simple banner" width={1000} height={500} />
+<img
+	src="/simple-banner.png"
+	alt="Sunar simple banner"
+	width={1000}
+	height={500}
+/>
+
+## What is Sunar?
+
+Sunar is a lightweight and efficient framework for building Discord bots using [discord.js](https://discord.js.org). Designed with simplicity and ease of use in mind, Sunar streamlines your bot development process while providing powerful features and a clean API.
 
 ## Why Choose Sunar?
 
-Sunar offers a minimalistic and readable API that simplifies bot development without sacrificing functionality. With full TypeScript support, it ensures type safety and an improved developer experience for both JavaScript and TypeScript users. The framework is rich in features, supporting slash commands, context menu commands, buttons, modals, select menus, and more. Built with extensibility in mind, Sunar allows you to add custom functionality and easily manage your bot's capabilities. As an open-source project, it invites community contributions to continuously enhance the framework.
+Sunar offers a minimalistic and readable API that simplifies bot development without sacrificing functionality. With full TypeScript support, it ensures type safety and an improved developer experience for both JavaScript and TypeScript users.
+
+The framework is rich in features, supporting slash commands, context menu commands, buttons, modals, select menus, and more. Built with extensibility in mind, Sunar allows you to add custom functionality and easily manage your bot's capabilities.
+
+As an open-source project, it invites community contributions to continuously enhance the framework.
+
+import {
+	SquareSlash,
+	PanelTopDashed,
+	RadioTower,
+	Component,
+	Shield,
+} from 'lucide-react';
 
 ## Key Features
 
-- **Slash Commands**
-- **Signals Handling**
-- **Context Menu Commands**
-- **Interactive Components**
-- **Middlewares**
-- **Modular Structure**
+Explore the core functionalities that make Sunar a powerful and versatile framework for building Discord bots.
+
+<Cards>
+	<Card
+		icon={<RadioTower />}
+		title="Signals Handling"
+		description="Manage events and interactions with a robust signaling system."
+		href="/docs/builders/signal"
+	/>
+	<Card
+		icon={<SquareSlash />}
+		title="Application Commands"
+		description="Define and handle commands within the Discord chat interface and context menus."
+		href="/docs/guides/registering-commands"
+	/>
+	<Card
+		icon={<Component />}
+		title="Interactive Components"
+		description="Enhance user engagement with buttons, modals, and select menus."
+		href="/docs/builders/button"
+	/>
+	<Card
+		icon={<Shield />}
+		title="Middlewares"
+		description="Use protectors and accepts to enforce permissions and validate interactions effortlessly."
+		href="/docs/guides/middlewares"
+	/>
+</Cards>
 
 ## See also
+
+Find additional resources and documentation to enhance your Sunar experience. These links offer valuable insights and advanced techniques for bot development.
 
 import {
 	DiscordJSIcon,
@@ -51,7 +94,7 @@ import {
 
 ## Donations
 
-Support the development of Sunar:
+Support the development of Sunar by making a donation. Your contributions help us continue to improve and expand the framework.
 
 <Cards>
 	<Card
@@ -72,7 +115,7 @@ Support the development of Sunar:
 
 ## Credits
 
-The source code structure is heavily inspired by the [Valibot](https://github.com/fabian-hiller/valibot) package.
+Special thanks to [discord.js](https://discord.js.org) for their incredible library that powers Sunar, to [Valibot](https://github.com/fabian-hiller/valibot) for inspiring our code structure, and to [Fumadocs](https://fumadocs.vercel.app/) for being an excellent framework for creating documentations.
 
 ## License
 

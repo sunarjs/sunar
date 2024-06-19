@@ -1,5 +1,5 @@
 ---
-title: Modals
+title: Modal
 description: Modals are popup forms that can collect detailed user input. They are particularly useful for complex interactions that require multiple fields or steps.
 ---
 
@@ -7,7 +7,7 @@ Modals are popup forms that can collect detailed user input. They are particular
 
 <Links>
 	<Link
-		label="Modal Builder"
+		label="Source"
 		icon="github"
 		link="https://github.com/sunarjs/sunar/blob/main/src/builders/modal/modal.ts"
 	/>
@@ -22,6 +22,20 @@ Modals are popup forms that can collect detailed user input. They are particular
 		link="https://discord.com/developers/docs/interactions/overview#modals"
 	/>
 </Links>
+
+## Usage
+
+```js
+import { Modal, execute } from 'sunar';
+
+const modal = new Modal({ id: 'example' });
+
+execute(modal, (interaction) => {
+	// handle execution
+});
+
+export { modal };
+```
 
 ## Implementation
 
@@ -77,11 +91,20 @@ export { slash, modal };
 
 ## Reference
 
-### ModalOptions
+### ModalOptions [#modal-options]
 
 ```json doc-gen:typescript
 {
 	"file": "./content/docs/props.ts",
 	"name": "ModalOptions"
+}
+```
+
+### ModalConfig [#modal-config]
+
+```json doc-gen:typescript
+{
+	"file": "./content/docs/props.ts",
+	"name": "ModalConfig"
 }
 ```

@@ -1,3 +1,11 @@
+import type {
+	accepts,
+	config,
+	execute,
+	protect,
+	CooldownResolvable,
+} from 'sunar';
+
 export type {
 	AutocompleteOptions,
 	ContextMenuData,
@@ -6,3 +14,32 @@ export type {
 	SelectMenuOptions,
 	ModalOptions,
 } from 'sunar';
+
+export type {
+	ContextMenuConfig,
+	ModalConfig,
+	SlashConfig,
+	ButtonConfig,
+	SelectMenuConfig,
+	CooldownConfig,
+} from 'sunar';
+
+export interface ICooldownResolvable {
+	CooldownResolvable: CooldownResolvable
+}
+
+export interface IExecuteMut {
+	execute: typeof execute
+}
+
+export interface IProtectMut {
+	protect: typeof protect
+}
+
+export interface IAcceptsMut {
+	accepts: typeof accepts
+}
+
+export interface IConfigMut {
+	config: typeof config
+}

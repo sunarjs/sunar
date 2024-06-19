@@ -1,0 +1,31 @@
+---
+title: execute
+description: Whether managing slash commands, context menus, or other interactive components, "execute" empowers you to define and execute custom logic effortlessly, enhancing user engagement and bot functionality.
+---
+
+Whether managing slash commands, context menus, or other interactive components, `execute` empowers you to define and execute custom logic effortlessly, enhancing user engagement and bot functionality.
+
+<Links>
+	<Link
+		label="Source"
+		icon="github"
+		link="https://github.com/sunarjs/sunar/blob/main/src/mutators/execute/execute.ts"
+	/>
+</Links>
+
+## Usage
+
+```js title="src/commands/ping.js"
+import { Slash, execute } from 'sunar';
+
+const slash = new Slash({
+	name: 'ping',
+	description: "Ping the bot to check if it's online.",
+});
+
+execute(slash, (interaction) => { // [!code highlight]
+	interaction.reply('Pong!'); // [!code highlight]
+}); // [!code highlight]
+
+export { slash };
+```

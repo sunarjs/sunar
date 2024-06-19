@@ -1,5 +1,5 @@
 ---
-title: Signals
+title: Signal
 description: Signals in Sunar correspond to events in discord.js. They allow you to handle various actions and responses that occur within your Discord bot, such as messages being sent, users joining or leaving, and more.
 ---
 
@@ -7,7 +7,7 @@ Signals in Sunar correspond to events in [discord.js](https://www.npmjs.com/pack
 
 <Links>
 	<Link
-		label="Signal Builder"
+		label="Source"
 		icon="github"
 		link="https://github.com/sunarjs/sunar/blob/main/src/builders/signal/signal.ts"
 	/>
@@ -23,6 +23,20 @@ Signals in Sunar correspond to events in [discord.js](https://www.npmjs.com/pack
 	/>
 </Links>
 
+## Usage
+
+```js
+import { Signal, execute } from 'sunar';
+
+const signal = new Signal('messageCreate');
+
+execute(signal, (message) => {
+	// handle execution
+});
+
+export { signal };
+```
+
 ## Implementation
 
 The following example demonstrates how to implement a Signal using Sunar:
@@ -35,7 +49,7 @@ const signal = new Signal('guildMemberAdd');
 
 execute(signal, (member) => {
 	const channel = member.guild.channels.cache.find(
-		(c) => c.name === 'welcomes'
+		(c) => c.name === 'welcomes',
 	);
 
 	if (!(channel instanceof TextChannel)) return;
@@ -48,7 +62,7 @@ export { signal };
 
 ## Reference
 
-### SignalOptions
+### SignalOptions [#signal-options]
 
 ```json doc-gen:typescript
 {

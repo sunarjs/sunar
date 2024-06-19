@@ -1,0 +1,52 @@
+---
+title: accepts
+description: Accepts in Sunar offer a fast and straightforward method to add basic restrictions to commands. They function like protectors but with simpler syntax, making them ideal for enforcing permissions and other basic requirements without needing to write complete middleware functions.
+---
+
+<Callout title="In development" type="warn">
+	Validation failure handling is currently not supported directly by `accepts` in
+	Sunar. For the moment, it is recommended to use
+	[protectors](/docs/builders/protector).
+</Callout>
+
+`accepts` in Sunar offer a fast and straightforward method to add basic restrictions to commands. They function like [protectors](/docs/builders/protector) but with simpler syntax, making them ideal for enforcing permissions and other basic requirements without needing to write complete middleware functions.
+
+<Links>
+	<Link
+		label="Source"
+		icon="github"
+		link="https://github.com/sunarjs/sunar/blob/main/src/mutators/accepts/accepts.ts"
+	/>
+</Links>
+
+## Usage
+
+```js
+import { Slash, accepts, execute } from 'sunar';
+
+const slash = new Slash({
+	name: 'test',
+	description: 'This a testing',
+});
+
+accepts(slash, { // [!code highlight]
+	clientPermissions: ['SendMessages'], // [!code highlight]
+}); // [!code highlight]
+
+execute(slash, async (interaction) => {
+	// handle execution
+});
+
+export { slash };
+```
+
+import { Hourglass } from 'lucide-react';
+
+## Implementation
+
+<Card
+    icon={<Hourglass />}
+    title="Implement an accepts middleware"
+	description="Learn how to implement the accepts middleware to enforce permissions or other conditions before executing commands or interactions."
+    href="/docs/guides/middlewares#accepts"
+/>
