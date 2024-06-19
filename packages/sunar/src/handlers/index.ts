@@ -2,6 +2,7 @@ export * from './accepts';
 export * from './autocomplete';
 export * from './button';
 export * from './contextMenu';
+export * from './cooldown';
 export * from './interaction';
 export * from './modal';
 export * from './protectors';

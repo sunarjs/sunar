@@ -1,19 +1,6 @@
-import type { CooldownScope } from '../utils';
+import type { CooldownResolvable } from '..';
 
 export interface CommandConfig {
 	cooldown?: CooldownResolvable;
 	guildIds?: string[];
-}
-
-export type Cooldown = {
-	config: CommandConfig;
-};
-
-export type CooldownResolvable = number | CommandConfig;
-
-export interface CooldownConfig<TScope extends CooldownScope = CooldownScope> {
-	time: number;
-	exclude?: string[];
-	limit?: number;
-	scope?: TScope;
 }

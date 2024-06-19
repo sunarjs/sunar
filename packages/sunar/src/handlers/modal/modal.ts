@@ -1,5 +1,5 @@
 import type { ModalSubmitInteraction } from 'discord.js';
-import { handleAccepts } from '..';
+import { handleAccepts, handleCooldown } from '..';
 import { modalAcceptsArgs } from '../../builders';
 import { modals } from '../../stores';
 import { handleProtectors } from '../protectors';
@@ -15,6 +15,9 @@ export async function handleModal(interaction: ModalSubmitInteraction) {
 	});
 
 	if (!component) return;
+
+	const onCooldown = handleCooldown(interaction, component);
+	if (onCooldown) return;
 
 	if (typeof component.execute !== 'function') return;
 

@@ -1,5 +1,5 @@
 import type { AnySelectMenuInteraction } from 'discord.js';
-import { handleAccepts } from '..';
+import { handleAccepts, handleCooldown } from '..';
 import { selectMenuAcceptsArgs } from '../../builders';
 import { selectMenus } from '../../stores';
 import { handleProtectors } from '../protectors';
@@ -16,6 +16,9 @@ export async function handleSelectMenu(interaction: AnySelectMenuInteraction) {
 	});
 
 	if (!component) return;
+
+	const onCooldown = handleCooldown(interaction, component);
+	if (onCooldown) return;
 
 	if (typeof component.execute !== 'function') return;
 

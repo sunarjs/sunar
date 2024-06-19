@@ -12,3 +12,4 @@ export * from './isRegex';
 export * from './isSelectMenuBuilder';
 export * from './isSignalBuilder';
 export * from './isSlashBuilder';
+export * from './resolveCooldown';

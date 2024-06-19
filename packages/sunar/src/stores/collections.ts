@@ -1,7 +1,8 @@
 import { Collection } from 'discord.js';
 
+import type { CooldownTimestamp } from '..';
 import type { Autocomplete, Button, ContextMenu, Modal, SelectMenu, Signal, Slash } from '../builders';
-import type { CooldownResolvable } from '../types';
+import type { Builders, CooldownScope } from '../utils';
 
 export const signals = new Collection<symbol, Signal>();
 
@@ -17,4 +18,7 @@ export const selectMenus = new Collection<symbol, SelectMenu>();
 
 export const autocompletes = new Collection<symbol, Autocomplete>();
 
-export const cooldowns = new Collection<symbol, Required<CooldownResolvable>>();
+export const cooldownManager = new Collection<
+	Builders,
+	Collection<CooldownScope, Collection<string, CooldownTimestamp[]>>
+>();

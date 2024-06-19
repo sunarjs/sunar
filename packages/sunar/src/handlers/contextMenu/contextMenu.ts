@@ -1,5 +1,5 @@
-import type { ContextMenuCommandInteraction } from 'discord.js';
-import { handleAccepts } from '..';
+import type { MessageContextMenuCommandInteraction, UserContextMenuCommandInteraction } from 'discord.js';
+import { handleAccepts, handleCooldown } from '..';
 import { contextMenuAcceptsArgs } from '../../builders';
 import { contextMenuCommands } from '../../stores';
 import { handleProtectors } from '../protectors';
@@ -8,10 +8,15 @@ import { handleProtectors } from '../protectors';
  * Handle a context menu interaction.
  * @param interaction The context menu interaction to handle
  */
-export async function handleContextMenu(interaction: ContextMenuCommandInteraction) {
+export async function handleContextMenu(
+	interaction: UserContextMenuCommandInteraction | MessageContextMenuCommandInteraction,
+) {
 	const command = contextMenuCommands.get(interaction.commandName);
 
 	if (!command) return;
+
+	const onCooldown = handleCooldown(interaction, command);
+	if (onCooldown) return;
 
 	if (typeof command.execute !== 'function') return;
 

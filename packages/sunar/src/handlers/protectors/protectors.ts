@@ -1,5 +1,5 @@
 import type { Protector, ProtectorExecuteData } from '../../builders';
-import { PROTECTOR_NEXT_SYMBOL } from '../../symbols';
+import { PROTECTOR_NEXT_SYMBOL, UNHANDLED_SYMBOL } from '../../symbols';
 
 export interface HandleProtectorsOptions<TProtectors extends Protector[]> {
 	protectors?: TProtectors;
@@ -18,6 +18,7 @@ export async function handleProtectors<TProtectors extends Protector[]>({
 		// FIXME: Improve types, "never" should not be used here
 		const result = await protector.execute(data as never, () => PROTECTOR_NEXT_SYMBOL);
 
+		if (result === UNHANDLED_SYMBOL) continue;
 		if (result !== PROTECTOR_NEXT_SYMBOL) return false;
 	}
 

@@ -1,5 +1,6 @@
 import type { ButtonInteraction } from 'discord.js';
-import { handleAccepts } from '..';
+
+import { handleAccepts, handleCooldown } from '..';
 import { buttonAcceptsArgs } from '../../builders';
 import { buttons } from '../../stores';
 import { handleProtectors } from '../protectors';
@@ -15,6 +16,9 @@ export async function handleButton(interaction: ButtonInteraction) {
 	});
 
 	if (!component) return;
+
+	const onCooldown = handleCooldown(interaction, component);
+	if (onCooldown) return;
 
 	if (typeof component.execute !== 'function') return;
 
