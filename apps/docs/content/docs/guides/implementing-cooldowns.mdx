@@ -69,7 +69,7 @@ Learn how to implement and manage cooldowns for commands and components in your 
     <Step>
         ### Detect when a user is on cooldown
 
-        To handle scenarios when a user attempts to use a command or component while still in the cooldown period, you can listen for the `cooldown` signal provided by Sunar. This signal passes the interaction and a [`CooldownContext`](https://github.com/search?q=repo%3Asunarjs%2Fsunar+path%3Apackages%2Fsunar%2Fsrc%2Ftypes%cooldown.ts+CooldownContext&type=code) object as arguments.
+        To handle scenarios when a user attempts to use a command or component while still in the cooldown period, you can listen for the `cooldown` signal provided by Sunar. This signal passes the interaction and a [`CooldownContext`](https://github.com/search?q=repo%3Asunarjs%2Fsunar+path%3Apackages%2Fsunar%2Fsrc%2Ftypes%2Fcooldown.ts+CooldownContext&type=code) object as arguments.
 
         Here's how you can set it up:
 
@@ -88,7 +88,7 @@ Learn how to implement and manage cooldowns for commands and components in your 
         ```
         In this example, the cooldown signal helps you notify users when they attempt to use a command or component before the cooldown period has expired.
         
-        The [`CooldownContext`](https://github.com/search?q=repo%3Asunarjs%2Fsunar+path%3Apackages%2Fsunar%2Fsrc%2Ftypes%cooldown.ts+CooldownContext&type=code) object contains information such as the remaining cooldown time, which you can use to inform the user accordingly.
+        The [`CooldownContext`](https://github.com/search?q=repo%3Asunarjs%2Fsunar+path%3Apackages%2Fsunar%2Fsrc%2Ftypes%2Fcooldown.ts+CooldownContext&type=code) object contains information such as the remaining cooldown time, which you can use to inform the user accordingly.
     </Step>
 </Steps>
 
