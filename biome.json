@@ -35,8 +35,7 @@
 				"noEmptyBlockStatements": "off",
 				"noExplicitAny": "off"
 			}
-		},
-		"ignore": ["apps/docs"]
+		}
 	},
 	"formatter": {
 		"enabled": true,
@@ -56,6 +55,6 @@
 	},
 	"files": {
 		"include": ["**/*"],
-		"ignore": ["node_modules", "dist", "src/demos"]
+		"ignore": ["node_modules", "dist", "src/demos", "apps/docs"]
 	}
 }
