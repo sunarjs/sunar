@@ -31,7 +31,7 @@ export default function HomePage() {
 				</h2>
 				<div className="flex flex-row gap-x-2">
 					<Link href="/docs">
-						<Button>Getting started</Button>
+						<Button>Read the docs</Button>
 					</Link>
 
 					<CopyInstall className="hidden sm:flex" />
