@@ -1,7 +1,7 @@
 import { context, signals } from '../../stores';
 import { handleProtectors } from '../protectors';
 
-/** Handle all the signals. */
+/** Handle all the signals. This is used by Sunar internally. */
 export function handleSignals() {
 	for (const signal of signals.values()) {
 		if (!signal.execute) return;

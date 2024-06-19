@@ -13,7 +13,7 @@ export interface SlashConfig extends CommandConfig {}
 /**
  * Slash commands are one of the primary ways users interact with bots. They provide a structured way for users to issue commands directly within the chat interface.
  *
- * @see https://sunar.js.org/docs/commands/slash-commands
+ * @see https://sunar.js.org/docs/builders/slash
  */
 export class Slash implements Builder {
 	public readonly type = Builders.Slash;

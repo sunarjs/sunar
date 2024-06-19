@@ -32,7 +32,7 @@ export interface SelectMenuConfig {
 /**
  * Select menus allow users to choose from a list of options. They are useful for forms, surveys, or any scenario where the user needs to make a selection from multiple choices.
  *
- * @see https://sunar.js.org/docs/components/select-menus
+ * @see https://sunar.js.org/docs/builders/select-menu
  */
 export class SelectMenu<TOptions extends SelectMenuOptions = SelectMenuOptions> implements Builder {
 	public readonly type = Builders.SelectMenu;

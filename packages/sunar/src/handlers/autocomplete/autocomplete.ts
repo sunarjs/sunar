@@ -7,6 +7,8 @@ import { handleProtectors } from '../protectors';
 /**
  * Handle an autocomplete interaction.
  * @param interaction The autocomplete interaction to handle
+ *
+ * @see https://sunar.js.org/docs/guides/interactions-handling
  */
 export async function handleAutocomplete(interaction: AutocompleteInteraction) {
 	const focused = interaction.options.getFocused(true);

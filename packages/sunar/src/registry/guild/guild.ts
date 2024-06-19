@@ -9,6 +9,8 @@ import { getApplicationCommands } from '../../utils';
  * @param guildIds The IDs of the guilds where the commands will be registered.
  *
  * @returns An array of registered application commands collection
+ *
+ * @see https://sunar.js.org/docs/guides/registering-commands/guilds
  */
 export async function registerGuildCommands(
 	application: ClientApplication,

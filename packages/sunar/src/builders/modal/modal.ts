@@ -20,7 +20,7 @@ export interface ModalConfig {
 /**
  * Modals are popup forms that can collect detailed user input. They are particularly useful for complex interactions that require multiple fields or steps.
  *
- * @see https://sunar.js.org/docs/components/modals
+ * @see https://sunar.js.org/docs/builders/modal
  */
 export class Modal implements Builder {
 	public readonly type = Builders.Modal;

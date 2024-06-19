@@ -7,6 +7,8 @@ import { handleProtectors } from '../protectors';
 /**
  * Handle a context menu interaction.
  * @param interaction The context menu interaction to handle
+ *
+ * @see https://sunar.js.org/docs/guides/interactions-handling
  */
 export async function handleContextMenu(
 	interaction: UserContextMenuCommandInteraction | MessageContextMenuCommandInteraction,

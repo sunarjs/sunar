@@ -8,6 +8,8 @@ import { handleProtectors } from '../protectors';
 /**
  * Handle a button interaction.
  * @param interaction The button interaction to handle
+ *
+ * @see https://sunar.js.org/docs/guides/interactions-handling
  */
 export async function handleButton(interaction: ButtonInteraction) {
 	const component = buttons.find(({ options }) => {

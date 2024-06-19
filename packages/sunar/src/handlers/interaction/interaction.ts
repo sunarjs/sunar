@@ -7,6 +7,8 @@ import { handleContextMenu } from '../contextMenu';
 /**
  * Handle all the interactions supported by Sunar.
  * @param interaction The interaction to handle
+ *
+ * @see https://sunar.js.org/docs/guides/interactions-handling
  */
 export async function handleInteraction(interaction: Interaction) {
 	if (interaction.isChatInputCommand()) await handleSlash(interaction);

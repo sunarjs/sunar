@@ -9,6 +9,8 @@ import { handleProtectors } from '../protectors';
 /**
  * Handle a chat input interaction.
  * @param interaction The chat input interaction to handle
+ *
+ * @see https://sunar.js.org/docs/guides/interactions-handling
  */
 export async function handleSlash(interaction: ChatInputCommandInteraction) {
 	const command = slashCommands.get(interaction.commandName);

@@ -18,7 +18,7 @@ export interface AutocompleteAccepts extends InteractionAccepts {}
 /**
  * Autocomplete commands enhance the user experience by providing suggestions while the user is typing. They are particularly useful for commands with multiple options or extensive inputs.
  *
- * @see https://sunar.js.org/docs/commands/autocompletes
+ * @see https://sunar.js.org/docs/builders/autocomplete
  */
 export class Autocomplete implements Omit<Builder, 'config'> {
 	public readonly type = Builders.Autocomplete;

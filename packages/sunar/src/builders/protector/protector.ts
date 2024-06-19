@@ -25,7 +25,8 @@ export interface ProtectorOptions {
 /**
  * Protectors in Sunar act as middleware, allowing you to intercept and control the flow of commands and interactions within your Discord bot. They provide a flexible way to enforce permissions, validate inputs, or perform pre-processing before executing commands.
  *
- * @see https://sunar.js.org/docs/protectors
+ * @see https://sunar.js.org/docs/builders/protector
+ * @see https://sunar.js.org/docs/guides/middlewares#protectors
  */
 export class Protector<TOptions extends ProtectorOptions = ProtectorOptions>
 	implements Pick<Builder, 'type' | 'execute'>

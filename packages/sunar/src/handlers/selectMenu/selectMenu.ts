@@ -7,6 +7,8 @@ import { handleProtectors } from '../protectors';
 /**
  * Handle a select menu interaction.
  * @param interaction The select menu interaction to handle
+ *
+ * @see https://sunar.js.org/docs/guides/interactions-handling
  */
 export async function handleSelectMenu(interaction: AnySelectMenuInteraction) {
 	const component = selectMenus.find(({ options }) => {

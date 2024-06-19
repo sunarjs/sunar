@@ -13,6 +13,8 @@ export interface DynamicRegistryResult {
  * @param application The client application where the commands will be registered.
  *
  * @returns An object with the registered global and guild commands
+ *
+ * @see https://sunar.js.org/docs/guides/registering-commands/dynamic
  */
 export async function registerCommands(application: ClientApplication): Promise<DynamicRegistryResult> {
 	const commands = getSunarApplicationCommands();

@@ -7,6 +7,8 @@ import { getApplicationCommands } from '../../utils';
  *
  * @param application The client application where the commands will be registered.
  * @returns A registered application commands collection
+ *
+ * @see https://sunar.js.org/docs/guides/registering-commands/global
  */
 export function registerGlobalCommands(
 	application: ClientApplication,

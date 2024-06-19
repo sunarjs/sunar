@@ -11,13 +11,15 @@ export type Accept<TValue, InputArray = false> = TValue | TValue[] | RegExp | Ac
 export type AcceptableBuilder = Pick<Builder, 'type' | 'accepts'>;
 
 /**
- * ## ⚠️ Not fully supported
+ * ## ⚠️ In development
  *
  * Fast and straightforward method to add basic restrictions to commands.
+ *
  * @param builder The builder to mutate
  * @param accepts An object of accepts configuration
  *
- * @see https://sunar.js.org/docs/accepts
+ * @see https://sunar.js.org/docs/mutators/accepts
+ * @see https://sunar.js.org/docs/guides/middlewares#accepts
  */
 export function accepts<TBuilder extends AcceptableBuilder>(builder: TBuilder, accepts: TBuilder['accepts']): void {
 	if (!isObject(builder.accepts)) return;

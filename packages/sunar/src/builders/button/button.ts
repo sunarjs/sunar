@@ -20,7 +20,7 @@ export interface ButtonConfig {
 /**
  * Buttons are interactive elements users can click to trigger specific actions. They are ideal for creating interactive messages, such as confirmation prompts or menu navigation.
  *
- * @see https://sunar.js.org/docs/components/buttons
+ * @see https://sunar.js.org/docs/builders/button
  */
 export class Button implements Builder {
 	public readonly type = Builders.Button;

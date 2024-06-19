@@ -15,7 +15,8 @@ export interface SignalOptions {
 /**
  * Signals in Sunar correspond to events in discord.js. They allow you to handle various actions and responses that occur within your Discord bot, such as messages being sent, users joining or leaving, and more.
  *
- * @see https://sunar.js.org/docs/signals
+ * @see https://sunar.js.org/docs/builders/signal
+ * @see https://sunar.js.org/docs/guides/working-with-signals
  */
 export class Signal<TName extends SignalName = SignalName> implements Pick<Builder, 'type' | 'protectors' | 'execute'> {
 	public readonly type = Builders.Signal;

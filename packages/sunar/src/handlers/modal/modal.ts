@@ -7,6 +7,8 @@ import { handleProtectors } from '../protectors';
 /**
  * Handle a modal interaction.
  * @param interaction The modal interaction to handle
+ *
+ * @see https://sunar.js.org/docs/guides/interactions-handling
  */
 export async function handleModal(interaction: ModalSubmitInteraction) {
 	const component = modals.find(({ options }) => {
