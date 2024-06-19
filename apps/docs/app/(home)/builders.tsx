@@ -1,3 +1,4 @@
+import { CodeBlock } from '@/components/code-block';
 import {
 	MousePointerClickIcon,
 	PanelTopDashedIcon,
@@ -5,10 +6,6 @@ import {
 	SquareSlashIcon,
 } from 'lucide-react';
 import { Card } from './card';
-import { CodeBlock } from '@/components/code-block';
-import Link from 'next/link';
-import { cn } from '@/utils/cn';
-import { SectionTitle, Separator } from './separator';
 import {
 	buttonCode,
 	contextMenuCode,
@@ -17,8 +14,8 @@ import {
 	signalCode,
 	slashCommandCode,
 } from './codes';
-import Meteors from '@/components/meteors';
 import { HorizontalSection } from './horizontal-card';
+import { SectionTitle, Separator } from './separator';
 
 export function HomeBuilders() {
 	return (
@@ -29,7 +26,7 @@ export function HomeBuilders() {
 				<Card
 					title="Slash Commands"
 					description="Slash commands provide a structured and user-friendly way for users to interact with bots on Discord."
-					link="/docs/commands/slash-commands"
+					link="/docs/builders/slash"
 					icon={<SquareSlashIcon className="size-4 md:size-5" />}
 				>
 					<CodeBlock lang="js" code={slashCommandCode} />
@@ -37,7 +34,7 @@ export function HomeBuilders() {
 				<Card
 					title="Context Menus"
 					description="Context menu commands let users interact with bots via right-click options for quick access to functions."
-					link="/docs/commands/context-menus"
+					link="/docs/builders/context-menu"
 					icon={<PanelTopDashedIcon className="size-4 md:size-5" />}
 				>
 					<CodeBlock lang="js" code={contextMenuCode} />
@@ -49,12 +46,12 @@ export function HomeBuilders() {
 			<HorizontalSection
 				title="Signals"
 				description="Signals allow you to handle specific events or actions within your
-				bot, enabling customized and responsive behavior."
-				docsLink="/docs/signals"
+bot, enabling customized and responsive behavior."
+				docsLink="/docs/guides/working-with-signals"
 				titleClass="text-4xl lg:text-5xl xl:text-6xl"
 				otherLink={{
-					name: 'Signals Enum ↗',
-					link: '/docs/components/select-menus#selectmenuoptions',
+					name: 'All Signals ↗',
+					link: 'https://discord.js.org/docs/packages/discord.js/main/Client:Class#applicationCommandPermissionsUpdate',
 					external: true,
 				}}
 				withMeteors
@@ -74,7 +71,7 @@ export function HomeBuilders() {
 				<Card
 					title="Buttons"
 					description="Buttons provide interactive elements that users can click to trigger specific actions within your bot."
-					link="/docs/components/buttons"
+					link="/docs/builders/button"
 					icon={<MousePointerClickIcon className="size-4 md:size-5" />}
 				>
 					<CodeBlock lang="js" code={buttonCode} />
@@ -82,7 +79,7 @@ export function HomeBuilders() {
 				<Card
 					title="Modals"
 					description="Modals are popup forms that collect detailed user input, ideal for complex interactions requiring multiple fields."
-					link="/docs/components/modals"
+					link="/docs/builders/modal"
 					icon={<SquareMenuIcon className="size-4 md:size-5" />}
 				>
 					<CodeBlock lang="js" code={modalCode} />
@@ -92,10 +89,10 @@ export function HomeBuilders() {
 			<HorizontalSection
 				title="Select Menus"
 				description="Select menus allow users to choose from a list of options, perfect for forms and surveys requiring multiple choices."
-				docsLink="/docs/components/select-menus"
+				docsLink="/docs/builders/select-menu"
 				otherLink={{
 					name: 'Select Types',
-					link: '/docs/components/select-menus#selectmenuoptions',
+					link: '/docs/builders/select-menu#select-menu-options',
 				}}
 			>
 				<CodeBlock
