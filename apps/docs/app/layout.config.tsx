@@ -1,7 +1,6 @@
 import { type BaseLayoutProps } from 'fumadocs-ui/layout';
 
 import { Logo } from '@/components/logo';
-import { NPMIcon } from '@/icons/npm';
 import { SunarIcon } from '@/components/icon';
 
 export const baseOptions: BaseLayoutProps = {
@@ -16,13 +15,6 @@ export const baseOptions: BaseLayoutProps = {
 			icon: <SunarIcon className="size-4" />,
 			url: '/docs',
 			active: 'nested-url',
-		},
-		{
-			text: 'Package ↗',
-			url: 'https://npmjs.com/package/sunar',
-			icon: <NPMIcon className="size-4" />,
-			active: 'url',
-			external: true,
 		},
 	],
 };
