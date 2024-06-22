@@ -1,19 +1,7 @@
 {
+	"extends": "@total-typescript/tsconfig/bundler/no-dom/library-monorepo",
 	"compilerOptions": {
-		"target": "ESNext",
-		"module": "ESNext",
-		"moduleDetection": "force",
-		"moduleResolution": "bundler",
-		"allowImportingTsExtensions": true,
-		"esModuleInterop": true,
-		"noEmit": true,
-		"strict": true,
-		"skipLibCheck": true,
-		"noFallthroughCasesInSwitch": true,
-		"forceConsistentCasingInFileNames": true,
-		"verbatimModuleSyntax": true,
-		"noUnusedLocals": true,
-		"noUnusedParameters": true,
-		"noPropertyAccessFromIndexSignature": false
+		"module": "ES2022",
+		"moduleResolution": "Bundler"
 	}
 }
