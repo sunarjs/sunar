@@ -2,7 +2,7 @@ import { type ClientOptions, Client as DClient } from 'discord.js';
 
 import { handleSignals } from './handlers';
 import { context } from './stores';
-import type { CooldownContext } from './types';
+import type { SunarSignals } from './types';
 
 export class Client<Ready extends boolean = boolean> extends DClient<Ready> {
 	public constructor(options: ClientOptions) {
@@ -18,7 +18,5 @@ export class Client<Ready extends boolean = boolean> extends DClient<Ready> {
 }
 
 declare module 'discord.js' {
-	interface ClientEvents {
-		cooldown: [interaction: RepliableInteraction, context: CooldownContext];
-	}
+	interface ClientEvents extends SunarSignals {}
 }
