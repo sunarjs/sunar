@@ -11,8 +11,7 @@
 		"format": "turbo run format"
 	},
 	"dependencies": {
-		"turbo": "^2.0.3",
-		"@biomejs/biome": "1.8.1"
+		"turbo": "^2.0.4"
 	},
 	"keywords": [
 		"discord",
