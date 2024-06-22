@@ -29,10 +29,8 @@
 		"**/*.ts",
 		"**/*.tsx",
 		".next/types/**/*.ts",
-		"scripts/generate-docs.mts",
-		"remark/remark-install.mjs",
-		"remark/create-element.mjs",
-		"mdx/remark-install.mjs"
+		"scripts/**/*.mts",
+		"mdx/**/*.mjs"
 	],
 	"exclude": ["node_modules"]
 }
