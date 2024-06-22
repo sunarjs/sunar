@@ -14,14 +14,14 @@ export function HomeHero() {
 				y={-1}
 				strokeDasharray={'4 2'}
 				className={cn(
-					'-z-20 [mask-image:radial-gradient(650px_circle_at_center,white,transparent)]'
+					'-z-20 [mask-image:radial-gradient(650px_circle_at_center,white,transparent)]',
 				)}
 			/>
 			<h1
 				className={cn(
 					'mb-2 flex flex-col text-balance text-4xl font-extrabold tracking-tight sm:text-5xl md:mb-4 md:text-6xl lg:text-7xl xl:text-8xl',
 					'[&>span]:dark:bg-gradient-to-t [&>span]:dark:from-muted-foreground [&>span]:dark:to-foreground',
-					'[&>span]:dark:to-40% [&>span]:dark:bg-clip-text [&>span]:dark:text-transparent'
+					'[&>span]:dark:to-40% [&>span]:dark:bg-clip-text [&>span]:dark:text-transparent',
 				)}
 			>
 				<span>Make Overpowered</span>

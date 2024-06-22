@@ -56,7 +56,7 @@ export function CodeBlock({
 					},
 				],
 			}),
-		[code, lang]
+		[code, lang],
 	);
 
 	return (
@@ -88,7 +88,7 @@ export function PrettyCodeBlock({
 			{...container}
 			className={cn(
 				'relative flex h-80 overflow-hidden rounded-lg sm:w-full xl:w-[593px] [&>div>canvas]:hidden [&>div>canvas]:sm:block',
-				container?.className
+				container?.className,
 			)}
 		>
 			{background}

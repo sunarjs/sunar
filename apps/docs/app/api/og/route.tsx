@@ -4,7 +4,7 @@ import type { NextRequest } from 'next/server';
 export const runtime = 'edge';
 
 const bold = fetch(new URL('./Geist-Bold.woff', import.meta.url)).then((res) =>
-	res.arrayBuffer()
+	res.arrayBuffer(),
 );
 
 const foreground = 'hsl(0 0% 98%)';
@@ -25,7 +25,7 @@ export async function GET(request: NextRequest): Promise<ImageResponse> {
 			width: 1200,
 			height: 630,
 			fonts: [{ name: 'Geist Mono', data: await bold, weight: 700 }],
-		}
+		},
 	);
 }
 

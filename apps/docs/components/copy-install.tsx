@@ -10,7 +10,7 @@ export function CopyInstall(
 	props: React.DetailedHTMLProps<
 		React.HTMLAttributes<HTMLButtonElement>,
 		HTMLButtonElement
-	>
+	>,
 ) {
 	const [copied, setCopied] = useState(false);
 
@@ -35,7 +35,7 @@ export function CopyInstall(
 			{...props}
 			className={cn(
 				'flex items-center gap-x-3 rounded-full border bg-secondary px-6 py-2 text-start outline-none transition-colors hover:bg-white dark:bg-muted dark:hover:bg-secondary md:py-3',
-				props.className
+				props.className,
 			)}
 		>
 			<TerminalIcon className="hidden size-4 sm:block md:size-5" />
@@ -46,13 +46,13 @@ export function CopyInstall(
 				<CopyIcon
 					className={cn(
 						'size-3 opacity-100 transition-opacity md:size-4',
-						copied && 'opacity-0'
+						copied && 'opacity-0',
 					)}
 				/>
 				<CheckIcon
 					className={cn(
 						'absolute inset-0 size-3 opacity-0 transition-opacity md:size-4',
-						copied && 'opacity-100'
+						copied && 'opacity-100',
 					)}
 				/>
 			</div>

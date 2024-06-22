@@ -25,7 +25,7 @@ export function HorizontalSection({
 		<section
 			className={cn(
 				'flex w-full flex-col gap-x-6 gap-y-4 border border-t-0 p-4 sm:p-6 lg:flex-row lg:items-center lg:justify-around xl:p-8',
-				withMeteors && 'relative overflow-hidden'
+				withMeteors && 'relative overflow-hidden',
 			)}
 		>
 			{withMeteors && <Meteors number={20} />}
@@ -33,7 +33,7 @@ export function HorizontalSection({
 				<h2
 					className={cn(
 						'text-2xl font-bold sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl',
-						titleClass
+						titleClass,
 					)}
 				>
 					{title}
@@ -46,7 +46,7 @@ export function HorizontalSection({
 						href={docsLink}
 						className={cn(
 							'rounded-full border bg-foreground px-4 py-1 text-sm font-medium text-background transition-opacity hover:opacity-80 dark:font-semibold md:px-5 md:py-2 md:text-base',
-							'to-70% dark:bg-gradient-to-t dark:from-muted-foreground dark:to-foreground'
+							'to-70% dark:bg-gradient-to-t dark:from-muted-foreground dark:to-foreground',
 						)}
 					>
 						Read more

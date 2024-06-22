@@ -10,6 +10,6 @@ void Typescript.generateFiles({
 	output: (file) =>
 		path.resolve(
 			path.dirname(file),
-			`${path.basename(file).split('.')[0]}.mdx`
+			`${path.basename(file).split('.')[0]}.mdx`,
 		),
 });

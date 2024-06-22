@@ -43,7 +43,7 @@ export function remarkInstall({
 							value: command(value),
 						},
 					],
-				}))
+				})),
 			);
 
 			Object.assign(node, insert);

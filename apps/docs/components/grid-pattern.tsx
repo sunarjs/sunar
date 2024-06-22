@@ -29,7 +29,7 @@ export function GridPattern({
 			aria-hidden="true"
 			className={cn(
 				'pointer-events-none absolute inset-0 h-full w-full fill-gray-400/30 stroke-secondary-foreground/15 dark:stroke-secondary/90',
-				className
+				className,
 			)}
 			{...props}
 		>
