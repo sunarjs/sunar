@@ -3,8 +3,8 @@ import {
 	remarkDocGen,
 	fileGenerator,
 	typescriptGenerator,
+	remarkInstall,
 } from 'fumadocs-docgen';
-import { remarkInstall } from './mdx/remark-install.mjs';
 
 const withMDX = createMDX({
 	mdxOptions: {
@@ -16,7 +16,7 @@ const withMDX = createMDX({
 		},
 		lastModifiedTime: 'git',
 		remarkPlugins: [
-			remarkInstall,
+			[remarkInstall, { Tabs: 'InstallTabs' }],
 			[remarkDocGen, { generators: [typescriptGenerator(), fileGenerator()] }],
 		],
 	},
