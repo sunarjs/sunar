@@ -1,9 +1,9 @@
 import type { Awaitable, ClientEvents } from 'discord.js';
 
-import type { Protector } from '..';
-import { UNHANDLED_SYMBOL } from '../../symbols';
-import type { Builder } from '../../types';
-import { Builders } from '../../utils';
+import type { Protector } from '.';
+import { UNHANDLED_SYMBOL } from '../symbols';
+import type { Builder } from '../types';
+import { Builders } from '../utils';
 
 type SignalName = keyof ClientEvents;
 

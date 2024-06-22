@@ -1,10 +1,10 @@
 import type { AutocompleteFocusedOption, AutocompleteInteraction, Awaitable } from 'discord.js';
 
-import type { Protector } from '..';
-import { interactionAcceptsArgs } from '../../accepts';
-import { UNHANDLED_SYMBOL } from '../../symbols';
-import type { AcceptsArgs, Builder, InteractionAccepts } from '../../types';
-import { Builders } from '../../utils';
+import type { Protector } from '.';
+import { interactionAcceptsArgs } from '../accepts';
+import { UNHANDLED_SYMBOL } from '../symbols';
+import type { AcceptsArgs, Builder, InteractionAccepts } from '../types';
+import { Builders } from '../utils';
 
 export interface AutocompleteOptions {
 	/** The name of the command option that has autocomplete enabled. */

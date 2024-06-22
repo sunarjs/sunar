@@ -9,9 +9,9 @@ import type {
 	ModalSubmitInteraction,
 } from 'discord.js';
 
-import { UNHANDLED_SYMBOL } from '../../symbols';
-import type { Builder, CommandKey, ComponentKey, NextFunction } from '../../types';
-import { Builders, Commands, Components } from '../../utils';
+import { UNHANDLED_SYMBOL } from '../symbols';
+import type { Builder, CommandKey, ComponentKey, NextFunction } from '../types';
+import { Builders, Commands, Components } from '../utils';
 
 export interface ProtectorOptions {
 	/** The signals that can be protected by this protector. */
