@@ -1,3 +1,61 @@
 {
-	"extends": ["../../biome.json"]
+	"$schema": "https://biomejs.dev/schemas/1.8.2/schema.json",
+	"organizeImports": {
+		"enabled": true
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"complexity": {
+				"all": true,
+				"noExcessiveCognitiveComplexity": "off",
+				"noThisInStatic": "off"
+			},
+			"correctness": {
+				"recommended": true
+			},
+			"nursery": {
+				"all": true,
+				"noUndeclaredDependencies": "off",
+				"useImportRestrictions": "off",
+				"useImportExtensions": "off"
+			},
+			"performance": {
+				"all": true,
+				"noBarrelFile": "off",
+				"noReExportAll": "off"
+			},
+			"security": {
+				"all": true
+			},
+			"style": {
+				"recommended": true
+			},
+			"suspicious": {
+				"all": true,
+				"noEmptyBlockStatements": "off",
+				"noExplicitAny": "off"
+			}
+		}
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab",
+		"indentWidth": 2,
+		"lineWidth": 80
+	},
+	"javascript": {
+		"formatter": {
+			"enabled": true,
+			"quoteStyle": "single",
+			"indentWidth": 2,
+			"lineWidth": 120,
+			"semicolons": "always",
+			"trailingCommas": "all"
+		}
+	},
+	"files": {
+		"include": ["**/*"],
+		"ignore": ["node_modules", "dist", "src/demos"]
+	}
 }
