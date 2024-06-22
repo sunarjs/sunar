@@ -5,8 +5,14 @@ export function middleware(request: NextRequest) {
 
 	const isProduction = process.env.NODE_ENV === 'production';
 	const requestedHost = request.headers.get('X-Forwarded-Host');
+	const isLocalHost = requestedHost?.startsWith('localhost:');
 
-	if (isProduction && requestedHost && !requestedHost.match(/sunar.js.org/)) {
+	if (
+		isProduction &&
+		requestedHost &&
+		!isLocalHost &&
+		!requestedHost.match(/sunar.js.org/)
+	) {
 		const host = 'sunar.js.org';
 
 		const requestedPort = request.headers.get('X-Forwarded-Port');
