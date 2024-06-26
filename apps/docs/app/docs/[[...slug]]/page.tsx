@@ -3,6 +3,7 @@ import { createMetadata } from '@/utils/metadata';
 import { getPage, getPages } from '@/utils/source';
 import { DocsBody, DocsPage } from 'fumadocs-ui/page';
 import { notFound } from 'next/navigation';
+import { RollButton } from 'fumadocs-ui/components/roll-button';
 
 interface Params {
 	slug: string[];
@@ -42,6 +43,7 @@ export default function Page({ params }: { params: Params }) {
 			}}
 			tableOfContentPopover={{ footer }}
 		>
+			<RollButton />
 			<DocsBody>
 				<h1>{page.data.title}</h1>
 				<MDX />
