@@ -1,7 +1,6 @@
 {
 	"root": true,
 	"pages": [
-		"---General---",
 		"index",
 		"getting-started",
 
