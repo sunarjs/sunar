@@ -5,7 +5,6 @@ import type { Builders, Commands, Components } from '../utils';
 
 export interface Builder {
 	readonly type: Builders;
-	accepts: object;
 	protectors: Protector[];
 	execute: (...args: any) => Awaitable<unknown>;
 	config: object;

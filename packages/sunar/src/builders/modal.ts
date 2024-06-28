@@ -1,12 +1,9 @@
 import type { Awaitable, ModalSubmitInteraction } from 'discord.js';
 
 import type { Protector } from '.';
-import { interactionAcceptsArgs } from '../accepts';
 import { UNHANDLED_SYMBOL } from '../symbols';
-import type { AcceptsArgs, Builder, CooldownResolvable, InteractionAccepts } from '../types';
+import type { Builder, CooldownResolvable } from '../types';
 import { Builders } from '../utils';
-
-export interface ModalAccepts extends InteractionAccepts {}
 
 export interface ModalOptions {
 	/** The modal custom ID to target. */
@@ -27,7 +24,6 @@ export class Modal implements Builder {
 	public readonly options: ModalOptions;
 
 	public config: ModalConfig = {};
-	public accepts: ModalAccepts = {};
 	public protectors: Protector<{ components: 'modal'[] }>[] = [];
 	public execute: (interaction: ModalSubmitInteraction) => Awaitable<unknown> = () => UNHANDLED_SYMBOL;
 
@@ -35,5 +31,3 @@ export class Modal implements Builder {
 		this.options = options;
 	}
 }
-
-export const modalAcceptsArgs: AcceptsArgs<ModalSubmitInteraction, ModalAccepts> = interactionAcceptsArgs;

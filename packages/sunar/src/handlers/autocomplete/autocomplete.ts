@@ -1,6 +1,4 @@
 import type { AutocompleteInteraction } from 'discord.js';
-import { handleAccepts } from '..';
-import { autocompleteAcceptsArgs } from '../../builders';
 import { autocompletes } from '../../stores';
 import { handleProtectors } from '../protectors';
 
@@ -23,9 +21,6 @@ export async function handleAutocomplete(interaction: AutocompleteInteraction) {
 	if (!command) return;
 
 	if (typeof command.execute !== 'function') return;
-
-	const accepted = await handleAccepts({ interaction, accepts: command.accepts, args: autocompleteAcceptsArgs });
-	if (!accepted) return; // TODO: Add the ability to handle when not accepted
 
 	const canContinue = await handleProtectors({ protectors: command.protectors, data: interaction });
 	if (!canContinue) return;

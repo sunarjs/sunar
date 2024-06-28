@@ -1,6 +1,5 @@
 import type { MessageContextMenuCommandInteraction, UserContextMenuCommandInteraction } from 'discord.js';
-import { handleAccepts, handleCooldown } from '..';
-import { contextMenuAcceptsArgs } from '../../builders';
+import { handleCooldown } from '..';
 import { contextMenuCommands } from '../../stores';
 import { handleProtectors } from '../protectors';
 
@@ -21,9 +20,6 @@ export async function handleContextMenu(
 	if (onCooldown) return;
 
 	if (typeof command.execute !== 'function') return;
-
-	const accepted = await handleAccepts({ interaction, accepts: command.accepts, args: contextMenuAcceptsArgs });
-	if (!accepted) return; // TODO: Add the ability to handle when not accepted
 
 	const canContinue = await handleProtectors({ protectors: command.protectors, data: interaction });
 	if (!canContinue) return;

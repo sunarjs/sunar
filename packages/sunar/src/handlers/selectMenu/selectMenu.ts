@@ -1,6 +1,5 @@
 import type { AnySelectMenuInteraction } from 'discord.js';
-import { handleAccepts, handleCooldown } from '..';
-import { selectMenuAcceptsArgs } from '../../builders';
+import { handleCooldown } from '..';
 import { selectMenus } from '../../stores';
 import { handleProtectors } from '../protectors';
 
@@ -23,9 +22,6 @@ export async function handleSelectMenu(interaction: AnySelectMenuInteraction) {
 	if (onCooldown) return;
 
 	if (typeof component.execute !== 'function') return;
-
-	const accepted = await handleAccepts({ interaction, accepts: component.accepts, args: selectMenuAcceptsArgs });
-	if (!accepted) return; // TODO: Add the ability to handle when not accepted
 
 	const canContinue = await handleProtectors({ protectors: component.protectors, data: interaction });
 	if (!canContinue) return;

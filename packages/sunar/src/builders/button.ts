@@ -1,17 +1,14 @@
 import type { Awaitable, ButtonInteraction } from 'discord.js';
 
 import type { Protector } from '.';
-import { interactionAcceptsArgs } from '../accepts';
 import { UNHANDLED_SYMBOL } from '../symbols';
-import type { AcceptsArgs, Builder, CooldownResolvable, InteractionAccepts } from '../types';
+import type { Builder, CooldownResolvable } from '../types';
 import { Builders } from '../utils';
 
 export interface ButtonOptions {
 	/** The button custom ID to target. */
 	id: string | RegExp;
 }
-
-export interface ButtonAccepts extends InteractionAccepts {}
 
 export interface ButtonConfig {
 	cooldown?: CooldownResolvable;
@@ -27,7 +24,6 @@ export class Button implements Builder {
 	public readonly options: ButtonOptions;
 
 	public config: ButtonConfig = {};
-	public accepts: ButtonAccepts = {};
 	public protectors: Protector<{ components: 'button'[] }>[] = [];
 	public execute: (interaction: ButtonInteraction) => Awaitable<unknown> = () => UNHANDLED_SYMBOL;
 
@@ -35,5 +31,3 @@ export class Button implements Builder {
 		this.options = options;
 	}
 }
-
-export const buttonAcceptsArgs: AcceptsArgs<ButtonInteraction, ButtonAccepts> = interactionAcceptsArgs;

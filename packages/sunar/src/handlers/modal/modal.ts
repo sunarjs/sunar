@@ -1,6 +1,5 @@
 import type { ModalSubmitInteraction } from 'discord.js';
-import { handleAccepts, handleCooldown } from '..';
-import { modalAcceptsArgs } from '../../builders';
+import { handleCooldown } from '..';
 import { modals } from '../../stores';
 import { handleProtectors } from '../protectors';
 
@@ -22,9 +21,6 @@ export async function handleModal(interaction: ModalSubmitInteraction) {
 	if (onCooldown) return;
 
 	if (typeof component.execute !== 'function') return;
-
-	const accepted = await handleAccepts({ interaction, accepts: component.accepts, args: modalAcceptsArgs });
-	if (!accepted) return; // TODO: Add the ability to handle when not accepted
 
 	const canContinue = await handleProtectors({ protectors: component.protectors, data: interaction });
 	if (!canContinue) return;

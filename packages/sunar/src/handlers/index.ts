@@ -1,4 +1,3 @@
-export * from './accepts';
 export * from './autocomplete';
 export * from './button';
 export * from './contextMenu';

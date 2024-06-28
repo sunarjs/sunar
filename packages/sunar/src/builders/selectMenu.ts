@@ -11,9 +11,8 @@ import type {
 } from 'discord.js';
 
 import type { Protector } from '.';
-import { interactionAcceptsArgs } from '../accepts';
 import { UNHANDLED_SYMBOL } from '../symbols';
-import type { AcceptsArgs, Builder, CooldownResolvable, InteractionAccepts } from '../types';
+import type { Builder, CooldownResolvable } from '../types';
 import { Builders } from '../utils';
 
 export interface SelectMenuOptions {
@@ -22,8 +21,6 @@ export interface SelectMenuOptions {
 	/** The type of select menu to target. */
 	type: SelectMenuType;
 }
-
-export interface SelectMenuAccepts extends InteractionAccepts {}
 
 export interface SelectMenuConfig {
 	cooldown?: CooldownResolvable;
@@ -39,7 +36,6 @@ export class SelectMenu<TOptions extends SelectMenuOptions = SelectMenuOptions> 
 	public readonly options: TOptions;
 
 	public config: SelectMenuConfig = {};
-	public accepts: SelectMenuAccepts = {};
 	public protectors: Protector<{ components: 'selectMenu'[] }>[] = [];
 	public execute: (...args: SelectMenuArgs<TOptions>) => Awaitable<unknown> = () => UNHANDLED_SYMBOL;
 
@@ -47,8 +43,6 @@ export class SelectMenu<TOptions extends SelectMenuOptions = SelectMenuOptions> 
 		this.options = options;
 	}
 }
-
-export const selectMenuAcceptsArgs: AcceptsArgs<AnySelectMenuInteraction, SelectMenuAccepts> = interactionAcceptsArgs;
 
 export type SelectMenuArgs<TOptions extends SelectMenuOptions> = [
 	interaction: TOptions['type'] extends ComponentType.ChannelSelect
