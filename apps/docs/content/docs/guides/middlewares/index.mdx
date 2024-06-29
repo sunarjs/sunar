@@ -16,36 +16,30 @@ Protectors in Sunar act as middleware, allowing you to intercept and control the
 Create a file `only-admins.js` in the directory `src/protectors/`. This file defines a protector `onlyAdmins` that checks if the user has administrator permissions.
 
 ```js title="src/protectors/only-admins.js"
-import { Protector, execute } from 'sunar';
 import { PermissionFlagsBits } from 'discord.js';
+import { Protector, execute } from 'sunar';
 
 const onlyAdmins = new Protector({
 	commands: ['slash'],
 	signals: ['interactionCreate'],
 });
 
-function isAdmin(permissions) {
+const content = 'This command can only be used by administrators';
+
+function checkIsAdmin(permissions) {
 	if (!permissions) return false;
 	return permissions.has(PermissionFlagsBits.Administrator);
 }
 
 execute(onlyAdmins, (arg, next) => {
-	const content = 'This command can only be used by administrators';
+	const entry = Array.isArray(arg) ? arg[0] : arg;
+	const isAdmin = checkIsAdmin(entry.memberPermissions);
 
-	if (Array.isArray(arg)) {
-		const interaction = arg[0];
-
-		if (isAdmin(interaction.memberPermissions)) return next();
-
-		if (!interaction.isRepliable()) return;
-
-		interaction.reply({ content, ephemeral: true });
+	if (entry.isRepliable() && !isAdmin) {
+		return entry.reply({ content, ephemeral: true });
 	}
 
-	if (arg.isChatInputCommand()) {
-		if (isAdmin(arg.memberPermissions)) return next();
-		return arg.reply({ content, ephemeral: true });
-	}
+	return isAdmin && next();
 });
 
 export { onlyAdmins };
@@ -100,59 +94,3 @@ Here's an overview of the project's file structure to help you visualize how fil
 		<File name="index.js" />
 	</Folder>
 </Files>
-
-## Accepts
-
-Accepts in Sunar offer a fast and straightforward method to add basic restrictions to commands. They function like protectors but with simpler syntax, making them ideal for enforcing permissions and other basic requirements without needing to write complete middleware functions.
-
-<Callout title="In development" type="warn">
-	Validation failure handling is currently not supported directly by `accepts` in
-	Sunar. For the moment, it is recommended to use protectors.
-</Callout>
-
-```js title="src/commands/remove-role.js"
-import { Slash, accepts, execute } from 'sunar';
-import {
-	ApplicationCommandOptionType,
-	PermissionFlagsBits,
-	Role,
-} from 'discord.js';
-
-const slash = new Slash({
-	name: 'remove-role',
-	description: 'Remove a role',
-	dmPermission: false,
-	defaultMemberPermissions: [PermissionFlagsBits.ManageRoles],
-	options: [
-		{
-			name: 'target',
-			description: 'Target role',
-			type: ApplicationCommandOptionType.Role,
-			required: true,
-		},
-	],
-});
-
-accepts(slash, { // [!code highlight]
-	clientPermissions: ['ManageRoles'], // [!code highlight]
-}); // [!code highlight]
-
-execute(slash, async (interaction) => {
-	const role = interaction.options.getRole('target', true);
-
-	if (!(role instanceof Role)) {
-		return interaction.reply({ content: 'Invalid role.' });
-	}
-
-	if (!role.editable) {
-		return interaction.reply({ content: "I don't have enough permissions." });
-	}
-
-	await role.delete();
-
-	interaction.reply({ content: `**${role.name}** deleted.` });
-});
-
-export { slash };
-```
-The `accepts` mutator in this example configures permissions that a command or interaction (`slash` in this case) requires from the client (your bot) before allowing it to execute. Specifically, it ensures that the bot has the `ManageRoles` permission before allowing the `slash` command to be executed. This helps enforce necessary permissions for secure and controlled bot interactions in Discord.

@@ -1,0 +1,125 @@
+---
+title: Verify member roles
+description: Implement role verification to restrict command usage to members with specific roles. Follow this guide to learn how to use middleware in Sunar for role-based command access.
+---
+
+Implement role verification to restrict command usage to members with specific roles. Follow this guide to learn how to use middleware in Sunar for role-based command access.
+
+## Usage
+
+```js
+protect(builder, [roles("123456")])
+```
+
+## Logic
+
+<LanguageTabs>
+	<Tab value="JavaScript">
+	```js
+	import { GuildMemberRoleManager, Message, Role, inlineCode } from 'discord.js';
+	import { Protector, execute } from 'sunar';
+
+	/** @param {Role[]} missing */
+	const res = (missing) => {
+		const missingRoles = missing.map((r) => inlineCode(r.name)).join(', ');
+		return `You need the ${missingRoles} roles.`;
+	};
+
+	/** @param {...Role} roles */
+	export function roles(...roles) {
+		const protector = new Protector({
+			commands: ['autocomplete', 'contextMenu', 'slash'],
+			components: ['button', 'modal', 'selectMenu'],
+			signals: ['interactionCreate', 'messageCreate'],
+		});
+
+		execute(protector, (arg, next) => {
+			const entry = Array.isArray(arg) ? arg[0] : arg;
+			if (!entry.guild) return next();
+
+			const missing = getMissingRoles(entry.member?.roles);
+			const isMissing = missing.length > 0;
+
+			if (entry instanceof Message) {
+				if (!isMissing) return next();
+				return entry.reply({ content: res(missing) });
+			}
+
+			if (entry.isAutocomplete() && isMissing) return entry.respond([]);
+			if (entry.isRepliable() && isMissing) return entry.reply({ content: res(missing), ephemeral: true });
+
+			return !isMissing && next();
+		});
+
+		/** @param {GuildMemberRoleManager | string[] | undefined} manager */
+		function getMissingRoles(manager) {
+			if (!manager || Array.isArray(manager)) return [];
+
+			const missing = roles
+				.map((r) => {
+					const role = manager.guild.roles.resolve(r);
+					if (role && !manager.cache.has(role.id)) return role;
+				})
+				.filter((r) => r != null);
+
+			return missing;
+		}
+
+		return protector;
+	}
+	```
+	</Tab>
+
+	<Tab value="TypeScript">
+	```ts
+	import { type GuildMemberRoleManager, Message, type Role, type RoleResolvable, inlineCode } from 'discord.js';
+	import { Protector, execute } from 'sunar';
+
+	const res = (missing: Role[]) => {
+		const missingRoles = missing.map((r) => inlineCode(r.name)).join(', ');
+		return `You need the ${missingRoles} roles.`;
+	};
+
+	export function roles(...roles: RoleResolvable[]) {
+		const protector = new Protector({
+			commands: ['autocomplete', 'contextMenu', 'slash'],
+			components: ['button', 'modal', 'selectMenu'],
+			signals: ['interactionCreate', 'messageCreate'],
+		});
+
+		execute(protector, (arg, next) => {
+			const entry = Array.isArray(arg) ? arg[0] : arg;
+			if (!entry.guild) return next();
+
+			const missing = getMissingRoles(entry.member?.roles);
+			const isMissing = missing.length > 0;
+
+			if (entry instanceof Message) {
+				if (!isMissing) return next();
+				return entry.reply({ content: res(missing) });
+			}
+
+			if (entry.isAutocomplete() && isMissing) return entry.respond([]);
+			if (entry.isRepliable() && isMissing) return entry.reply({ content: res(missing), ephemeral: true });
+
+			return !isMissing && next();
+		});
+
+		function getMissingRoles(manager?: GuildMemberRoleManager | string[]): Role[] {
+			if (!manager || Array.isArray(manager)) return [];
+
+			const missing = roles
+				.map((r) => {
+					const role = manager.guild.roles.resolve(r);
+					if (role && !manager.cache.has(role.id)) return role;
+				})
+				.filter((r) => r != null);
+
+			return missing;
+		}
+
+		return protector;
+	}
+	```
+	</Tab>
+</LanguageTabs>

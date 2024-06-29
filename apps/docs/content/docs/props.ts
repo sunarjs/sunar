@@ -1,5 +1,4 @@
 import type {
-	accepts,
 	config,
 	execute,
 	protect,
@@ -34,10 +33,6 @@ export interface IExecuteMut {
 
 export interface IProtectMut {
 	protect: typeof protect
-}
-
-export interface IAcceptsMut {
-	accepts: typeof accepts
 }
 
 export interface IConfigMut {

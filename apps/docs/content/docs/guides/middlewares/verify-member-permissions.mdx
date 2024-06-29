@@ -1,0 +1,109 @@
+---
+title: Verify member permissions
+description: Ensure users have the required permissions before executing commands. This guide offers examples for checking member permissions using middleware in Sunar.
+---
+
+Ensure users have the required permissions before executing commands. This guide offers examples for checking member permissions using middleware in Sunar.
+
+## Usage
+
+```js
+protect(builder, [memberPerms("Administrator")])
+```
+
+## Logic
+
+<LanguageTabs>
+	<Tab value="JavaScript">
+	```js
+	import { Message, PermissionResolvable, PermissionsBitField, PermissionsString, inlineCode } from 'discord.js';
+	import { Protector, execute } from 'sunar';
+
+	/** @param {PermissionsString[]} missing */
+	const res = (missing) => {
+		const missingPerms = missing.map((p) => inlineCode(p)).join(', ');
+		return `You need the ${missingPerms} permissions.`;
+	};
+
+	/** @param {...PermissionResolvable} perms */
+	export function memberPerms(...perms) {
+		const protector = new Protector({
+			commands: ['autocomplete', 'contextMenu', 'slash'],
+			components: ['button', 'modal', 'selectMenu'],
+			signals: ['interactionCreate', 'messageCreate'],
+		});
+
+		execute(protector, (arg, next) => {
+			const entry = Array.isArray(arg) ? arg[0] : arg;
+			if (!entry.guild) return next();
+
+			const missing = getMissingPerms(entry.member?.permissions);
+			const isMissing = missing.length > 0;
+
+			if (entry instanceof Message) {
+				if (!isMissing) return next();
+				return entry.reply({ content: res(missing) });
+			}
+
+			if (entry.isAutocomplete() && isMissing) return entry.respond([]);
+			if (entry.isRepliable() && isMissing) return entry.reply({ content: res(missing), ephemeral: true });
+
+			return !isMissing && next();
+		});
+
+		/** @param {Readonly<PermissionsBitField> | string | undefined} bitField */
+		function getMissingPerms(bitField) {
+			if (!bitField || typeof bitField === 'string') return [];
+			return bitField.missing(perms);
+		}
+
+		return protector;
+	}
+	```
+	</Tab>
+
+	<Tab value="TypeScript">
+	```ts
+	import { Message, type PermissionResolvable, type PermissionsBitField, type PermissionsString, inlineCode } from 'discord.js';
+	import { Protector, execute } from 'sunar';
+
+	const res = (missing: PermissionsString[]) => {
+		const missingPerms = missing.map((p) => inlineCode(p)).join(', ');
+		return `You need the ${missingPerms} permissions.`;
+	};
+
+	export function memberPerms(...perms: PermissionResolvable[]) {
+		const protector = new Protector({
+			commands: ['autocomplete', 'contextMenu', 'slash'],
+			components: ['button', 'modal', 'selectMenu'],
+			signals: ['interactionCreate', 'messageCreate'],
+		});
+
+		execute(protector, (arg, next) => {
+			const entry = Array.isArray(arg) ? arg[0] : arg;
+			if (!entry.guild) return next();
+
+			const missing = getMissingPerms(entry.member?.permissions);
+			const isMissing = missing.length > 0;
+
+			if (entry instanceof Message) {
+				if (!isMissing) return next();
+				return entry.reply({ content: res(missing) });
+			}
+
+			if (entry.isAutocomplete() && isMissing) return entry.respond([]);
+			if (entry.isRepliable() && isMissing) return entry.reply({ content: res(missing), ephemeral: true });
+
+			return !isMissing && next();
+		});
+
+		function getMissingPerms(bitField?: Readonly<PermissionsBitField> | string): PermissionsString[] {
+			if (!bitField || typeof bitField === 'string') return [];
+			return bitField.missing(perms);
+		}
+
+		return protector;
+	}
+	```
+	</Tab>
+</LanguageTabs>

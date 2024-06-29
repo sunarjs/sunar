@@ -1,0 +1,48 @@
+---
+title: Owner only
+description: Learn how to restrict command execution to only the bot owner using middleware in Sunar. This guide provides examples to enforce owner-only access.
+---
+
+Limit command usage to the server owner. This guide provides examples of configuring middleware in Sunar to ensure only the server owner can execute certain commands.
+
+## Usage
+
+```js
+protect(builder, [ownerOnly])
+```
+
+## Logic
+
+```js
+import { Message } from 'discord.js';
+import { Protector, execute } from 'sunar';
+
+const OWNERS = ['123', '456', '789'];
+
+const ownerOnly = new Protector({
+	commands: ['autocomplete', 'contextMenu', 'slash'],
+	components: ['button', 'modal', 'selectMenu'],
+	signals: ['interactionCreate', 'messageCreate'],
+});
+
+const content = 'Only the bot owners can use this.';
+
+execute(ownerOnly, (arg, next) => {
+	const entry = Array.isArray(arg) ? arg[0] : arg;
+
+	if (entry instanceof Message) {
+		const isOwner = OWNERS.includes(entry.author.id);
+		if (isOwner) return next();
+		return entry.reply({ content });
+	}
+
+	const isOwner = OWNERS.includes(entry.user.id);
+
+	if (entry.isAutocomplete() && !isOwner) return entry.respond([]);
+	if (entry.isRepliable() && !isOwner) return entry.reply({ content, ephemeral: true });
+
+	return isOwner && next();
+});
+
+export { ownerOnly };
+```
