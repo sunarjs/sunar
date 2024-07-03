@@ -38,7 +38,7 @@ console.clear();
 
 const version = '[VI]{{inject}}[/VI]';
 
-intro(bgWhite(black(bold(' Sunar CLI '))) + redBright(` - Welcome to Sunar CLI ${version} 🚀`));
+intro(bgWhite(black(bold(' Sunar CLI '))) + redBright(` - Welcome to Sunar CLI v${version} 🚀`));
 
 if (!name) {
 	name = await text({
