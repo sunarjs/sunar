@@ -1,6 +1,6 @@
 {
 	"name": "create-sunar",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "The easiest way to get started with Sunar.",
 	"author": "tai (https://github.com/taii03)",
 	"license": "MIT",
@@ -42,6 +42,7 @@
 		"@types/node": "^20.14.7",
 		"@types/validate-npm-package-name": "^4.0.2",
 		"arg": "^5.0.2",
+		"esbuild-plugin-version-injector": "1.2.1",
 		"tsup": "8.1.0",
 		"tsx": "4.16.0",
 		"typescript": "5.5.3"

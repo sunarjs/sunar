@@ -1,6 +1,8 @@
 import arg from 'arg';
 import { defineConfig } from 'tsup';
 
+import { esbuildPluginVersionInjector } from 'esbuild-plugin-version-injector';
+
 const args = arg({ '--watch': Boolean });
 const isWatch = Boolean(args['--watch']);
 
@@ -19,5 +21,6 @@ export default defineConfig({
 	keepNames: true,
 	shims: true,
 	skipNodeModulesBundle: true,
+	esbuildPlugins: [esbuildPluginVersionInjector()],
 	ignoreWatch: ['**/node_modules/**', '**/.git/**'],
 });
