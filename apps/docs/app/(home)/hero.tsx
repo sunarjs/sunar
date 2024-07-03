@@ -1,8 +1,10 @@
+import Link from 'next/link';
+
 import { CopyInstall } from '@/components/copy-install';
 import { GridPattern } from '@/components/grid-pattern';
 import { Button } from '@/components/ui/button';
+
 import { cn } from '@/utils/cn';
-import Link from 'next/link';
 
 export function HomeHero() {
 	return (

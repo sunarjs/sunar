@@ -1,8 +1,11 @@
+import Link from 'next/link';
+
 import { HomeHero } from '@/app/(home)/hero';
 import { HomeBuilders } from '@/app/(home)/builders';
+
 import { HomeHighlights } from './highlights';
 import { Separator } from './separator';
-import Link from 'next/link';
+
 import { CopyInstall } from '@/components/copy-install';
 import { Button } from '@/components/ui/button';
 
@@ -12,7 +15,7 @@ export default function HomePage() {
 			<HomeHero />
 
 			<section className="flex w-full items-center justify-center border-x bg-gradient-to-b from-background to-muted/50 px-2 py-12 md:px-0 md:py-16 lg:py-20">
-				<h2 className="text-pretty text-center text-3xl font-bold dark:opacity-90 dark:drop-shadow-lg sm:text-4xl md:text-5xl lg:text-6xl">
+				<h2 className="text-pretty text-center text-2xl font-bold dark:opacity-90 dark:drop-shadow-lg sm:text-4xl md:text-5xl lg:text-6xl">
 					Build your bot at
 					<br />
 					the speed of thought.

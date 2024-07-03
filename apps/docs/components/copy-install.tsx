@@ -1,10 +1,11 @@
 'use client';
 
-import { cn } from '@/utils/cn';
 import { CheckIcon, CopyIcon, TerminalIcon } from 'lucide-react';
 import { useState } from 'react';
 
-const content = 'npm install sunar';
+import { cn } from '@/utils/cn';
+
+const content = 'npm create sunar';
 
 export function CopyInstall(
 	props: React.DetailedHTMLProps<

@@ -1,4 +1,3 @@
-import { Cross } from '@/icons/cross';
 import {
 	FolderTreeIcon,
 	GlobeIcon,
@@ -8,6 +7,8 @@ import {
 	ScaleIcon,
 	TypeIcon,
 } from 'lucide-react';
+
+import { Cross } from '@/icons/cross';
 
 export function HomeHighlights() {
 	return (

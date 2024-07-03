@@ -1,7 +1,8 @@
-import Meteors from '@/components/meteors';
-import { cn } from '@/utils/cn';
 import Link from 'next/link';
 import type { PropsWithChildren } from 'react';
+
+import Meteors from '@/components/meteors';
+import { cn } from '@/utils/cn';
 
 interface HorizontalSectionProps extends PropsWithChildren {
 	title: string;

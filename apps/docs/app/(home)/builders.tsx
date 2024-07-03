@@ -1,10 +1,10 @@
-import { CodeBlock } from '@/components/code-block';
 import {
 	MousePointerClickIcon,
 	PanelTopDashedIcon,
 	SquareMenuIcon,
 	SquareSlashIcon,
 } from 'lucide-react';
+
 import { Card } from './card';
 import {
 	buttonCode,
@@ -16,6 +16,8 @@ import {
 } from './codes';
 import { HorizontalSection } from './horizontal-card';
 import { SectionTitle, Separator } from './separator';
+
+import { CodeBlock } from '@/components/code-block';
 
 export function HomeBuilders() {
 	return (
