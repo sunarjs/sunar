@@ -12,7 +12,7 @@ import {
 	spinner,
 	text,
 } from '@clack/prompts';
-import { bgWhite, black, bold, dim, red, redBright } from 'colorette';
+import { bgRed, bold, dim, redBright } from 'colorette';
 
 import { setup } from './setup';
 import type { Feature, Language } from './types';
@@ -38,11 +38,13 @@ console.clear();
 
 const version = '[VI]{{inject}}[/VI]';
 
-intro(bgWhite(black(bold(' Sunar CLI '))) + redBright(` - Welcome to Sunar CLI v${version} 🚀`));
+intro(
+	`🚀 ${bgRed(bold(' Sunar CLI '))} ${redBright('- Quickly setup your Discord bot!')} ${dim(`v${version}`)}`,
+);
 
 if (!name) {
 	name = await text({
-		message: '🏷️  Enter the name of your project:',
+		message: '🏷️ Enter the name of your project:',
 		placeholder: 'my-bot',
 		validate: (name) => {
 			const problems = validateName(name);
@@ -57,7 +59,7 @@ if (isCancel(name)) {
 }
 
 const language: Language | symbol = await select({
-	message: '🛠️  Select your preferred language:',
+	message: '🛠️ Select your preferred language:',
 	options: [
 		{ value: 'javascript', label: 'JavaScript' },
 		{ value: 'typescript', label: 'TypeScript' },
