@@ -6,14 +6,12 @@
 	"tasks": {
 		"build": {
 			"dependsOn": ["^build"],
-			"outputs": [".next/**", "!.next/cache/**", "dist/**"],
-			"outputLogs": "errors-only"
+			"outputs": [".next/**", "!.next/cache/**", "dist/**"]
 		},
 		"lint": {
 			"dependsOn": ["^build"],
 			"inputs": ["../../.prettierrc", "src/**", "package.json"],
-			"outputs": [],
-			"outputLogs": "errors-only"
+			"outputs": []
 		},
 		"format": {
 			"dependsOn": ["^format"]
