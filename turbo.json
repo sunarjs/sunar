@@ -3,6 +3,7 @@
 	"remoteCache": {
 		"enabled": true
 	},
+	"ui": "tui",
 	"tasks": {
 		"build": {
 			"dependsOn": ["^build"],
