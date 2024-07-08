@@ -12,13 +12,13 @@ A robust library of constants defining Discord's limits, aimed at streamlining b
 You can install the package using one of the following package managers:
 
 ```bash
-npm install @sunar/limits
+npm install @sunarjs/limits
 # or
-yarn add @sunar/limits
+yarn add @sunarjs/limits
 # or
-pnpm add @sunar/limits
+pnpm add @sunarjs/limits
 # or
-bun add @sunar/limits
+bun add @sunarjs/limits
 ```
 
 ## Constants

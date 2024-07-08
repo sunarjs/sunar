@@ -1,5 +1,5 @@
 {
-	"name": "@sunar/limits",
+	"name": "@sunarjs/limits",
 	"version": "1.0.0",
 	"description": "A robust library of constants defining Discord's limits, aimed at streamlining bot and application development and integration on the Discord platform.",
 	"author": "tai (https://github.com/taii03)",
