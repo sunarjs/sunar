@@ -11,6 +11,6 @@ const client = new Client({
 	],
 });
 
-await load(`${dirname()}/{commands,signals}/**/*.{js,ts}`);
+await load(`${dirname(import.meta.url)}/{commands,signals}/**/*.{js,ts}`);
 
 client.login();
