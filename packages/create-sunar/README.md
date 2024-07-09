@@ -14,13 +14,13 @@
 To create a new Sunar bot project, run the following command:
 
 ```bash
-npm create sunar
+npm create sunar@latest
 # or
-yarn create sunar
+yarn create sunar@latest
 # or
-pnpm create sunar
+pnpm create sunar@latest
 # or
-bun create sunar
+bun create sunar@latest
 ```
 
 You will be prompted to enter some details about your project, such as the project name, preferred language (TypeScript or JavaScript), and desired features (e.g., Biome, TSX, TSUP, Prettier, ESLint).
