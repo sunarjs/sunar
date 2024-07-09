@@ -12,10 +12,8 @@ export function getScripts(language: Language, features: Features) {
 }
 
 function start(language: Language, features: Features): string {
-	if (features.tsup) return `${SCRIPTS.BUILD.TSUP} && ${SCRIPTS.START.NODE_DIST}`;
-
-	if (language === 'typescript') {
-		return `${SCRIPTS.BUILD.TSC} && ${SCRIPTS.START.NODE_DIST}`;
+	if (language === 'typescript' || features.tsup) {
+		return SCRIPTS.START.NODE_DIST;
 	}
 
 	return SCRIPTS.START.NODE;
