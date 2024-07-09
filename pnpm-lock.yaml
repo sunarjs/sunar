@@ -158,6 +158,31 @@ importers:
         specifier: ^5.5.3
         version: 5.5.3
 
+  packages/pagination:
+    dependencies:
+      discord.js:
+        specifier: 14.15.3
+        version: 14.15.3
+    devDependencies:
+      '@biomejs/biome':
+        specifier: 1.8.2
+        version: 1.8.2
+      '@total-typescript/tsconfig':
+        specifier: ^1.0.4
+        version: 1.0.4
+      esbuild-plugin-file-path-extensions:
+        specifier: 2.1.2
+        version: 2.1.2
+      esbuild-plugin-version-injector:
+        specifier: 1.2.1
+        version: 1.2.1
+      tsup:
+        specifier: 8.1.0
+        version: 8.1.0(postcss@8.4.39)(typescript@5.5.3)
+      typescript:
+        specifier: ^5.5.3
+        version: 5.5.3
+
   packages/sunar:
     dependencies:
       discord.js:
@@ -3229,7 +3254,7 @@ snapshots:
       discord-api-types: 0.37.83
       fast-deep-equal: 3.1.3
       ts-mixer: 6.0.4
-      tslib: 2.6.2
+      tslib: 2.6.3
 
   '@discordjs/collection@1.5.3': {}
 
@@ -3248,7 +3273,7 @@ snapshots:
       '@vladfrangu/async_event_emitter': 2.4.1
       discord-api-types: 0.37.83
       magic-bytes.js: 1.10.0
-      tslib: 2.6.2
+      tslib: 2.6.3
       undici: 6.13.0
 
   '@discordjs/util@1.1.0': {}
@@ -3262,7 +3287,7 @@ snapshots:
       '@types/ws': 8.5.10
       '@vladfrangu/async_event_emitter': 2.4.1
       discord-api-types: 0.37.83
-      tslib: 2.6.2
+      tslib: 2.6.3
       ws: 8.18.0
     transitivePeerDependencies:
       - bufferutil

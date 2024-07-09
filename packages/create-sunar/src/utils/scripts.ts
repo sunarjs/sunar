@@ -1,7 +1,6 @@
 export const SCRIPTS = {
 	START: {
 		NODE: 'node src/index.js',
-		TSX: 'tsx src/index.ts',
 		NODE_DIST: 'node dist/index.js',
 	},
 	DEV: {
