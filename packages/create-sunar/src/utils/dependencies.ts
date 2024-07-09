@@ -1,5 +1,5 @@
 export const DEPENDENCIES = {
-	sunar: '0.4.1',
+	sunar: '0.4.2',
 	'discord.js': '14.15.3',
 	dotenv: '16.4.5',
 
