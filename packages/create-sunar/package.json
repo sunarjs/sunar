@@ -1,6 +1,6 @@
 {
 	"name": "create-sunar",
-	"version": "1.1.7",
+	"version": "1.2.0",
 	"description": "The easiest way to get started with Sunar.",
 	"author": "tai (https://github.com/taii03)",
 	"license": "MIT",
@@ -11,6 +11,7 @@
 	"bin": {
 		"create-sunar": "dist/index.js"
 	},
+	"files": ["dist", "configs", "templates"],
 	"scripts": {
 		"build": "tsup",
 		"lint": "biome lint ./src",
