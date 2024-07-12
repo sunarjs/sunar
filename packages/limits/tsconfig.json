@@ -1,9 +1,0 @@
-{
-	"extends": "@total-typescript/tsconfig/bundler/no-dom/library-monorepo",
-	"compilerOptions": {
-		"module": "ES2022",
-		"moduleResolution": "Bundler"
-	},
-	"include": ["src/**/*.ts"],
-	"exclude": ["node_modules"]
-}

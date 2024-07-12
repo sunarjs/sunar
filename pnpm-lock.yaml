@@ -137,27 +137,6 @@ importers:
         specifier: 5.5.3
         version: 5.5.3
 
-  packages/limits:
-    devDependencies:
-      '@biomejs/biome':
-        specifier: 1.8.2
-        version: 1.8.2
-      '@total-typescript/tsconfig':
-        specifier: ^1.0.4
-        version: 1.0.4
-      esbuild-plugin-file-path-extensions:
-        specifier: 2.1.2
-        version: 2.1.2
-      esbuild-plugin-version-injector:
-        specifier: 1.2.1
-        version: 1.2.1
-      tsup:
-        specifier: 8.1.0
-        version: 8.1.0(postcss@8.4.39)(typescript@5.5.3)
-      typescript:
-        specifier: ^5.5.3
-        version: 5.5.3
-
   packages/pagination:
     dependencies:
       discord.js:
