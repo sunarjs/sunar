@@ -1,5 +1,5 @@
 {
 	"editor.wordWrap": "on",
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
-	"cSpell.words": ["fumadocs", "Novatrix", "uvcanvas"]
+	"cSpell.words": ["docgen", "fumadocs", "Novatrix", "uvcanvas"]
 }
