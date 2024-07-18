@@ -1,14 +1,12 @@
 export enum Builders {
 	Slash = 0,
-	SlashParent = 1,
-	SlashGroup = 2,
-	ContextMenu = 3,
-	Protector = 4,
-	Signal = 5,
-	Button = 6,
-	Modal = 7,
-	SelectMenu = 8,
-	Autocomplete = 9,
+	ContextMenu = 1,
+	Protector = 2,
+	Signal = 3,
+	Button = 4,
+	Modal = 5,
+	SelectMenu = 6,
+	Autocomplete = 7,
 }
 
 export enum CooldownScope {
