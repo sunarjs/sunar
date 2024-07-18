@@ -18,7 +18,8 @@
 				"all": true,
 				"noUndeclaredDependencies": "off",
 				"useImportRestrictions": "off",
-				"useImportExtensions": "off"
+				"useImportExtensions": "off",
+				"noConsole": "off"
 			},
 			"performance": {
 				"all": true,
@@ -34,7 +35,8 @@
 			"suspicious": {
 				"all": true,
 				"noEmptyBlockStatements": "off",
-				"noExplicitAny": "off"
+				"noExplicitAny": "off",
+				"noConsoleLog": "off"
 			}
 		}
 	},
@@ -56,6 +58,6 @@
 	},
 	"files": {
 		"include": ["**/*"],
-		"ignore": ["node_modules", "dist", "src/demos"]
+		"ignore": ["node_modules", "dist"]
 	}
 }
