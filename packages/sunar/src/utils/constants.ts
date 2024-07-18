@@ -1,6 +1,9 @@
 import { Events } from 'discord.js';
 
-export const Signals = Events;
+export const Signals = {
+	...Events,
+	Cooldown: 'cooldown',
+} as const;
 
 export const Commands = {
 	Slash: 'slash',
