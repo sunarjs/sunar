@@ -8,7 +8,8 @@
 	"scripts": {
 		"build": "turbo run build --concurrency=4",
 		"lint": "turbo run lint",
-		"format": "turbo run format"
+		"format": "turbo run format",
+		"test": "turbo run test"
 	},
 	"dependencies": {
 		"turbo": "^2.0.6"
