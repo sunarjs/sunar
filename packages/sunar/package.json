@@ -12,8 +12,7 @@
 	"scripts": {
 		"build": "tsup",
 		"lint": "biome lint ./src",
-		"format": "biome format --write .",
-		"prepare": "husky"
+		"format": "biome format --write ."
 	},
 	"keywords": [
 		"discord",
