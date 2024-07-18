@@ -4,6 +4,4 @@ dist
 .env
 .env.development
 
-src/demos
-
 bun.lockb
