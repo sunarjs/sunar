@@ -12,7 +12,8 @@
 	"scripts": {
 		"build": "tsup",
 		"lint": "biome lint ./src",
-		"format": "biome format --write ."
+		"format": "biome format --write .",
+		"test": "vitest"
 	},
 	"keywords": [
 		"discord",
@@ -40,7 +41,8 @@
 		"esbuild-plugin-version-injector": "1.2.1",
 		"tsup": "8.1.2",
 		"tsx": "^4.16.2",
-		"typescript": "5.5.3"
+		"typescript": "5.5.3",
+		"vitest": "^2.0.3"
 	},
 	"peerDependencies": {
 		"discord.js": "^14.14.x"

@@ -2,6 +2,7 @@
 	"extends": "@total-typescript/tsconfig/bundler/no-dom/library-monorepo",
 	"compilerOptions": {
 		"module": "ES2022",
-		"moduleResolution": "Bundler"
+		"moduleResolution": "Bundler",
+		"types": ["vitest/globals"]
 	}
 }

@@ -4,7 +4,7 @@ import { esbuildPluginFilePathExtensions } from 'esbuild-plugin-file-path-extens
 import { esbuildPluginVersionInjector } from 'esbuild-plugin-version-injector';
 
 export default defineConfig({
-	entry: ['src/**/*.ts', '!src/**/*.spec.ts', '!src/demos/**/*.ts'],
+	entry: ['src/**/*.ts', '!src/**/*.spec.ts', '!src/vitest/**/*.ts'],
 	format: ['cjs', 'esm'],
 	clean: true,
 	dts: true,
