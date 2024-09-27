@@ -1,7 +1,6 @@
 import type { CooldownResolvable } from '..';
 
-/** Configuration for a command. */
-export interface CommandConfig {
+export interface CooldownProp {
 	/**
 	 * Defines the cooldown period for the command.
 	 * Can be a simple number representing milliseconds or a more complex configuration object.
@@ -9,7 +8,10 @@ export interface CommandConfig {
 	 * @see https://sunar.js.org/docs/guides/implementing-cooldowns
 	 */
 	cooldown?: CooldownResolvable;
+}
 
+/** Configuration for a command. */
+export interface CommandConfig extends CooldownProp {
 	/**
 	 * Specifies the guild IDs where the command is registered.
 	 * If provided, the command will only be available in these guilds.
