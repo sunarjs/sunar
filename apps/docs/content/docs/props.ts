@@ -21,6 +21,7 @@ export type {
 	ButtonConfig,
 	SelectMenuConfig,
 	CooldownConfig,
+	GroupConfig,
 } from 'sunar';
 
 export interface ICooldownResolvable {
