@@ -1,16 +1,16 @@
 export const DEPENDENCIES = {
-	sunar: '0.5.0',
-	'discord.js': '14.15.3',
+	sunar: '0.6.0',
+	'discord.js': '14.16.2',
 	dotenv: '16.4.5',
 
-	'@types/node': '20.14.11',
-	typescript: '5.5.3',
+	'@types/node': '22.7.4',
+	typescript: '5.6.2',
 
-	tsx: '4.16.2',
-	tsup: '8.1.2',
-	nodemon: '3.1.4',
+	tsx: '4.19.1',
+	tsup: '8.3.0',
+	nodemon: '3.1.7',
 
-	'@biomejs/biome': '1.8.3',
+	'@biomejs/biome': '1.9.2',
 	eslint: '8.57.0',
 	'@typescript-eslint/parser': '7.14.1',
 	'@typescript-eslint/eslint-plugin': '7.14.1',
