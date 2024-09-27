@@ -7,6 +7,7 @@ export enum Builders {
 	Modal = 5,
 	SelectMenu = 6,
 	Autocomplete = 7,
+	Group = 8
 }
 
 export enum CooldownScope {

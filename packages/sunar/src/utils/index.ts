@@ -13,3 +13,5 @@ export * from './isSelectMenuBuilder';
 export * from './isSignalBuilder';
 export * from './isSlashBuilder';
 export * from './resolveCooldown';
+export * from './isGroupBuilder';
+export * from './getGroupStoreKey';

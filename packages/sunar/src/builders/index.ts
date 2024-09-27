@@ -1,6 +1,7 @@
 export * from './autocomplete';
 export * from './button';
 export * from './contextMenu';
+export * from './group';
 export * from './modal';
 export * from './protector';
 export * from './selectMenu';
