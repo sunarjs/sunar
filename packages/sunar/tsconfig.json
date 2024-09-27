@@ -4,5 +4,6 @@
 		"module": "ES2022",
 		"moduleResolution": "Bundler",
 		"types": ["vitest/globals"]
-	}
+	},
+	"exclude": ["node_modules", "dist"]
 }
