@@ -4,8 +4,6 @@ description: If you're new to Sunar, you can follow these steps to get started b
 icon: Rocket
 ---
 
-If you're new to Sunar, you can follow these steps to get started.
-
 ## Automatic Installation
 
 Create a new app with `create-sunar`, it requires Node.js 18+.
@@ -52,7 +50,7 @@ sunar discord.js
 Create a new file, e.g., `index.js`, and set up your Discord bot using Sunar.
 
 ```js title="src/index.js"
-import { Client, load } from 'sunar';
+import { Client, dirname, load } from 'sunar';
 
 const start = async () => {
 	const client = new Client({ intents: [] });
@@ -60,7 +58,7 @@ const start = async () => {
 	// stores all sunar modules, you can add more
 	// directories by passing them after the "signals"
 	// with a comma (e.g. signals,buttons,autocompletes)
-	await load('src/{commands,signals}/**/*.{js,ts}');
+	await load(`${dirname(import.meta.url)}/{commands,signals}/**/*.{js,ts}`);
 
 	client.login('YOUR_DISCORD_BOT_TOKEN');
 };

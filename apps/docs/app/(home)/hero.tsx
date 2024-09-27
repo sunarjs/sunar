@@ -22,14 +22,14 @@ export function HomeHero() {
 			<h1
 				className={cn(
 					'mb-2 flex flex-col text-balance text-4xl font-extrabold tracking-tight sm:text-5xl md:mb-4 md:text-6xl lg:text-7xl xl:text-8xl',
-					'[&>span]:dark:bg-gradient-to-t [&>span]:dark:from-muted-foreground [&>span]:dark:to-foreground',
+					'[&>span]:dark:from-muted-foreground [&>span]:dark:to-foreground [&>span]:dark:bg-gradient-to-t',
 					'[&>span]:dark:to-40% [&>span]:dark:bg-clip-text [&>span]:dark:text-transparent',
 				)}
 			>
 				<span>Make Overpowered</span>
 				<span>Discord Bots.</span>
 			</h1>
-			<p className="max-w-5xl text-balance text-base font-medium text-muted-foreground sm:text-lg md:text-xl lg:text-3xl">
+			<p className="text-muted-foreground max-w-5xl text-balance text-base font-medium sm:text-lg md:text-xl lg:text-3xl">
 				Sunar emerges as a finely-tuned discord.js framework, meticulously
 				engineered to prioritize{' '}
 				<span className="text-secondary-foreground">

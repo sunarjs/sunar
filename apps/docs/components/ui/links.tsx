@@ -25,7 +25,7 @@ export function Link({ label, link, icon }: LinkItem) {
 			href={link}
 			target="_blank"
 			rel="noopener noreferrer"
-			className="flex items-center gap-x-2 rounded-lg bg-muted px-3 py-1.5 text-sm no-underline"
+			className="bg-muted flex items-center gap-x-2 rounded-lg px-3 py-1.5 text-sm no-underline"
 		>
 			{Icons[icon]}
 			{label}

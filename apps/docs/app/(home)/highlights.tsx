@@ -12,7 +12,7 @@ import { Cross } from '@/icons/cross';
 
 export function HomeHighlights() {
 	return (
-		<div className="grid w-full grid-cols-1 border-b border-r bg-gradient-to-b from-muted/40 to-transparent to-50% sm:grid-cols-2 md:grid-cols-3">
+		<div className="from-muted/40 grid w-full grid-cols-1 border-b border-r bg-gradient-to-b to-transparent to-50% sm:grid-cols-2 md:grid-cols-3">
 			<div className="relative">
 				<Highlight title="Easy-to-Use" icon={MousePointerClickIcon}>
 					Offers a simple and readable API, making Discord bot development
@@ -59,7 +59,7 @@ interface HighlightPros extends React.PropsWithChildren {
 export function Highlight({ icon: IconComp, title, children }: HighlightPros) {
 	return (
 		<div className="h-full border-l border-t px-4 py-5 md:p-8">
-			<div className="mb-3 flex flex-row items-center gap-x-2 text-muted-foreground md:mb-4">
+			<div className="text-muted-foreground mb-3 flex flex-row items-center gap-x-2 md:mb-4">
 				<IconComp className="size-3 md:size-4" />
 				<h2 className="text-xs font-normal md:text-sm md:font-medium">
 					{title}

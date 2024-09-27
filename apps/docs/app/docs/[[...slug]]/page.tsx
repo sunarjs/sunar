@@ -1,9 +1,16 @@
-import { GitHubIcon } from '@/icons';
-import { createMetadata } from '@/utils/metadata';
-import { getPage, getPages } from '@/utils/source';
-import { DocsBody, DocsPage } from 'fumadocs-ui/page';
 import { notFound } from 'next/navigation';
-import { RollButton } from 'fumadocs-ui/components/roll-button';
+import {
+	DocsBody,
+	DocsCategory,
+	DocsDescription,
+	DocsPage,
+	DocsTitle,
+} from 'fumadocs-ui/page';
+
+import { GitHubIcon } from '@/icons';
+import { source } from '@/app/source';
+import { createMetadata } from '@/utils/metadata';
+import { mdxComponents } from '@/utils/mdx-components';
 
 interface Params {
 	slug: string[];
@@ -11,14 +18,11 @@ interface Params {
 
 export const dynamicParams = false;
 
-export default function Page({ params }: { params: Params }) {
-	const page = getPage(params.slug);
+export default async function Page({ params }: { params: Params }) {
+	const page = source.getPage(params.slug);
 
-	if (page == null) {
-		notFound();
-	}
+	if (page == null) notFound();
 
-	const MDX = page.data.exports.default;
 	const path = `apps/docs/content/docs/${page.file.path}`;
 
 	const footer = (
@@ -35,31 +39,33 @@ export default function Page({ params }: { params: Params }) {
 
 	return (
 		<DocsPage
-			toc={page.data.exports.toc}
-			lastUpdate={page.data.exports.lastModified}
+			toc={page.data.toc}
+			lastUpdate={page.data.lastModified}
 			tableOfContent={{
 				enabled: true,
+				style: 'clerk',
 				footer,
 			}}
 			tableOfContentPopover={{ footer }}
 		>
-			<RollButton />
+			<DocsTitle>{page.data.title}</DocsTitle>
+			<DocsDescription>{page.data.description}</DocsDescription>
 			<DocsBody>
-				<h1>{page.data.title}</h1>
-				<MDX />
+				<page.data.body components={mdxComponents} />
+				{page.data.index ? (
+					<DocsCategory page={page} pages={source.getPages()} />
+				) : null}
 			</DocsBody>
 		</DocsPage>
 	);
 }
 
 export function generateStaticParams(): Params[] {
-	return getPages().map<Params>((page) => ({
-		slug: page.slugs,
-	}));
+	return source.generateParams();
 }
 
-export function generateMetadata({ params }: { params: { slug?: string[] } }) {
-	const page = getPage(params.slug);
+export async function generateMetadata({ params }: { params: Params }) {
+	const page = source.getPage(params.slug);
 
 	if (page == null) notFound();
 

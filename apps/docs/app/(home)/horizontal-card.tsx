@@ -39,15 +39,15 @@ export function HorizontalSection({
 				>
 					{title}
 				</h2>
-				<p className="max-w-xl text-pretty text-sm font-medium text-muted-foreground sm:text-base md:text-lg xl:text-xl">
+				<p className="text-muted-foreground max-w-xl text-pretty text-sm font-medium sm:text-base md:text-lg xl:text-xl">
 					{description}
 				</p>
 				<div className="mt-1 flex flex-wrap gap-x-1.5 gap-y-1.5 sm:gap-x-2 md:mt-2 md:gap-x-4">
 					<Link
 						href={docsLink}
 						className={cn(
-							'rounded-full border bg-foreground px-4 py-1 text-sm font-medium text-background transition-opacity hover:opacity-80 dark:font-semibold md:px-5 md:py-2 md:text-base',
-							'to-70% dark:bg-gradient-to-t dark:from-muted-foreground dark:to-foreground',
+							'bg-foreground text-background rounded-full border px-4 py-1 text-sm font-medium transition-opacity hover:opacity-80 dark:font-semibold md:px-5 md:py-2 md:text-base',
+							'dark:from-muted-foreground dark:to-foreground to-70% dark:bg-gradient-to-t',
 						)}
 					>
 						Read more
@@ -57,7 +57,7 @@ export function HorizontalSection({
 							href={otherLink.link}
 							rel="noopener noreferrer"
 							target={otherLink.external ? '_blank' : undefined}
-							className="w-fit rounded-full bg-muted px-4 py-1 text-sm font-medium transition-colors hover:bg-secondary md:px-5 md:py-2 md:text-base"
+							className="bg-muted hover:bg-secondary w-fit rounded-full px-4 py-1 text-sm font-medium transition-colors md:px-5 md:py-2 md:text-base"
 						>
 							{otherLink.name}
 						</Link>

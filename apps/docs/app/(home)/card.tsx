@@ -68,7 +68,7 @@ export const Card = ({
 			/>
 			<header className="flex items-center justify-between">
 				<div className="flex items-center gap-x-2 sm:gap-x-4">
-					<div className="rounded-lg border bg-gradient-to-t from-background to-muted p-2 text-secondary-foreground dark:text-secondary-foreground/60">
+					<div className="from-background to-muted text-secondary-foreground dark:text-secondary-foreground/60 rounded-lg border bg-gradient-to-t p-2">
 						{icon}
 					</div>
 					<h3 className="text-lg font-semibold sm:text-xl md:text-2xl">
@@ -78,14 +78,14 @@ export const Card = ({
 				{link && (
 					<Link
 						href={link}
-						className="mr-1 text-3xl font-extralight text-muted-foreground transition-colors hover:text-foreground"
+						className="text-muted-foreground hover:text-foreground mr-1 text-3xl font-extralight transition-colors"
 					>
 						↗
 					</Link>
 				)}
 			</header>
 			<main className="flex flex-col">
-				<p className="my-2 text-pretty text-sm text-muted-foreground sm:text-base lg:my-4 xl:text-lg">
+				<p className="text-muted-foreground my-2 text-pretty text-sm sm:text-base lg:my-4 xl:text-lg">
 					{description}
 				</p>
 				{children}

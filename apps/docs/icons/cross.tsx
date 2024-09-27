@@ -9,8 +9,8 @@ export function Cross({
 >) {
 	return (
 		<div {...props} className={cn('relative z-10', className)}>
-			<div className="h-[15px] w-[1px] bg-muted-foreground" />
-			<div className="absolute inset-0 h-[15px] w-[1px] rotate-90 bg-muted-foreground" />
+			<div className="bg-muted-foreground h-[15px] w-[1px]" />
+			<div className="bg-muted-foreground absolute inset-0 h-[15px] w-[1px] rotate-90" />
 		</div>
 	);
 }

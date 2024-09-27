@@ -35,7 +35,7 @@ export function CopyInstall(
 			onClick={handleClick}
 			{...props}
 			className={cn(
-				'flex items-center gap-x-3 rounded-full border bg-secondary px-6 py-2 text-start outline-none transition-colors hover:bg-white dark:bg-muted dark:hover:bg-secondary md:py-3',
+				'bg-secondary dark:bg-muted dark:hover:bg-secondary flex items-center gap-x-3 rounded-full border px-6 py-2 text-start outline-none transition-colors hover:bg-white md:py-3',
 				props.className,
 			)}
 		>
@@ -43,7 +43,7 @@ export function CopyInstall(
 			<span className="font-mono text-sm font-medium sm:text-base">
 				{content}
 			</span>
-			<div className="relative pl-1 text-muted-foreground">
+			<div className="text-muted-foreground relative pl-1">
 				<CopyIcon
 					className={cn(
 						'size-3 opacity-100 transition-opacity md:size-4',

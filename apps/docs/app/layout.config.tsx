@@ -1,4 +1,4 @@
-import { type BaseLayoutProps } from 'fumadocs-ui/layout';
+import type { B as BaseLayoutProps } from 'fumadocs-ui/dist/layout.shared-DEQFTB9M';
 
 import { Logo } from '@/components/logo';
 import { SunarIcon } from '@/components/icon';

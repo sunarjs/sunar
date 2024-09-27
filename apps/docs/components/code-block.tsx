@@ -1,14 +1,15 @@
 import { cn } from '@/utils/cn';
 import * as Base from 'fumadocs-ui/components/codeblock';
-import type { HTMLAttributes } from 'react';
-import { useMemo } from 'react';
+import { Jsx, toJsxRuntime } from 'hast-util-to-jsx-runtime';
+import { Fragment, type HTMLAttributes } from 'react';
 import {
 	BundledLanguage,
 	LanguageInput,
 	SpecialLanguage,
 	StringLiteralUnion,
-	getHighlighter,
+	codeToHast,
 } from 'shiki';
+import { jsx, jsxs } from 'react/jsx-runtime';
 
 const langs = ['js'] satisfies (
 	| LanguageInput
@@ -16,56 +17,45 @@ const langs = ['js'] satisfies (
 	| StringLiteralUnion<BundledLanguage, string>
 )[];
 
-const highlighter = await getHighlighter({
-	langs,
-	themes: ['min-light', 'github-dark-default'],
-});
-
 export type CodeBlockProps = HTMLAttributes<HTMLPreElement> & {
 	code: string;
 	wrapper?: Base.CodeBlockProps;
 	lang: (typeof langs)[number];
 };
 
-export function CodeBlock({
+export async function CodeBlock({
 	code,
 	lang,
 	wrapper,
 	...props
-}: CodeBlockProps): React.ReactElement {
-	const html = useMemo(
-		() =>
-			highlighter.codeToHtml(code, {
-				lang,
-				defaultColor: false,
-				themes: {
-					light: 'min-light',
-					dark: 'github-dark-default',
-				},
-				transformers: [
-					{
-						name: 'remove-pre',
-						root: (root) => {
-							if (root.children[0].type !== 'element') return;
+}: CodeBlockProps) {
+	const hast = await codeToHast(code, {
+		lang,
+		defaultColor: false,
+		themes: {
+			light: 'min-light',
+			dark: 'github-dark-default',
+		},
+	});
 
-							return {
-								type: 'root',
-								children: root.children[0].children,
-							};
-						},
-					},
-				],
-			}),
-		[code, lang],
-	);
+	const rendered = toJsxRuntime(hast, {
+		jsx: jsx as Jsx,
+		jsxs: jsxs as Jsx,
+		Fragment,
+		development: false,
+		components: {
+			// @ts-expect-error -- JSX component
+			pre: Base.Pre,
+		},
+	});
 
 	return (
 		<Base.CodeBlock
 			allowCopy={false}
 			{...wrapper}
-			className={cn('m-0 mt-2 bg-muted/50', wrapper?.className)}
+			className={cn('bg-muted/50 m-0 mt-2', wrapper?.className)}
 		>
-			<Base.Pre {...props} dangerouslySetInnerHTML={{ __html: html }} />
+			{rendered}
 		</Base.CodeBlock>
 	);
 }

@@ -1,13 +1,13 @@
 import '@/app/global.css';
 
-import { RootProvider } from 'fumadocs-ui/provider';
 import type { ReactNode } from 'react';
-import { Analytics } from '@vercel/analytics/react';
 import { GeistSans } from 'geist/font/sans';
 import { GeistMono } from 'geist/font/mono';
+import { RootProvider } from 'fumadocs-ui/provider';
+import { Analytics } from '@vercel/analytics/react';
 
-import { baseUrl, createMetadata } from '@/utils/metadata';
 import { cn } from '@/utils/cn';
+import { baseUrl, createMetadata } from '@/utils/metadata';
 
 export const metadata = createMetadata({
 	title: {
