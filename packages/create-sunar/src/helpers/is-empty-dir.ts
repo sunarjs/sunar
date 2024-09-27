@@ -31,9 +31,11 @@ const validFiles = [
 	'.yarn',
 ];
 
+const imlRegex = /\.iml$/;
+
 export function isEmptyDir(root: string, name: string): boolean {
 	const conflicts = readdirSync(root).filter(
-		(file) => !(validFiles.includes(file) || /\.iml$/.test(file)),
+		(file) => !(validFiles.includes(file) || imlRegex.test(file)),
 	);
 
 	if (conflicts.length <= 0) return true;

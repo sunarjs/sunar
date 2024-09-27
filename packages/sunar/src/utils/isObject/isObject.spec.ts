@@ -40,7 +40,7 @@ describe('isObject()', () => {
 
 	it('should return true for other non-plain objects', () => {
 		expect(isObject(new Date())).toBe(true);
-		// biome-ignore lint/nursery/useTopLevelRegex: testing purposes
+		// biome-ignore lint/performance/useTopLevelRegex: testing purposes
 		expect(isObject(/regex/)).toBe(true);
 	});
 });

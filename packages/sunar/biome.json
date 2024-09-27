@@ -16,6 +16,7 @@
 			},
 			"nursery": {
 				"all": true,
+				"noEnum": "off",
 				"useImportRestrictions": "off",
 				"useConsistentMemberAccessibility": "off"
 			},
@@ -33,8 +34,7 @@
 			"suspicious": {
 				"all": true,
 				"noEmptyBlockStatements": "off",
-				"noExplicitAny": "off",
-				"noConsoleLog": "off"
+				"noExplicitAny": "off"
 			}
 		}
 	},

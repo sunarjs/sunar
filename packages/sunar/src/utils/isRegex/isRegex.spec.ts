@@ -2,7 +2,7 @@ import { isRegex } from './isRegex';
 
 describe('isRegex()', () => {
 	it('should return true for a valid RegExp', () => {
-		// biome-ignore lint/nursery/useTopLevelRegex: testing purposes
+		// biome-ignore lint/performance/useTopLevelRegex: testing purposes
 		const regex = /[a-z]+/;
 		expect(isRegex(regex)).toBe(true);
 	});
@@ -18,7 +18,7 @@ describe('isRegex()', () => {
 	});
 
 	it('should return false for null', () => {
-		// biome-ignore lint/nursery/noEvolvingTypes: testing purposes
+		// biome-ignore lint/suspicious/noEvolvingTypes: testing purposes
 		const notRegex = null;
 		expect(isRegex(notRegex)).toBe(false);
 	});
