@@ -1,6 +1,6 @@
 {
 	"name": "create-sunar",
-	"version": "1.2.2",
+	"version": "1.3.0",
 	"description": "The easiest way to get started with Sunar.",
 	"author": "tai (https://github.com/taii03)",
 	"license": "MIT",
@@ -34,18 +34,18 @@
 		"@clack/prompts": "^0.7.0",
 		"colorette": "^2.0.20",
 		"fs-extra": "^11.2.0",
-		"validate-npm-package-name": "^5.0.1"
+		"validate-npm-package-name": "^6.0.0"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "1.8.2",
+		"@biomejs/biome": "1.9.2",
 		"@total-typescript/tsconfig": "1.0.4",
 		"@types/fs-extra": "^11.0.4",
-		"@types/node": "^20.14.7",
+		"@types/node": "^22.7.4",
 		"@types/validate-npm-package-name": "^4.0.2",
 		"arg": "^5.0.2",
 		"esbuild-plugin-version-injector": "1.2.1",
-		"tsup": "8.1.0",
-		"tsx": "4.16.0",
-		"typescript": "5.5.3"
+		"tsup": "8.3.0",
+		"tsx": "4.19.1",
+		"typescript": "5.6.2"
 	}
 }
