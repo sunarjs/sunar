@@ -24,7 +24,7 @@
 
 If you're new to Sunar, you can follow these steps to get started.
 
-Ensure you have [Node.js](https://nodejs.org) (16.11.0 or newer) installed on your machine. Sunar requires [discord.js](https://npmjs.com/package/discord.js) as a peer dependency.
+Ensure you have [Node.js](https://nodejs.org) (18 or newer) installed on your machine. Sunar requires [discord.js](https://npmjs.com/package/discord.js) as a peer dependency.
 
 ## Initialize the client
 
