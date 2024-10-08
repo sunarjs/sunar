@@ -20,7 +20,7 @@ export default function HomeLayout({
 
 function Footer(): React.ReactElement {
 	return (
-		<footer className="text-secondary-foreground py-12">
+		<footer className="py-12 text-secondary-foreground">
 			<div className="flex flex-col gap-4 px-4 sm:flex-row sm:items-end sm:justify-between">
 				<div>
 					<p className="mb-1 text-lg font-semibold">Sunar</p>
@@ -30,7 +30,7 @@ function Footer(): React.ReactElement {
 							href="https://github.com/taii03"
 							rel="noreferrer noopener"
 							target="_blank"
-							className="hover:text-foreground font-medium transition-colors"
+							className="font-medium transition-colors hover:text-foreground"
 						>
 							tai03 ↗
 						</a>
@@ -38,7 +38,7 @@ function Footer(): React.ReactElement {
 				</div>
 				<a
 					href="https://github.com/sunarjs/sunar/blob/main/LICENSE.md"
-					className="text-muted-foreground hover:text-foreground transition-colors"
+					className="text-muted-foreground transition-colors hover:text-foreground"
 					rel="noopener noreferrer"
 					target="_blank"
 				>
