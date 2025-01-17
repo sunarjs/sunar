@@ -2,7 +2,7 @@
 	"name": "@sunar/sunar",
 	"description": "Discord.js lightweight framework.",
 	"version": "0.0.0",
-	"author": "tai (https://github.com/taii03)",
+	"author": "4doist (https://github.com/4doist)",
 	"type": "module",
 	"private": true,
 	"scripts": {
@@ -11,8 +11,9 @@
 		"format": "turbo run format",
 		"test": "turbo run test"
 	},
+	"workspaces": ["apps/*", "packages/*"],
 	"dependencies": {
-		"turbo": "^2.0.6"
+		"turbo": "^2.3.3"
 	},
 	"keywords": [
 		"discord",
@@ -33,5 +34,8 @@
 		"url": "https://github.com/sunarjs/sunar/issues"
 	},
 	"homepage": "https://github.com/sunarjs/sunar",
-	"packageManager": "pnpm@9.5.0"
+	"devDependencies": {
+		"@commitlint/cli": "^19.6.1",
+		"@commitlint/config-conventional": "^19.6.0"
+	}
 }

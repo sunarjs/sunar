@@ -1,26 +1,14 @@
 {
-	"editor.defaultFormatter": "biomejs.biome",
-	"typescript.tsdk": "node_modules\\typescript\\lib",
-
-	"conventionalCommits.scopes": ["readme", "vscode", "jsdoc", "biome"],
-	"cSpell.words": [
-		"autocompletes",
-		"biomejs",
-		"commitlint",
-		"cooldowns",
-		"Protectable",
-		"Repliable",
-		"sunar",
-		"treeshake"
-	],
-	"exportall.config.folderListener": [
-		"/src/types",
-		"/src/stores",
-		"/src/builders",
-		"/src/mutators",
-		"/src/registry",
-		"/src/handlers",
-		"/src/modules",
-		"/src/utils"
-	]
+    "editor.defaultFormatter": "biomejs.biome",
+    "typescript.tsdk": "node_modules\\typescript\\lib",
+    "cSpell.words": [
+        "autocompletes",
+        "biomejs",
+        "commitlint",
+        "cooldowns",
+        "Protectable",
+        "Repliable",
+        "sunar",
+        "treeshake"
+    ]
 }
