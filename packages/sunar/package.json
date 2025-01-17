@@ -2,7 +2,7 @@
     "name": "sunar",
     "version": "0.6.1",
     "description": "A simple and easy to use discord.js framework.",
-    "author": "tai (https://github.com/taii03)",
+    "author": "4doist (https://github.com/4doist)",
     "license": "MIT",
     "main": "dist/index.cjs",
     "types": "dist/index.d.ts",
@@ -28,16 +28,16 @@
         "typescript"
     ],
     "dependencies": {
-        "glob": "11.0.0"
+        "glob": "11.0.1"
     },
     "devDependencies": {
         "@biomejs/biome": "1.9.4",
         "@total-typescript/tsconfig": "^1.0.4",
-        "esbuild-plugin-file-path-extensions": "2.1.3",
+        "esbuild-plugin-file-path-extensions": "2.1.4",
         "esbuild-plugin-version-injector": "1.2.1",
-        "tsup": "8.3.0",
+        "tsup": "8.3.5",
         "typescript": "5.6.2",
-        "vitest": "^2.1.1"
+        "vitest": "^3.0.1"
     },
     "peerDependencies": {
         "discord.js": "^14.17.x"
