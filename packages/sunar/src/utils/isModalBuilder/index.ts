@@ -1,1 +1,1 @@
-export * from './isModalBuilder';
+export * from "./isModalBuilder";

@@ -1,29 +1,29 @@
 import type {
-	AnySelectMenuInteraction,
-	Awaitable,
-	ChannelSelectMenuInteraction,
-	ComponentType,
-	MentionableSelectMenuInteraction,
-	RoleSelectMenuInteraction,
-	SelectMenuType,
-	StringSelectMenuInteraction,
-	UserSelectMenuInteraction,
-} from 'discord.js';
+    AnySelectMenuInteraction,
+    Awaitable,
+    ChannelSelectMenuInteraction,
+    ComponentType,
+    MentionableSelectMenuInteraction,
+    RoleSelectMenuInteraction,
+    SelectMenuType,
+    StringSelectMenuInteraction,
+    UserSelectMenuInteraction,
+} from "discord.js";
 
-import type { Protector } from '.';
-import { UNHANDLED_SYMBOL } from '../symbols';
-import type { Builder, CooldownResolvable } from '../types';
-import { Builders } from '../utils';
+import type { Protector } from ".";
+import { UNHANDLED_SYMBOL } from "../symbols";
+import type { Builder, CooldownResolvable } from "../types";
+import { Builders } from "../utils";
 
 export interface SelectMenuOptions {
-	/** The select menu custom ID to target. */
-	id: string | RegExp;
-	/** The type of select menu to target. */
-	type: SelectMenuType;
+    /** The select menu custom ID to target. */
+    id: string | RegExp;
+    /** The type of select menu to target. */
+    type: SelectMenuType;
 }
 
 export interface SelectMenuConfig {
-	cooldown?: CooldownResolvable;
+    cooldown?: CooldownResolvable;
 }
 
 /**
@@ -32,28 +32,28 @@ export interface SelectMenuConfig {
  * @see https://sunar.js.org/docs/builders/select-menu
  */
 export class SelectMenu<TOptions extends SelectMenuOptions = SelectMenuOptions> implements Builder {
-	public readonly type = Builders.SelectMenu;
-	public readonly options: TOptions;
+    public readonly type = Builders.SelectMenu;
+    public readonly options: TOptions;
 
-	public config: SelectMenuConfig = {};
-	public protectors: Protector<{ components: 'selectMenu'[] }>[] = [];
-	public execute: (...args: SelectMenuArgs<TOptions>) => Awaitable<unknown> = () => UNHANDLED_SYMBOL;
+    public config: SelectMenuConfig = {};
+    public protectors: Protector<{ components: "selectMenu"[] }>[] = [];
+    public execute: (...args: SelectMenuArgs<TOptions>) => Awaitable<unknown> = () => UNHANDLED_SYMBOL;
 
-	constructor(options: TOptions) {
-		this.options = options;
-	}
+    constructor(options: TOptions) {
+        this.options = options;
+    }
 }
 
 export type SelectMenuArgs<TOptions extends SelectMenuOptions> = [
-	interaction: TOptions['type'] extends ComponentType.ChannelSelect
-		? ChannelSelectMenuInteraction
-		: TOptions['type'] extends ComponentType.MentionableSelect
-			? MentionableSelectMenuInteraction
-			: TOptions['type'] extends ComponentType.RoleSelect
-				? RoleSelectMenuInteraction
-				: TOptions['type'] extends ComponentType.StringSelect
-					? StringSelectMenuInteraction
-					: TOptions['type'] extends ComponentType.UserSelect
-						? UserSelectMenuInteraction
-						: AnySelectMenuInteraction,
+    interaction: TOptions["type"] extends ComponentType.ChannelSelect
+        ? ChannelSelectMenuInteraction
+        : TOptions["type"] extends ComponentType.MentionableSelect
+          ? MentionableSelectMenuInteraction
+          : TOptions["type"] extends ComponentType.RoleSelect
+            ? RoleSelectMenuInteraction
+            : TOptions["type"] extends ComponentType.StringSelect
+              ? StringSelectMenuInteraction
+              : TOptions["type"] extends ComponentType.UserSelect
+                ? UserSelectMenuInteraction
+                : AnySelectMenuInteraction,
 ];

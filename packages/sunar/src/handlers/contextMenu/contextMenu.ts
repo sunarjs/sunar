@@ -1,7 +1,7 @@
-import type { MessageContextMenuCommandInteraction, UserContextMenuCommandInteraction } from 'discord.js';
-import { handleCooldown } from '..';
-import { contextMenuCommands } from '../../stores';
-import { handleProtectors } from '../protectors';
+import type { MessageContextMenuCommandInteraction, UserContextMenuCommandInteraction } from "discord.js";
+import { handleCooldown } from "..";
+import { contextMenuCommands } from "../../stores";
+import { handleProtectors } from "../protectors";
 
 /**
  * Handle a context menu interaction.
@@ -10,23 +10,23 @@ import { handleProtectors } from '../protectors';
  * @see https://sunar.js.org/docs/guides/interactions-handling
  */
 export async function handleContextMenu(
-	interaction: UserContextMenuCommandInteraction | MessageContextMenuCommandInteraction,
+    interaction: UserContextMenuCommandInteraction | MessageContextMenuCommandInteraction,
 ) {
-	const command = contextMenuCommands.get(interaction.commandName);
+    const command = contextMenuCommands.get(interaction.commandName);
 
-	if (!command) return;
+    if (!command) return;
 
-	const onCooldown = handleCooldown(interaction, command);
-	if (onCooldown) return;
+    const onCooldown = handleCooldown(interaction, command);
+    if (onCooldown) return;
 
-	if (typeof command.execute !== 'function') return;
+    if (typeof command.execute !== "function") return;
 
-	const canContinue = await handleProtectors({ protectors: command.protectors, data: interaction });
-	if (!canContinue) return;
+    const canContinue = await handleProtectors({ protectors: command.protectors, data: interaction });
+    if (!canContinue) return;
 
-	const result = await command.execute(interaction);
+    const result = await command.execute(interaction);
 
-	if (!result) return;
+    if (!result) return;
 
-	// TODO: handle the result of the command execution
+    // TODO: handle the result of the command execution
 }

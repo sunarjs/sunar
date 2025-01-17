@@ -1,10 +1,10 @@
-import { Slash } from '../../builders'
-import { execute } from '../../mutators'
+import { Slash } from "../../builders";
+import { execute } from "../../mutators";
 
-const slash = new Slash({ name: 'ping', description: 'Pong' })
+const slash = new Slash({ name: "ping", description: "Pong" });
 
 execute(slash, (interaction) => {
-    interaction.reply({ content: 'Pong!' })
-})
+    interaction.reply({ content: "Pong!" });
+});
 
-export { slash }
+export { slash };

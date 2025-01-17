@@ -1,1 +1,1 @@
-export * from './isSlashBuilder';
+export * from "./isSlashBuilder";

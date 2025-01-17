@@ -1,17 +1,17 @@
-import type { Awaitable, ButtonInteraction } from 'discord.js';
+import type { Awaitable, ButtonInteraction } from "discord.js";
 
-import type { Protector } from '.';
-import { UNHANDLED_SYMBOL } from '../symbols';
-import type { Builder, CooldownResolvable } from '../types';
-import { Builders } from '../utils';
+import type { Protector } from ".";
+import { UNHANDLED_SYMBOL } from "../symbols";
+import type { Builder, CooldownResolvable } from "../types";
+import { Builders } from "../utils";
 
 export interface ButtonOptions {
-	/** The button custom ID to target. */
-	id: string | RegExp;
+    /** The button custom ID to target. */
+    id: string | RegExp;
 }
 
 export interface ButtonConfig {
-	cooldown?: CooldownResolvable;
+    cooldown?: CooldownResolvable;
 }
 
 /**
@@ -20,14 +20,14 @@ export interface ButtonConfig {
  * @see https://sunar.js.org/docs/builders/button
  */
 export class Button implements Builder {
-	public readonly type = Builders.Button;
-	public readonly options: ButtonOptions;
+    public readonly type = Builders.Button;
+    public readonly options: ButtonOptions;
 
-	public config: ButtonConfig = {};
-	public protectors: Protector<{ components: 'button'[] }>[] = [];
-	public execute: (interaction: ButtonInteraction) => Awaitable<unknown> = () => UNHANDLED_SYMBOL;
+    public config: ButtonConfig = {};
+    public protectors: Protector<{ components: "button"[] }>[] = [];
+    public execute: (interaction: ButtonInteraction) => Awaitable<unknown> = () => UNHANDLED_SYMBOL;
 
-	constructor(options: ButtonOptions) {
-		this.options = options;
-	}
+    constructor(options: ButtonOptions) {
+        this.options = options;
+    }
 }

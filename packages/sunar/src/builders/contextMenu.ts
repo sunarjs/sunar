@@ -1,17 +1,17 @@
 import type {
-	ApplicationCommandType,
-	Awaitable,
-	ContextMenuCommandInteraction,
-	MessageApplicationCommandData,
-	MessageContextMenuCommandInteraction,
-	UserApplicationCommandData,
-	UserContextMenuCommandInteraction,
-} from 'discord.js';
+    ApplicationCommandType,
+    Awaitable,
+    ContextMenuCommandInteraction,
+    MessageApplicationCommandData,
+    MessageContextMenuCommandInteraction,
+    UserApplicationCommandData,
+    UserContextMenuCommandInteraction,
+} from "discord.js";
 
-import type { Protector } from '.';
-import { UNHANDLED_SYMBOL } from '../symbols';
-import type { Builder, CommandConfig } from '../types';
-import { Builders } from '../utils';
+import type { Protector } from ".";
+import { UNHANDLED_SYMBOL } from "../symbols";
+import type { Builder, CommandConfig } from "../types";
+import { Builders } from "../utils";
 
 export type ContextMenuData = MessageApplicationCommandData | UserApplicationCommandData;
 
@@ -23,22 +23,22 @@ export interface ContextMenuConfig extends CommandConfig {}
  * @see https://sunar.js.org/docs/builders/context-menu
  */
 export class ContextMenu<TData extends ContextMenuData = ContextMenuData> implements Builder {
-	public readonly type = Builders.ContextMenu;
-	public readonly data: TData;
+    public readonly type = Builders.ContextMenu;
+    public readonly data: TData;
 
-	public config: ContextMenuConfig = {};
-	public protectors: Protector<{ commands: 'contextMenu'[] }>[] = [];
-	public execute: (...args: ContextMenuArgs<TData>) => Awaitable<unknown> = () => UNHANDLED_SYMBOL;
+    public config: ContextMenuConfig = {};
+    public protectors: Protector<{ commands: "contextMenu"[] }>[] = [];
+    public execute: (...args: ContextMenuArgs<TData>) => Awaitable<unknown> = () => UNHANDLED_SYMBOL;
 
-	constructor(data: TData) {
-		this.data = data;
-	}
+    constructor(data: TData) {
+        this.data = data;
+    }
 }
 
 export type ContextMenuArgs<TData extends ContextMenuData> = [
-	interaction: TData['type'] extends ApplicationCommandType.Message
-		? MessageContextMenuCommandInteraction
-		: TData['type'] extends ApplicationCommandType.User
-			? UserContextMenuCommandInteraction
-			: ContextMenuCommandInteraction,
+    interaction: TData["type"] extends ApplicationCommandType.Message
+        ? MessageContextMenuCommandInteraction
+        : TData["type"] extends ApplicationCommandType.User
+          ? UserContextMenuCommandInteraction
+          : ContextMenuCommandInteraction,
 ];

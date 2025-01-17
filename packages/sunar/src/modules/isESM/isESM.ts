@@ -1,3 +1,3 @@
 export function isESM(): boolean {
-	return !!import.meta.url;
+    return !!import.meta.url;
 }

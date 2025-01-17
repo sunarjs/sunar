@@ -1,6 +1,6 @@
-import type { ApplicationCommand, ClientApplication, Collection } from 'discord.js';
+import type { ApplicationCommand, ClientApplication, Collection } from "discord.js";
 
-import { getApplicationCommands } from '../../utils';
+import { getApplicationCommands } from "../../utils";
 
 /**
  * Register all commands for specific guilds.
@@ -13,19 +13,19 @@ import { getApplicationCommands } from '../../utils';
  * @see https://sunar.js.org/docs/guides/registering-commands/guilds
  */
 export async function registerGuildCommands(
-	application: ClientApplication,
-	guildIds: string[],
+    application: ClientApplication,
+    guildIds: string[],
 ): Promise<Collection<string, ApplicationCommand>[]> {
-	const applicationCommands = getApplicationCommands();
+    const applicationCommands = getApplicationCommands();
 
-	if (applicationCommands.length <= 0) return [];
+    if (applicationCommands.length <= 0) return [];
 
-	const results: Collection<string, ApplicationCommand>[] = [];
+    const results: Collection<string, ApplicationCommand>[] = [];
 
-	for (const guildId of guildIds) {
-		const result = await application.commands.set(applicationCommands, guildId);
-		results.push(result);
-	}
+    for (const guildId of guildIds) {
+        const result = await application.commands.set(applicationCommands, guildId);
+        results.push(result);
+    }
 
-	return results;
+    return results;
 }

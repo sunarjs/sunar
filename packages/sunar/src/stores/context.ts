@@ -1,10 +1,10 @@
-import type { Client } from '../client';
+import type { Client } from "../client";
 
 export interface Context {
-	client: Client;
-	config: unknown;
+    client: Client;
+    config: unknown;
 }
 
 export const context = {
-	config: {},
+    config: {},
 } as Context;

@@ -1,1 +1,1 @@
-export * from './getSunarApplicationCommands';
+export * from "./getSunarApplicationCommands";

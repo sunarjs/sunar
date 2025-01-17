@@ -1,1 +1,1 @@
-export * from './getGroupStoreKey';
+export * from "./getGroupStoreKey";

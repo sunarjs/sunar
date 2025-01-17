@@ -1,6 +1,6 @@
-import type { ApplicationCommand, ClientApplication, Collection } from 'discord.js';
+import type { ApplicationCommand, ClientApplication, Collection } from "discord.js";
 
-import { getApplicationCommands } from '../../utils';
+import { getApplicationCommands } from "../../utils";
 
 /**
  * Register all commands as global.
@@ -11,9 +11,9 @@ import { getApplicationCommands } from '../../utils';
  * @see https://sunar.js.org/docs/guides/registering-commands/global
  */
 export function registerGlobalCommands(
-	application: ClientApplication,
+    application: ClientApplication,
 ): Promise<Collection<string, ApplicationCommand>> {
-	const applicationCommands = getApplicationCommands();
+    const applicationCommands = getApplicationCommands();
 
-	return application.commands.set(applicationCommands.length > 0 ? applicationCommands : []);
+    return application.commands.set(applicationCommands.length > 0 ? applicationCommands : []);
 }

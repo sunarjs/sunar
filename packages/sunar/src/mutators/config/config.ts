@@ -1,7 +1,7 @@
-import type { Builder } from '../../types';
-import { isObject } from '../../utils';
+import type { Builder } from "../../types";
+import { isObject } from "../../utils";
 
-export type ConfigurableBuilder = Pick<Builder, 'type' | 'config'>;
+export type ConfigurableBuilder = Pick<Builder, "type" | "config">;
 
 /**
  * Applies the specified configuration to a builder.
@@ -13,7 +13,7 @@ export type ConfigurableBuilder = Pick<Builder, 'type' | 'config'>;
  * @see https://sunar.js.org/docs/guides/implementing-cooldowns
  * @see https://sunar.js.org/docs/guides/registering-commands/dynamic#specific-guilds-ids-commands
  */
-export function config<TBuilder extends ConfigurableBuilder>(builder: TBuilder, config: TBuilder['config']): void {
-	if (!isObject(config)) return;
-	builder.config = config;
+export function config<TBuilder extends ConfigurableBuilder>(builder: TBuilder, config: TBuilder["config"]): void {
+    if (!isObject(config)) return;
+    builder.config = config;
 }

@@ -1,1 +1,1 @@
-export * from './isESM';
+export * from "./isESM";

@@ -1,1 +1,1 @@
-export * from './isRegex';
+export * from "./isRegex";

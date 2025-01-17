@@ -1,1 +1,1 @@
-export * from './resolveCooldown';
+export * from "./resolveCooldown";

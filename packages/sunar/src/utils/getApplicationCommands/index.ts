@@ -1,1 +1,1 @@
-export * from './getApplicationCommands';
+export * from "./getApplicationCommands";

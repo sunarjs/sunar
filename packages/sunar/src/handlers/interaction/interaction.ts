@@ -1,8 +1,8 @@
-import type { Interaction } from 'discord.js';
+import type { Interaction } from "discord.js";
 
-import { handleAutocomplete, handleModal, handleSelectMenu, handleSlash } from '..';
-import { handleButton } from '../button';
-import { handleContextMenu } from '../contextMenu';
+import { handleAutocomplete, handleModal, handleSelectMenu, handleSlash } from "..";
+import { handleButton } from "../button";
+import { handleContextMenu } from "../contextMenu";
 
 /**
  * Handle all the interactions supported by Sunar.
@@ -11,10 +11,10 @@ import { handleContextMenu } from '../contextMenu';
  * @see https://sunar.js.org/docs/guides/interactions-handling
  */
 export async function handleInteraction(interaction: Interaction) {
-	if (interaction.isChatInputCommand()) await handleSlash(interaction);
-	if (interaction.isContextMenuCommand()) await handleContextMenu(interaction);
-	if (interaction.isModalSubmit()) await handleModal(interaction);
-	if (interaction.isButton()) await handleButton(interaction);
-	if (interaction.isAnySelectMenu()) await handleSelectMenu(interaction);
-	if (interaction.isAutocomplete()) await handleAutocomplete(interaction);
+    if (interaction.isChatInputCommand()) await handleSlash(interaction);
+    if (interaction.isContextMenuCommand()) await handleContextMenu(interaction);
+    if (interaction.isModalSubmit()) await handleModal(interaction);
+    if (interaction.isButton()) await handleButton(interaction);
+    if (interaction.isAnySelectMenu()) await handleSelectMenu(interaction);
+    if (interaction.isAutocomplete()) await handleAutocomplete(interaction);
 }

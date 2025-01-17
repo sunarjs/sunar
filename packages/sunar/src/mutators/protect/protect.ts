@@ -1,7 +1,7 @@
-import type { Protector } from '../../builders';
-import type { Builder } from '../../types';
+import type { Protector } from "../../builders";
+import type { Builder } from "../../types";
 
-export type ProtectableBuilder = Pick<Builder, 'type' | 'protectors'>;
+export type ProtectableBuilder = Pick<Builder, "type" | "protectors">;
 
 // FIXME: Improve types, "any" should not be used here
 
@@ -17,7 +17,7 @@ export type ProtectableBuilder = Pick<Builder, 'type' | 'protectors'>;
  * @see https://sunar.js.org/docs/guides/middlewares#create-a-protected-command
  */
 export function protect<TBuilder extends ProtectableBuilder>(builder: TBuilder, protectors: Protector[]): Protector[] {
-	if (!Array.isArray(builder.protectors)) return builder.protectors;
-	builder.protectors.push(...(protectors as any));
-	return builder.protectors;
+    if (!Array.isArray(builder.protectors)) return builder.protectors;
+    builder.protectors.push(...(protectors as any));
+    return builder.protectors;
 }

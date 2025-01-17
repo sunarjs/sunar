@@ -1,5 +1,5 @@
-import type { GlobOptions } from 'glob';
-import { resolve, storeModules } from '..';
+import type { GlobOptions } from "glob";
+import { resolve, storeModules } from "..";
 
 /**
  * Resolve and store all the sunar modules.
@@ -10,7 +10,7 @@ import { resolve, storeModules } from '..';
  * @see https://sunar.js.org/docs/guides/load-modules
  */
 export async function load(patterns: string | string[], options?: GlobOptions): Promise<void> {
-	const modules = await resolve(patterns, options);
+    const modules = await resolve(patterns, options);
 
-	storeModules(modules);
+    storeModules(modules);
 }

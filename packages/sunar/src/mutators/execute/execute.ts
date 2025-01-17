@@ -1,6 +1,6 @@
-import type { Builder } from '../../types';
+import type { Builder } from "../../types";
 
-export type ExecutableBuilder = Pick<Builder, 'type' | 'execute'>;
+export type ExecutableBuilder = Pick<Builder, "type" | "execute">;
 
 /**
  * Set the function to execute when an executable builder is accepted.
@@ -10,7 +10,7 @@ export type ExecutableBuilder = Pick<Builder, 'type' | 'execute'>;
  *
  * @see https://sunar.js.org/docs/mutators/execute
  */
-export function execute<TBuilder extends ExecutableBuilder>(builder: TBuilder, execute: TBuilder['execute']): void {
-	if (typeof execute !== 'function') return;
-	builder.execute = execute;
+export function execute<TBuilder extends ExecutableBuilder>(builder: TBuilder, execute: TBuilder["execute"]): void {
+    if (typeof execute !== "function") return;
+    builder.execute = execute;
 }

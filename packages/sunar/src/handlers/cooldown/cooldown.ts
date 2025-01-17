@@ -1,90 +1,92 @@
-import { Collection, type Interaction, type RepliableInteraction } from 'discord.js';
+import { Collection, type Interaction, type RepliableInteraction } from "discord.js";
 
-import { context, cooldownManager } from '../../stores';
-import type { Builder, CooldownResolvable, CooldownTimestamp } from '../../types';
-import { CooldownScope, resolveCooldown } from '../../utils';
+import { context, cooldownManager } from "../../stores";
+import type { Builder, CooldownResolvable, CooldownTimestamp } from "../../types";
+import { CooldownScope, resolveCooldown } from "../../utils";
 
 export function handleCooldown<
-	TInteraction extends RepliableInteraction,
-	TBuilder extends Builder & { config: { cooldown?: CooldownResolvable } },
+    TInteraction extends RepliableInteraction,
+    TBuilder extends Builder & { config: { cooldown?: CooldownResolvable } },
 >(interaction: TInteraction, builder: TBuilder): boolean {
-	if (!builder.config.cooldown) return false;
-	if (!interaction.isRepliable()) return false;
+    if (!builder.config.cooldown) return false;
+    if (!interaction.isRepliable()) return false;
 
-	const config = resolveCooldown(builder.config.cooldown);
+    const config = resolveCooldown(builder.config.cooldown);
 
-	const { scope } = config;
+    const { scope } = config;
 
-	const isUser = scope === CooldownScope.User;
-	const isChannel = scope === CooldownScope.Channel;
-	const isGuild = scope === CooldownScope.Guild;
-	const isGlobal = scope === CooldownScope.Global;
+    const isUser = scope === CooldownScope.User;
+    const isChannel = scope === CooldownScope.Channel;
+    const isGuild = scope === CooldownScope.Guild;
+    const isGlobal = scope === CooldownScope.Global;
 
-	const targetId = isUser
-		? interaction.user.id
-		: isChannel
-			? interaction.channelId
-			: isGuild
-				? interaction.guildId
-				: isGlobal
-					? Symbol()
-					: null;
+    let targetId: string | symbol | null = null;
 
-	if (targetId === null) return false;
+    if (isUser) {
+        targetId = interaction.user.id;
+    } else if (isChannel) {
+        targetId = interaction.channelId;
+    } else if (isGuild) {
+        targetId = interaction.guildId;
+    } else if (isGlobal) {
+        targetId = Symbol();
+    }
 
-	if (!isGlobal && config.exclude.includes(targetId as string)) return false;
+    if (targetId === null) return false;
 
-	const scopes = cooldownManager.ensure(builder.type, () => new Collection());
+    if (!isGlobal && config.exclude.includes(targetId as string)) return false;
 
-	const interactionId = getInteractionId(interaction);
-	if (!interactionId) return false;
+    const scopes = cooldownManager.ensure(builder.type, () => new Collection());
 
-	const cooldowns = scopes.ensure(scope, () => new Collection([[interactionId, []]]));
-	const timestamps = cooldowns.ensure(interactionId, () => []);
+    const interactionId = getInteractionId(interaction);
+    if (!interactionId) return false;
 
-	const targetTimestamps = timestamps.filter((c) =>
-		typeof c.targetId === 'symbol' ? c.targetId === targetId : c.targetId.startsWith(String(targetId)),
-	);
+    const cooldowns = scopes.ensure(scope, () => new Collection([[interactionId, []]]));
+    const timestamps = cooldowns.ensure(interactionId, () => []);
 
-	if (!targetTimestamps || targetTimestamps.length < config.limit) {
-		addCooldown(targetId, config.time, interactionId, cooldowns, timestamps, targetTimestamps);
-		return false;
-	}
+    const targetTimestamps = timestamps.filter((c) =>
+        typeof c.targetId === "symbol" ? c.targetId === targetId : c.targetId.startsWith(String(targetId)),
+    );
 
-	const lastTimestamp = targetTimestamps.at(-1);
-	if (!lastTimestamp) return false;
+    if (!targetTimestamps || targetTimestamps.length < config.limit) {
+        addCooldown(targetId, config.time, interactionId, cooldowns, timestamps, targetTimestamps);
+        return false;
+    }
 
-	const remaining = config.time - (Date.now() - lastTimestamp.expiration);
+    const lastTimestamp = targetTimestamps.at(-1);
+    if (!lastTimestamp) return false;
 
-	context.client.emit('cooldown', interaction, { remaining, scope, limit: config.limit });
+    const remaining = config.time - (Date.now() - lastTimestamp.expiration);
 
-	return true;
+    context.client.emit("cooldown", interaction, { remaining, scope, limit: config.limit });
+
+    return true;
 }
 
 function addCooldown(
-	targetId: string | symbol,
-	time: number,
-	interactionId: string,
-	cooldownManager: Collection<string, CooldownTimestamp[]>,
-	currentTimestamps: CooldownTimestamp[],
-	targetTimestamps: CooldownTimestamp[],
+    targetId: string | symbol,
+    time: number,
+    interactionId: string,
+    cooldownManager: Collection<string, CooldownTimestamp[]>,
+    currentTimestamps: CooldownTimestamp[],
+    targetTimestamps: CooldownTimestamp[],
 ) {
-	const timer = setTimeout(() => {
-		cooldownManager.sweep((t) => t.some((c) => c.targetId === uniqueId));
-	}, time);
+    const timer = setTimeout(() => {
+        cooldownManager.sweep((t) => t.some((c) => c.targetId === uniqueId));
+    }, time);
 
-	const uniqueId = `${String(targetId)}-${Date.now().toString(36)}`;
-	const newTimestamp: CooldownTimestamp = { targetId: uniqueId, expiration: Date.now(), timer };
+    const uniqueId = `${String(targetId)}-${Date.now().toString(36)}`;
+    const newTimestamp: CooldownTimestamp = { targetId: uniqueId, expiration: Date.now(), timer };
 
-	cooldownManager.set(interactionId, currentTimestamps ? [...currentTimestamps, newTimestamp] : [newTimestamp]);
+    cooldownManager.set(interactionId, currentTimestamps ? [...currentTimestamps, newTimestamp] : [newTimestamp]);
 
-	for (const { timer } of targetTimestamps) {
-		timer.refresh();
-	}
+    for (const { timer } of targetTimestamps) {
+        timer.refresh();
+    }
 }
 
 function getInteractionId(interaction: Interaction): string | null {
-	if (interaction.isCommand()) return interaction.commandId;
-	if (interaction.isMessageComponent()) return interaction.customId;
-	return null;
+    if (interaction.isCommand()) return interaction.commandId;
+    if (interaction.isMessageComponent()) return interaction.customId;
+    return null;
 }

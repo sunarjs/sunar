@@ -1,18 +1,18 @@
-import { Events } from 'discord.js';
+import { Events } from "discord.js";
 
 export const Signals = {
-	...Events,
-	Cooldown: 'cooldown',
+    ...Events,
+    Cooldown: "cooldown",
 } as const;
 
 export const Commands = {
-	Slash: 'slash',
-	ContextMenu: 'contextMenu',
-	Autocomplete: 'autocomplete',
+    Slash: "slash",
+    ContextMenu: "contextMenu",
+    Autocomplete: "autocomplete",
 } as const;
 
 export const Components = {
-	Button: 'button',
-	Modal: 'modal',
-	SelectMenu: 'selectMenu',
+    Button: "button",
+    Modal: "modal",
+    SelectMenu: "selectMenu",
 } as const;
