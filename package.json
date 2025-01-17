@@ -9,7 +9,8 @@
 		"build": "turbo run build --concurrency=4",
 		"lint": "turbo run lint",
 		"format": "turbo run format",
-		"test": "turbo run test"
+		"test": "turbo run test",
+		"prepare": "husky"
 	},
 	"workspaces": ["apps/*", "packages/*"],
 	"dependencies": {
@@ -36,6 +37,7 @@
 	"homepage": "https://github.com/sunarjs/sunar",
 	"devDependencies": {
 		"@commitlint/cli": "^19.6.1",
-		"@commitlint/config-conventional": "^19.6.0"
+		"@commitlint/config-conventional": "^19.6.0",
+		"husky": "^9.1.7"
 	}
 }
