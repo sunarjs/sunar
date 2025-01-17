@@ -9,8 +9,8 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
-            - uses: pnpm/action-setup@v4
+            - uses: oven-sh/setup-bun@v2
 
-            - run: pnpm install
-            - run: pnpm run lint
-            - run: pnpm run build
+            - run: bun install
+            - run: bun run lint
+            - run: bun run build
