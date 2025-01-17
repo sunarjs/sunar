@@ -3,5 +3,3 @@ dist
 
 .env
 .env.development
-
-bun.lockb
