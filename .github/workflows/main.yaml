@@ -3,14 +3,24 @@ on:
     push:
         branches:
             - "**"
+    pull_request:
+        branches:
+            - "**"
 
 jobs:
     build:
         runs-on: ubuntu-latest
         steps:
             - uses: actions/checkout@v4
+
             - uses: oven-sh/setup-bun@v2
 
             - run: bun install
+
             - run: bun run lint
-            - run: bun run build
+
+            - name: Build
+              env:
+                  NEXT_PUBLIC_ORAMA_API_ENDPOINT: ${{ secrets.NEXT_PUBLIC_ORAMA_API_ENDPOINT }}
+                  NEXT_PUBLIC_ORAMA_API_KEY: ${{ secrets.NEXT_PUBLIC_ORAMA_API_KEY }}
+              run: bun run build
