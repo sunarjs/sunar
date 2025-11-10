@@ -1,9 +1,17 @@
 import { Events } from "discord.js";
 
-export const Signals = {
+type MergeConst<T extends object, U extends object> = {
+    readonly [K in keyof (T & U)]: (T & U)[K];
+};
+
+enum SunarEvents {
+    Cooldown = "cooldown",
+}
+
+export const Signals: MergeConst<typeof Events, typeof SunarEvents> = {
     ...Events,
-    Cooldown: "cooldown",
-} as const;
+    ...SunarEvents,
+};
 
 export const Commands = {
     Slash: "slash",

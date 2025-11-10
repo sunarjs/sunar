@@ -3,7 +3,7 @@ title: Implementing cooldowns
 description: Learn how to implement and manage cooldowns for commands and components in your Discord bot using Sunar. This guide will walk you through the steps to ensure your bot handles cooldowns effectively, preventing command spam and enhancing user experience.
 ---
 
-<Callout>
+<Callout type="warning">
     Cooldowns can be used only for [repliable interactions](https://discord.js.org/docs/packages/discord.js/main/RepliableInteraction:TypeAlias).
 </Callout>
 
@@ -48,7 +48,7 @@ description: Learn how to implement and manage cooldowns for commands and compon
         const slash = new Slash({ name: 'avatar', description: 'Show your user avatar' });
 
         config(slash, { // [!code highlight]
-        /* [!code highlight] */    cooldown: 5_000, // 5000 miliseconds = 5 seconds
+            cooldown: 5_000, // 5000 milliseconds = 5 seconds [!code highlight]
         }); // [!code highlight]
 
         execute(slash, (interaction) => {
@@ -72,9 +72,9 @@ description: Learn how to implement and manage cooldowns for commands and compon
         Here's how you can set it up:
 
         ```js title="src/signals/cooldown.js"
-        import { Signal, execute } from 'sunar';
+        import { Signal, Signals, execute } from 'sunar';
 
-        const signal = new Signal('cooldown');
+        const signal = new Signal(Signals.Cooldown);
 
         execute(signal, (interaction, context) => {
             interaction.reply({
@@ -199,9 +199,9 @@ In this example, the `avatar` command is configured with a User scope cooldown o
 Learn how to leverage the `cooldown` signal in Sunar for advanced bot interaction management. This section covers configuring, customizing, and integrating cooldown signals to optimize command usage and user experience.
 
 ```js title="src/signals/cooldown.js"
-import { Signal, CooldownScope, execute } from 'sunar';
+import { Signal, Signals, CooldownScope, execute } from 'sunar';
 
-const signal = new Signal('cooldown');
+const signal = new Signal(Signals.Cooldown);
 
 execute(signal, (interaction, { remaining, scope }) => {
     const type = interaction.isCommand() ? 'command' : 'component';
@@ -240,7 +240,37 @@ export { signal };
 
 This setup allows developers to configure cooldowns based on specific needs, ensuring smooth bot operation and enhancing community engagement on Discord platforms.
 
-### Conclusion
+### Clearing Cooldowns
+
+There may be situations where you need to clear cooldowns for a user, such as when handling errors or canceling operations. Sunar provides a utility function to help with this:
+
+```js
+import { clearCooldownsForInteraction } from 'sunar';
+
+// In your error handler or wherever you need to clear cooldowns
+function handleError(interaction) {
+    // Clear all cooldowns related to this interaction
+    const clearedCount = clearCooldownsForInteraction(interaction);
+    console.log(`Cleared ${clearedCount} cooldowns`);
+    
+    // Handle the error
+    interaction.reply({ content: 'An error occurred', ephemeral: true });
+}
+```
+
+The `clearCooldownsForInteraction` function will:
+- Clear all cooldowns related to the interaction's user
+- Clear all cooldowns for the interaction's channel (if any)
+- Clear all cooldowns for the interaction's guild (if any)
+- Return the number of cooldowns that were cleared
+
+This is particularly useful when:
+- Handling errors and you want to allow the user to retry immediately
+- Canceling an operation that had cooldowns applied
+- Implementing an admin override for cooldowns
+- Resetting state after a failed operation
+
+## Conclusion
 
 Implementing cooldowns in your discord bot using Sunar is essential for maintaining a balanced user experience and preventing command abuse. By configuring cooldowns, you ensure that commands and interactive components are used responsibly across different contexts, such as users, channels, servers, and globally.
 

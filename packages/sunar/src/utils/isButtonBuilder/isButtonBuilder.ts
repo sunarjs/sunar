@@ -1,5 +1,6 @@
+import { Button } from "~/builders";
+
 import { Builders, isBuilder } from "..";
-import { Button } from "../../builders";
 
 export function isButtonBuilder(builder: any): builder is Button {
     if (!isBuilder(builder)) return false;

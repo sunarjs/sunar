@@ -1,25 +1,17 @@
 ---
 title: Autocomplete
 description: Autocomplete commands enhance the user experience by providing suggestions while the user is typing. They are particularly useful for commands with multiple options or extensive inputs.
+references:
+  - source: github-sunar
+    title: Autocomplete Source Code
+    path: /src/builders/autocomplete.ts
+  - source: discord-api
+    title: Autocomplete API Reference
+    path: /interactions/application-commands#autocomplete
+  - source: discord.js
+    title: AutocompleteInteraction
+    path: /AutocompleteInteraction:Class
 ---
-
-<Links>
-	<Link
-		label="Source"
-		icon="github"
-		link="https://github.com/sunarjs/sunar/blob/main/packages/sunar/src/builders/autocomplete.ts"
-	/>
-	<Link
-		label="Autocomplete Interaction"
-		icon="discordjs"
-		link="https://discord.js.org/docs/packages/discord.js/main/AutocompleteInteraction:Class"
-	/>
-	<Link
-		label="API Reference"
-		icon="discord"
-		link="https://discord.com/developers/docs/interactions/application-commands#autocomplete"
-	/>
-</Links>
 
 ## Usage
 
@@ -53,7 +45,7 @@ const slash = new Slash({
 			name: 'fruit',
 			description: 'Select the fruit',
 			type: ApplicationCommandOptionType.String,
-			autocomplete: true,
+			autocomplete: true, // [!code highlight]
 			required: true,
 		},
 	],
@@ -82,7 +74,7 @@ execute(autocomplete, (interaction, option) => {
 		e.name.toLowerCase().includes(option.value.toLowerCase())
 	);
 
-	interaction.respond(results);
+	return interaction.respond(results);
 });
 
 export { slash, autocomplete };
@@ -92,9 +84,4 @@ export { slash, autocomplete };
 
 ### AutocompleteOptions [#autocomplete-options]
 
-```json doc-gen:typescript
-{
-	"file": "./content/docs/props.ts",
-	"name": "AutocompleteOptions"
-}
-```
+<AutoTypeTable path="./content/docs/props.ts" name="AutocompleteOptions" />

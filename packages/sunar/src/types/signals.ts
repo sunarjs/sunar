@@ -1,8 +1,7 @@
 import type { RepliableInteraction } from "discord.js";
 
-import type { Signals } from "../utils";
-import type { CooldownContext } from "./cooldown";
+import type { CooldownContext } from "~/types";
 
 export interface SunarSignals {
-    [Signals.Cooldown]: [interaction: RepliableInteraction, context: CooldownContext];
+    cooldown: [interaction: RepliableInteraction, context: CooldownContext];
 }

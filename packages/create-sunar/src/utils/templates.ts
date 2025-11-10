@@ -1,9 +1,10 @@
-import { join } from 'node:path';
-import { DIRNAME } from './constants';
+import { join } from "node:path";
 
-export const LANGUAGES = ['javascript', 'typescript'] as const;
+import { DIRNAME } from "./constants";
 
-const javascript = join(DIRNAME, '..', 'templates', 'javascript');
-const typescript = join(DIRNAME, '..', 'templates', 'typescript');
+export const LANGUAGES = ["javascript", "typescript"] as const;
+
+const javascript = join(DIRNAME, "..", "templates", "javascript");
+const typescript = join(DIRNAME, "..", "templates", "typescript");
 
 export const templates = { javascript, typescript };

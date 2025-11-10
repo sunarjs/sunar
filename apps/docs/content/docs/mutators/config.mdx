@@ -1,11 +1,11 @@
 ---
 title: config
 description: Configure builders and fine-tune your discord bot's functionality with the flexible "config" mutator in Sunar. Customize settings, adjust parameters, and optimize your bot's behavior seamlessly.
+references:
+  - source: github-sunar
+    title: Config Mutator Source Code
+    path: /src/mutators/config/config.ts
 ---
-
-<Links>
-<Link label="Source" icon="github" link="https://github.com/sunarjs/sunar/blob/main/packages/sunar/src/mutators/config/config.ts" />
-</Links>
 
 ## Usage
 
@@ -44,7 +44,7 @@ import { Hourglass, Boxes } from 'lucide-react'
         icon={<Boxes />}
         title="Dynamic registration"
         description="Explore dynamic command registration methods tailored for specific guilds or IDs, enabling flexible bot customization and interaction management."
-        href="/docs/guides/registering-commands/dynamic#specific-guilds-ids-commands"
+        href="/docs/guides/registering-commands#register-commands-dynamically"
     />
 </Cards>
 
@@ -52,18 +52,9 @@ import { Hourglass, Boxes } from 'lucide-react'
 
 ### config [#mutator]
 
-```json doc-gen:typescript
-{
-	"file": "./content/docs/props.ts",
-	"name": "IConfigMut"
-}
-```
+<AutoTypeTable path="./content/docs/props.ts" name="IConfigMut" />
 
 ### CooldownConfig [#cooldown-config]
 
-```json doc-gen:typescript
-{
-	"file": "./content/docs/props.ts",
-	"name": "CooldownConfig"
-}
-```
+<AutoTypeTable path="./content/docs/props.ts" name="CooldownConfig" />
+

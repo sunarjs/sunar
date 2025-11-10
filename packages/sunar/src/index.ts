@@ -1,10 +1,10 @@
 export * from "./builders";
 export * from "./client";
-export * from "./types";
-export * from "./mutators";
 export * from "./modules";
-
+export * from "./mutators";
+export * from "./types";
 export * from "./utils/constants";
 export * from "./utils/enums";
 
-export const version: string = "[VI]{{inject}}[/VI]";
+// biome-ignore lint/style/noNonNullAssertion: this is defined in built time, see bunup.config.ts file
+export const version: string = process.env.PACKAGE_VERSION!;

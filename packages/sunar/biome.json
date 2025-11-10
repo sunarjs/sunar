@@ -1,64 +1,27 @@
 {
-    "$schema": "https://biomejs.dev/schemas/1.9.4/schema.json",
-    "organizeImports": {
-        "enabled": true
-    },
-    "linter": {
+    "$schema": "https://biomejs.dev/schemas/2.3.4/schema.json",
+    "extends": "//",
+    "assist": {
         "enabled": true,
-        "rules": {
-            "complexity": {
-                "all": true,
-                "noExcessiveCognitiveComplexity": "off",
-                "noThisInStatic": "off"
-            },
-            "correctness": {
-                "recommended": true
-            },
-            "nursery": {
-                "all": true,
-                "noEnum": "off",
-                "noSecrets": "off",
-                "useExplicitType": "off",
-                "useImportRestrictions": "off",
-                "useConsistentMemberAccessibility": "off"
-            },
-            "performance": {
-                "all": true,
-                "noBarrelFile": "off",
-                "noReExportAll": "off"
-            },
-            "security": {
-                "all": true
-            },
-            "style": {
-                "recommended": true
-            },
-            "suspicious": {
-                "all": true,
-                "noEmptyBlockStatements": "off",
-                "noExplicitAny": "off"
+        "actions": {
+            "source": {
+                "organizeImports": {
+                    "level": "on",
+                    "options": {
+                        "groups": [
+                            [":BUN:", ":NODE:"],
+                            ":BLANK_LINE:",
+                            ":PACKAGE:",
+                            ":BLANK_LINE:",
+                            { "type": true, "source": ":PACKAGE:" },
+                            ":BLANK_LINE:",
+                            [{ "type": false, "source": "~/**" }, "!$/types"],
+                            ":BLANK_LINE:",
+                            [{ "type": true, "source": "~/**" }, "~/types"]
+                        ]
+                    }
+                }
             }
         }
-    },
-    "formatter": {
-        "enabled": true,
-        "indentStyle": "space",
-        "indentWidth": 4,
-        "lineWidth": 80
-    },
-    "javascript": {
-        "formatter": {
-            "enabled": true,
-            "indentStyle": "space",
-            "quoteStyle": "double",
-            "indentWidth": 4,
-            "lineWidth": 120,
-            "semicolons": "always",
-            "trailingCommas": "all"
-        }
-    },
-    "files": {
-        "include": ["**/*"],
-        "ignore": ["node_modules", "dist"]
     }
 }

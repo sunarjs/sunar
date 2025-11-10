@@ -1,5 +1,5 @@
-import { Autocomplete } from "../../builders";
-import { isAutocompleteBuilder } from "./isAutocompleteBuilder";
+import { Autocomplete } from "~/builders";
+import { isAutocompleteBuilder } from "~/utils";
 
 describe("isAutocompleteBuilder()", () => {
     it("should return true for a valid Autocomplete builder", () => {

@@ -1,5 +1,5 @@
-import { Builders, isBuilder } from "..";
-import { SelectMenu } from "../../builders";
+import { SelectMenu } from "~/builders";
+import { Builders, isBuilder } from "~/utils";
 
 export function isSelectMenuBuilder(builder: any): builder is SelectMenu {
     if (!isBuilder(builder)) return false;

@@ -1,24 +1,24 @@
 {
-	"$schema": "https://turbo.build/schema.json",
-	"remoteCache": {
-		"enabled": true
-	},
-	"ui": "tui",
-	"tasks": {
-		"build": {
-			"dependsOn": ["^build"],
-			"outputs": [".next/**", "!.next/cache/**", "dist/**"]
-		},
-		"lint": {
-			"dependsOn": ["^build"],
-			"inputs": ["../../.prettierrc", "src/**", "package.json"],
-			"outputs": []
-		},
-		"format": {
-			"dependsOn": ["^format"]
-		},
-		"test": {
-			"dependsOn": ["^test"]
-		}
-	}
+    "$schema": "https://turbo.build/schema.json",
+    "remoteCache": {
+        "enabled": true
+    },
+    "ui": "tui",
+    "tasks": {
+        "build": {
+            "dependsOn": ["^build"],
+            "outputs": [".next/**", "!.next/cache/**", "dist/**"]
+        },
+        "lint": {
+            "dependsOn": ["^build"],
+            "inputs": ["src/**", "package.json"],
+            "outputs": []
+        },
+        "format": {
+            "dependsOn": ["^format"]
+        },
+        "test": {
+            "dependsOn": ["^test"]
+        }
+    }
 }

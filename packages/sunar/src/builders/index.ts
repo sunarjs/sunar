@@ -7,3 +7,5 @@ export * from "./protector";
 export * from "./selectMenu";
 export * from "./signal";
 export * from "./slash";
+export * from "./slashParent";
+export * from "./slashSubCommand";

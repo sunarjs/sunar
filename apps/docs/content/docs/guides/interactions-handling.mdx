@@ -3,9 +3,20 @@ title: Interactions handling
 description: Learn how to effectively manage interactions between your bot and users using Sunar. From responding to slash commands, context menu clicks, button presses, to select menu choices, Sunar offers robust mechanisms to handle diverse interactions within Discord.
 ---
 
-## Handle all supported interactions
+## Overview
 
-This setup configures Sunar to efficiently manage various Discord interactions using a `Signal` named `interactionCreate`. It prepares the framework to handle incoming events such as slash commands, buttons, and other interactions initiated by users in Discord.
+Discord interactions are the way users communicate with your bot through various UI elements like commands, buttons, and menus. Sunar provides two approaches to handle these interactions:
+
+1. **Global handler**: A single handler for all interaction types (recommended for most bots)
+2. **Specific handlers**: Individual handlers for each interaction type (useful for complex bots)
+
+## Global Handler (Recommended)
+
+The simplest way to handle all interactions is using the global `handleInteraction` function. This approach:
+- Automatically routes interactions to the correct handlers
+- Handles all interaction types out of the box
+- Reduces boilerplate code
+- Applies protectors and cooldowns automatically
 
 
 ```js title="src/signals/interaction-create.js"
@@ -51,4 +62,94 @@ execute(signal, async (interaction) => {
 export { signal };
 ```
 
-This setup allows your bot to efficiently manage and respond to specific interaction types on Discord, ensuring accurate and timely responses tailored to the user's actions. Customize the handling logic within each handler function (`handleSlash`, `handleContextMenu`, etc.) as needed to implement your bot's functionality and interaction flow according to Discord's API capabilities and user experience requirements.
+## Specific Handlers
+
+For more complex bots that need granular control over interaction handling, you can use specific handlers for each interaction type. This approach allows you to:
+- Add custom logic before/after handling specific interactions
+- Handle only certain types of interactions
+- Implement custom error handling per interaction type
+- Add logging or monitoring for specific interaction types
+
+### Available Handlers
+
+Sunar provides these specialized handlers:
+
+| Handler | Interaction Type | Use Case |
+|---------|-----------------|-----------|
+| `handleSlash` | Slash Commands | Process `/commands` |
+| `handleContextMenu` | Context Menus | Handle right-click menu actions |
+| `handleButton` | Buttons | Process button clicks |
+| `handleModal` | Modals | Handle form submissions |
+| `handleSelectMenu` | Select Menus | Process dropdown selections |
+| `handleAutocomplete` | Autocomplete | Handle command option suggestions |
+
+## Error Handling
+
+You can implement custom error handling by wrapping the interaction handler in a try-catch block. This allows you to handle different types of errors and provide appropriate responses:
+
+```js title="src/signals/interaction-create.js"
+import { Signal, Signals, execute, clearCooldownsForInteraction } from 'sunar';
+import { handleInteraction } from 'sunar/handlers';
+
+const signal = new Signal(Signals.InteractionCreate);
+
+execute(signal, async (interaction) => {
+	try {
+		await handleInteraction(interaction);
+	} catch (error) {
+		await handleError(interaction, error);
+	}
+});
+
+async function handleError(interaction, error) {
+	// Clear any cooldowns that might have been set
+	clearCooldownsForInteraction(interaction);
+
+	if (!interaction.isRepliable()) {
+		console.error('Non-repliable interaction error:', error);
+		return;
+	}
+
+	// Handle different types of errors
+	if (error instanceof UserError) {
+		return interaction.reply({
+			content: `❌ ${error.message}`,
+			ephemeral: true
+		});
+	}
+
+	// Log unexpected errors
+	console.error('Unexpected error:', error);
+
+	return interaction.reply({
+		content: '⚠️ An unexpected error occurred.',
+		ephemeral: true
+	});
+}
+
+export { signal };
+```
+
+<Callout type="info">
+This example shows a basic error handling setup. You can extend it with custom error classes, error tracking services, and more sophisticated cooldown management for production use.
+</Callout>
+
+## Best Practices
+
+1. **Use Global Handler**: Start with `handleInteraction` unless you have specific needs
+2. **Error Handling**: Always set up an error signal to catch and log interaction errors
+3. **Type Safety**: Use TypeScript to ensure type safety when working with interactions
+4. **Validation**: Use protectors to validate interactions before processing them
+5. **Response Times**: Always respond to interactions within 3 seconds or defer them
+
+<Callout type="warning">
+Discord requires interactions to be acknowledged within 3 seconds. If your command takes longer, use `interaction.deferReply()`.
+</Callout>
+
+## Further Reading
+
+- [Working with Slash Commands](/docs/builders/slash)
+- [Using Buttons](/docs/builders/button)
+- [Modal Forms](/docs/builders/modal)
+- [Context Menus](/docs/builders/context-menu)
+- [Select Menus](/docs/builders/select-menu)

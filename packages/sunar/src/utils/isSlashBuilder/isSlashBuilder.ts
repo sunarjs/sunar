@@ -1,5 +1,5 @@
-import { Builders, isBuilder } from "..";
-import { Slash } from "../../builders";
+import { Slash } from "~/builders";
+import { Builders, isBuilder } from "~/utils";
 
 export function isSlashBuilder(builder: any): builder is Slash {
     if (!isBuilder(builder)) return false;

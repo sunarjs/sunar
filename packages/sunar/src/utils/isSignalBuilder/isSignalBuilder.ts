@@ -1,5 +1,5 @@
-import { Builders, isBuilder } from "..";
-import { Signal } from "../../builders";
+import { Signal } from "~/builders";
+import { Builders, isBuilder } from "~/utils";
 
 export function isSignalBuilder(builder: any): builder is Signal {
     if (!isBuilder(builder)) return false;

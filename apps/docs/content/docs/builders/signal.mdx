@@ -1,32 +1,24 @@
 ---
 title: Signal
 description: Signals in Sunar correspond to events in discord.js. They allow you to handle various actions and responses that occur within your Discord bot, such as messages being sent, users joining or leaving, and more.
+references:
+  - source: github-sunar
+    title: Signal Source Code
+    path: /src/builders/signal.ts
+  - source: discord-api
+    title: Gateway Events API Reference
+    path: /topics/gateway#gateway-events
+  - source: discord.js
+    title: Events Enum
+    path: /Events:Enum
 ---
-
-<Links>
-	<Link
-		label="Source"
-		icon="github"
-		link="https://github.com/sunarjs/sunar/blob/main/packages/sunar/src/builders/signal.ts"
-	/>
-	<Link
-		label="Signals"
-		icon="discordjs"
-		link="https://discord.js.org/docs/packages/discord.js/main/Events:Enum"
-	/>
-	<Link
-		label="API Reference"
-		icon="discord"
-		link="https://discord.com/developers/docs/topics/gateway#gateway-events"
-	/>
-</Links>
 
 ## Usage
 
 ```js
-import { Signal, execute } from 'sunar';
+import { Signal, Signals, execute } from 'sunar';
 
-const signal = new Signal('messageCreate');
+const signal = new Signal(Signals.GuildMemberAdd);
 
 execute(signal, (message) => {
 	// handle execution
@@ -40,10 +32,10 @@ export { signal };
 The following example demonstrates how to implement a Signal using Sunar:
 
 ```js
-import { Signal, execute } from 'sunar';
+import { Signal, Signals, execute } from 'sunar';
 import { TextChannel } from 'discord.js';
 
-const signal = new Signal('guildMemberAdd');
+const signal = new Signal(Signals.GuildMemberAdd);
 
 execute(signal, (member) => {
 	const channel = member.guild.channels.cache.find(
@@ -62,9 +54,12 @@ export { signal };
 
 ### SignalOptions [#signal-options]
 
-```json doc-gen:typescript
-{
-	"file": "./content/docs/props.ts",
-	"name": "SignalOptions"
-}
-```
+<AutoTypeTable path="./content/docs/props.ts" name="SignalOptions" />
+
+### Sunar Signals [#sunar-signals]
+
+<AutoTypeTable path="./content/docs/props.ts" name="SunarSignals" />
+
+<Callout>
+Find all available events in the [discord.js documentation](https://discord.js.org/docs/packages/discord.js/main/Events:Enum).
+</Callout>

@@ -1,0 +1,239 @@
+---
+title: Registering commands
+description: Learn how to register slash commands and context menus in Discord using Sunar. This guide includes global, guild-specific, dynamic registration, and usage of the --register flag.
+---
+
+Sunar provides flexible ways to register your Discord bot commands, either globally or per server (guild), with support for runtime configuration and dynamic behavior.
+
+<Steps>
+
+<Step>
+
+## Create a command
+
+Define a new [slash command](/docs/builders/slash) or a [context menu](/docs/builders/context-menu) using Sunar's builders:
+
+```js title="src/commands/ping.js"
+import { Slash, execute } from 'sunar';
+
+const slash = new Slash({
+	name: 'ping',
+	description: "Ping the bot to check if it's online.",
+});
+
+execute(slash, (interaction) => {
+	interaction.reply('Pong!');
+});
+
+export { slash };
+```
+
+</Step>
+
+<Step>
+
+## Listen for the `ready` signal
+
+This ensures your bot only attempts to register commands once it's connected to Discord:
+
+```js title="src/signals/ready.js"
+import { Signal, Signals, execute } from 'sunar';
+
+const signal = new Signal(Signals.ClientReady, { once: true });
+
+execute(signal, (client) => {
+	console.log(`${client.user.tag} is online!`);
+});
+
+export { signal };
+```
+
+</Step>
+
+<Step>
+
+## Register commands dynamically
+
+Use the `registerCommands` function from `sunar/registry` to register all stored commands at runtime. This is the recommended default if you want automatic detection with minimal setup:
+
+```js title="src/signals/ready.js"
+import { Signal, Signals, execute } from 'sunar';
+import { registerCommands } from 'sunar/registry'; // [!code highlight]
+
+const signal = new Signal(Signals.ClientReady, { once: true });
+
+execute(signal, async (client) => {
+	await registerCommands(client.application); // [!code highlight]
+	console.log(`${client.user.tag} logged!`);
+});
+
+export { signal };
+```
+
+<Callout>
+	By default, this registers commands globally. You can override that behavior with per-command configuration or by using dedicated functions.
+</Callout>
+
+<Callout type="warning">
+	Avoid registering commands repeatedly in a short time—Discord rate limits apply. Use the `--register` flag to control registration timing. See [Using the `--register` flag](/docs/guides/registering-commands#using-the-register-flag) section.
+</Callout>
+
+</Step>
+
+</Steps>
+
+---
+
+## Registering for Specific Guilds (Recommended for Development)
+
+To avoid waiting for Discord's global command propagation (which can take up to an hour), use `registerGuildCommands` during development:
+
+```js title="src/signals/ready.js"
+import { Signal, Signals, execute } from 'sunar';
+import { registerGuildCommands } from 'sunar/registry';
+
+const signal = new Signal(Signals.ClientReady, { once: true });
+
+execute(signal, async (client) => {
+	await registerGuildCommands(client.application, ['YOUR_GUILD_ID']); // [!code highlight]
+
+	console.log(`${client.user.tag} logged!`);
+});
+
+export { signal };
+```
+
+<Callout type="warning">
+	Use this method only during development. It ensures commands are registered instantly and avoids delays, but limits them to specific servers.
+</Callout>
+
+<Callout>
+	Replace `'YOUR_GUILD_ID'` with your actual Discord server ID(s).
+</Callout>
+
+---
+
+## Explicit Global Registration
+
+If you want to **explicitly force all commands to be registered globally**, regardless of any per-command configuration (like `guildIds`), you can use `registerGlobalCommands`:
+
+```js title="src/signals/ready.js"
+import { Signal, Signals, execute } from 'sunar';
+import { registerGlobalCommands } from 'sunar/registry';
+
+const signal = new Signal(Signals.ClientReady, { once: true });
+
+execute(signal, async (client) => {
+	await registerGlobalCommands(client.application); // [!code highlight]
+
+	console.log(`${client.user.tag} logged!`);
+});
+
+export { signal };
+```
+
+<Callout type="warning">
+	This method bypasses any `guildIds` specified in your command configurations and **forces all commands to be global**.
+	Use it only if you have a very specific use case that requires this behavior.
+</Callout>
+
+<Callout>
+	Prefer using `registerCommands()` for production — it respects per-command configuration and behaves globally by default.
+</Callout>
+
+---
+
+## Command-Specific Guild Registration
+
+You can also control registration behavior **on a per-command basis** using the [`config`](/docs/mutators/config) mutator:
+
+```js title="src/commands/ping.js"
+import { Slash, execute, config } from 'sunar';
+
+const slash = new Slash({
+	name: 'ping',
+	description: "Ping the bot to check if it's online.",
+});
+
+config(slash, { // [!code highlight]
+	guildIds: ['YOUR_GUILD_ID'], // [!code highlight]
+}); // [!code highlight]
+
+execute(slash, (interaction) => {
+	interaction.reply('Pong!');
+});
+
+export { slash };
+```
+
+<Callout>
+	This allows you to mix global and guild-specific commands without changing your registration strategy.
+</Callout>
+
+---
+
+## Using the `--register` flag [#using-the-register-flag]
+
+To separate registration from normal bot startup, you can use a CLI flag like `--register`. This is especially useful to avoid unnecessary re-registration during development or to prevent global command delays.
+
+In your `ready` signal:
+
+```js title="src/signals/ready.js"
+import { Signal, Signals, execute } from 'sunar';
+import { registerCommands } from 'sunar/registry';
+
+const signal = new Signal(Signals.ClientReady, { once: true });
+
+execute(signal, async (client) => {
+	if (process.argv.includes('--register')) { // [!code highlight]
+		await registerCommands(client.application); // [!code highlight]
+		console.log('Commands registered'); // [!code highlight]
+	} // [!code highlight]
+
+	console.log(`${client.user.tag} logged!`);
+});
+
+export { signal };
+```
+
+Run your bot with:
+
+```bash
+node src/index.js --register
+```
+
+Or with Bun:
+
+```bash
+bun src/index.ts --register
+```
+
+Or using `tsx`:
+
+```bash
+tsx src/index.ts --register
+```
+
+This pattern prevents command re-registration on every bot restart. Global commands, in particular, are slow to propagate, so registering them on-demand is preferred. You can also add a shortcut script in your package.json:
+
+```json title="package.json"
+{
+    // ...
+    "scripts": {
+        "register": "node src/index.js --register"
+    }
+    // ...
+}
+```
+
+---
+
+## Summary
+
+Sunar provides full flexibility over how and when your commands are registered:
+
+- Use **`registerGuildCommands()`** during development for instant updates.
+- Use **`registerCommands()`** in production — it's dynamic, respects `guildIds`, and behaves globally by default.
+- Use **`config(..., { guildIds })`** to mix both styles per command.
+- Use **`registerGlobalCommands()`** only if you need to forcibly override all command scopes.
+- Use the **`--register` flag** to control when commands are registered.

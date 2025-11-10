@@ -1,20 +1,11 @@
 ---
 title: Protector
 description: Protectors in Sunar act as middleware, allowing you to intercept and control the flow of commands and interactions within your Discord bot. They provide a flexible way to enforce permissions, validate inputs, or perform pre-processing before executing commands.
+references:
+  - source: github-sunar
+    title: Protector Source Code
+    path: /src/builders/protector.ts
 ---
-
-<Links>
-	<Link
-		label="Source"
-		icon="github"
-		link="https://github.com/sunarjs/sunar/blob/main/packages/sunar/src/builders/protector.ts"
-	/>
-	<Link
-		label="Protect Mutator"
-		icon="github"
-		link="https://github.com/sunarjs/sunar/blob/main/packages/sunar/src/mutators/protect/protect.ts"
-	/>
-</Links>
 
 ## Usage
 
@@ -32,6 +23,19 @@ execute(protector, (arg) => {
 export { protector };
 ```
 
+import { Shield } from 'lucide-react';
+
 ## Implementation
 
-In the [middlewares guide](/docs/guides/middlewares#protectors) you can find a detailed example of the implementation of protectors.
+<Card
+    icon={<Shield />}
+    title="Implementing protectors"
+    description="Protectors in Sunar act as middleware, allowing you to intercept and control the flow of commands and interactions within your Discord bot."
+    href="/docs/guides/middlewares#protectors"
+/>
+
+## Reference
+
+### ProtectorOptions [#protector-options]
+
+<AutoTypeTable path="./content/docs/props.ts" name="ProtectorOptions" />

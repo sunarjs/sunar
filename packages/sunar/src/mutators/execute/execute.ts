@@ -1,14 +1,24 @@
-import type { Builder } from "../../types";
+import type { Builder } from "~/types";
 
 export type ExecutableBuilder = Pick<Builder, "type" | "execute">;
 
 /**
- * Set the function to execute when an executable builder is accepted.
+ * Sets the execution function for an executable builder.
+ * This mutator allows you to define what happens when a builder (command, component, etc.) is triggered.
  *
- * @param builder The builder to mutate
- * @param execute Callback function to execute when a builder is accepted
+ * @template TBuilder - The builder type extending ExecutableBuilder
+ * @param {TBuilder} builder - The builder object to mutate.
+ * @param {TBuilder['execute']} execute - The callback function to execute when the builder is triggered.
  *
- * @see https://sunar.js.org/docs/mutators/execute
+ * @example
+ * ```typescript
+ * const ping = new Slash({ name: 'ping', description: 'Pong!' });
+ * execute(ping, async (interaction) => {
+ *   await interaction.reply('Pong!');
+ * });
+ * ```
+ *
+ * @see {@link https://sunar.js.org/docs/mutators/execute} for execute mutator documentation
  */
 export function execute<TBuilder extends ExecutableBuilder>(builder: TBuilder, execute: TBuilder["execute"]): void {
     if (typeof execute !== "function") return;

@@ -1,9 +1,10 @@
 import type { Awaitable, ModalSubmitInteraction } from "discord.js";
 
-import type { Protector } from ".";
-import { UNHANDLED_SYMBOL } from "../symbols";
-import type { Builder, CooldownResolvable } from "../types";
-import { Builders } from "../utils";
+import { UNHANDLED_SYMBOL } from "~/symbols";
+import { Builders } from "~/utils";
+
+import type { Protector } from "~/builders";
+import type { Builder, CooldownResolvable } from "~/types";
 
 export interface ModalOptions {
     /** The modal custom ID to target. */
@@ -15,17 +16,30 @@ export interface ModalConfig {
 }
 
 /**
- * Modals are popup forms that can collect detailed user input. They are particularly useful for complex interactions that require multiple fields or steps.
+ * Modals are popup forms that can collect detailed user input.
+ * They are particularly useful for complex interactions that require multiple fields or steps.
  *
- * @see https://sunar.js.org/docs/builders/modal
+ * @example
+ * ```typescript
+ * const feedbackModal = new Modal({
+ *   id: 'feedback-form'
+ * });
+ *
+ * // Or with regex for dynamic IDs
+ * const dynamicModal = new Modal({
+ *   id: /^edit-profile-\d+$/
+ * });
+ * ```
+ *
+ * @see {@link https://sunar.js.org/docs/builders/modal} for modal documentation
  */
 export class Modal implements Builder {
-    public readonly type = Builders.Modal;
-    public readonly options: ModalOptions;
+    readonly type: Builders.Modal = Builders.Modal;
+    readonly options: ModalOptions;
 
-    public config: ModalConfig = {};
-    public protectors: Protector<{ components: "modal"[] }>[] = [];
-    public execute: (interaction: ModalSubmitInteraction) => Awaitable<unknown> = () => UNHANDLED_SYMBOL;
+    config: ModalConfig = {};
+    protectors: Protector<{ components: "modal"[] }>[] = [];
+    execute: (interaction: ModalSubmitInteraction) => Awaitable<unknown> = () => UNHANDLED_SYMBOL;
 
     constructor(options: ModalOptions) {
         this.options = options;

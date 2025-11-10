@@ -8,27 +8,39 @@ import type {
     UserContextMenuCommandInteraction,
 } from "discord.js";
 
-import type { Protector } from ".";
-import { UNHANDLED_SYMBOL } from "../symbols";
-import type { Builder, CommandConfig } from "../types";
-import { Builders } from "../utils";
+import { UNHANDLED_SYMBOL } from "~/symbols";
+import { Builders } from "~/utils";
+
+import type { Protector } from "~/builders";
+import type { Builder, CommandConfig } from "~/types";
 
 export type ContextMenuData = MessageApplicationCommandData | UserApplicationCommandData;
 
 export interface ContextMenuConfig extends CommandConfig {}
 
 /**
- * Context menu commands are available directly in the right-click context menu for users or messages. These commands are convenient for quick actions without needing to type a command.
+ * Context menu commands are available directly in the right-click context menu for users or messages.
+ * These commands are convenient for quick actions without needing to type a command.
  *
- * @see https://sunar.js.org/docs/builders/context-menu
+ * @template TData - The context menu data type (MessageApplicationCommandData or UserApplicationCommandData)
+ *
+ * @example
+ * ```typescript
+ * const userInfo = new ContextMenu({
+ *   name: 'User Info',
+ *   type: ApplicationCommandType.User
+ * });
+ * ```
+ *
+ * @see {@link https://sunar.js.org/docs/builders/context-menu} for context menu documentation
  */
 export class ContextMenu<TData extends ContextMenuData = ContextMenuData> implements Builder {
-    public readonly type = Builders.ContextMenu;
-    public readonly data: TData;
+    readonly type: Builders.ContextMenu = Builders.ContextMenu;
+    readonly data: TData;
 
-    public config: ContextMenuConfig = {};
-    public protectors: Protector<{ commands: "contextMenu"[] }>[] = [];
-    public execute: (...args: ContextMenuArgs<TData>) => Awaitable<unknown> = () => UNHANDLED_SYMBOL;
+    config: ContextMenuConfig = {};
+    protectors: Protector<{ commands: "contextMenu"[] }>[] = [];
+    execute: (...args: ContextMenuArgs<TData>) => Awaitable<unknown> = () => UNHANDLED_SYMBOL;
 
     constructor(data: TData) {
         this.data = data;

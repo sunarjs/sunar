@@ -1,6 +1,5 @@
-import { Builders } from "..";
-import { Button, Group } from "../../builders";
-import { isGroupBuilder } from "./isGroupBuilder";
+import { Button, Group } from "~/builders";
+import { Builders, isGroupBuilder } from "~/utils";
 
 describe("isGroupBuilder()", () => {
     it("should return true for a valid Group builder", () => {

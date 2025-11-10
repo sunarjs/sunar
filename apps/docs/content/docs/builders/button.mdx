@@ -1,25 +1,17 @@
 ---
 title: Button
 description: Buttons are interactive elements users can click to trigger specific actions. They are ideal for creating interactive messages, such as confirmation prompts or menu navigation.
+references:
+  - source: github-sunar
+    title: Button Source Code
+    path: /src/builders/button.ts
+  - source: discord-api
+    title: Button API Reference
+    path: /interactions/message-components#buttons
+  - source: discord.js
+    title: ButtonInteraction
+    path: /ButtonInteraction:Class
 ---
-
-<Links>
-	<Link
-		label="Source"
-		icon="github"
-		link="https://github.com/sunarjs/sunar/blob/main/packages/sunar/src/builders/button.ts"
-	/>
-	<Link
-		label="ButtonInteraction"
-		icon="discordjs"
-		link="https://discord.js.org/docs/packages/discord.js/main/ButtonInteraction:Class"
-	/>
-	<Link
-		label="API Reference"
-		icon="discord"
-		link="https://discord.com/developers/docs/interactions/message-components#buttons"
-	/>
-</Links>
 
 ## Usage
 
@@ -40,6 +32,7 @@ export { button };
 The following example demonstrates how to implement a Button using Sunar:
 
 ```js
+// [!code word:'confirmLeave']
 import { Button, Slash, execute } from 'sunar';
 import {
 	ActionRowBuilder,
@@ -87,18 +80,9 @@ export { slash, button };
 
 ### ButtonOptions [#button-options]
 
-```json doc-gen:typescript
-{
-	"file": "./content/docs/props.ts",
-	"name": "ButtonOptions"
-}
-```
+<AutoTypeTable path="./content/docs/props.ts" name="ButtonOptions" />
+
 
 ### ButtonConfig [#button-config]
 
-```json doc-gen:typescript
-{
-	"file": "./content/docs/props.ts",
-	"name": "ButtonConfig"
-}
-```
+<AutoTypeTable path="./content/docs/props.ts" name="ButtonConfig" />

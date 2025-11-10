@@ -1,9 +1,10 @@
 import type { Awaitable, ButtonInteraction } from "discord.js";
 
-import type { Protector } from ".";
-import { UNHANDLED_SYMBOL } from "../symbols";
-import type { Builder, CooldownResolvable } from "../types";
-import { Builders } from "../utils";
+import { UNHANDLED_SYMBOL } from "~/symbols";
+import { Builders } from "~/utils";
+
+import type { Protector } from "~/builders";
+import type { Builder, CooldownResolvable } from "~/types";
 
 export interface ButtonOptions {
     /** The button custom ID to target. */
@@ -15,17 +16,30 @@ export interface ButtonConfig {
 }
 
 /**
- * Buttons are interactive elements users can click to trigger specific actions. They are ideal for creating interactive messages, such as confirmation prompts or menu navigation.
+ * Buttons are interactive elements users can click to trigger specific actions.
+ * They are ideal for creating interactive messages, such as confirmation prompts or menu navigation.
  *
- * @see https://sunar.js.org/docs/builders/button
+ * @example
+ * ```typescript
+ * const confirmButton = new Button({
+ *   id: 'confirm-action'
+ * });
+ *
+ * // Or with regex for dynamic IDs
+ * const dynamicButton = new Button({
+ *   id: /^delete-\d+$/
+ * });
+ * ```
+ *
+ * @see {@link https://sunar.js.org/docs/builders/button} for button documentation
  */
 export class Button implements Builder {
-    public readonly type = Builders.Button;
-    public readonly options: ButtonOptions;
+    readonly type: Builders.Button = Builders.Button;
+    readonly options: ButtonOptions;
 
-    public config: ButtonConfig = {};
-    public protectors: Protector<{ components: "button"[] }>[] = [];
-    public execute: (interaction: ButtonInteraction) => Awaitable<unknown> = () => UNHANDLED_SYMBOL;
+    config: ButtonConfig = {};
+    protectors: Protector<{ components: "button"[] }>[] = [];
+    execute: (interaction: ButtonInteraction) => Awaitable<unknown> = () => UNHANDLED_SYMBOL;
 
     constructor(options: ButtonOptions) {
         this.options = options;

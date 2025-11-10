@@ -1,4 +1,4 @@
-import type { CooldownResolvable } from "..";
+import type { CooldownResolvable } from "~/types";
 
 export interface CooldownProp {
     /**
@@ -16,7 +16,7 @@ export interface CommandConfig extends CooldownProp {
      * Specifies the guild IDs where the command is registered.
      * If provided, the command will only be available in these guilds.
      *
-     * @see https://sunar.js.org/docs/guides/registering-commands/dynamic#specific-guilds-ids-commands
+     * @see https://sunar.js.org/docs/guides/registering-commands#register-commands-dynamically
      */
     guildIds?: string[];
 }

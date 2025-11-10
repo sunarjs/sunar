@@ -1,43 +1,49 @@
 {
-	"name": "@sunar/sunar",
-	"description": "Discord.js lightweight framework.",
-	"version": "0.0.0",
-	"author": "4doist (https://github.com/4doist)",
-	"type": "module",
-	"private": true,
-	"scripts": {
-		"build": "turbo run build --concurrency=4",
-		"lint": "turbo run lint",
-		"format": "turbo run format",
-		"test": "turbo run test",
-		"prepare": "husky"
-	},
-	"workspaces": ["apps/*", "packages/*"],
-	"dependencies": {
-		"turbo": "^2.3.3"
-	},
-	"keywords": [
-		"discord",
-		"api",
-		"bot",
-		"client",
-		"node",
-		"discord.js",
-		"framework",
-		"handler",
-		"typescript"
-	],
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/sunarjs/sunar.git"
-	},
-	"bugs": {
-		"url": "https://github.com/sunarjs/sunar/issues"
-	},
-	"homepage": "https://github.com/sunarjs/sunar",
-	"devDependencies": {
-		"@commitlint/cli": "^19.6.1",
-		"@commitlint/config-conventional": "^19.6.0",
-		"husky": "^9.1.7"
-	}
+    "name": "@sunar/monorepo",
+    "description": "A discord.js lightweight framework.",
+    "version": "0.0.0",
+    "author": "usse (https://github.com/ussego)",
+    "private": true,
+    "scripts": {
+        "build": "turbo run build --concurrency=4",
+        "lint": "turbo run lint",
+        "format": "turbo run format",
+        "test": "turbo run test",
+        "prepare": "husky"
+    },
+    "workspaces": [
+        "apps/*",
+        "packages/*"
+    ],
+    "dependencies": {
+        "turbo": "^2.6.0"
+    },
+    "keywords": [
+        "discord",
+        "api",
+        "bot",
+        "client",
+        "node",
+        "discord.js",
+        "framework",
+        "handler",
+        "typescript"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sunarjs/sunar.git"
+    },
+    "bugs": {
+        "url": "https://github.com/sunarjs/sunar/issues"
+    },
+    "homepage": "https://github.com/sunarjs/sunar",
+    "devDependencies": {
+        "@biomejs/biome": "^2.3.4",
+        "@commitlint/cli": "^20.1.0",
+        "@commitlint/config-conventional": "^20.0.0",
+        "@total-typescript/tsconfig": "^1.0.4",
+        "@types/bun": "^1.3.2",
+        "husky": "^9.1.7"
+    },
+    "packageManager": "bun@1.3.2"
 }

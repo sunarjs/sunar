@@ -1,7 +1,7 @@
 import type { Awaitable } from "discord.js";
 
-import type { Protector } from "../builders";
-import type { Builders, Commands, Components } from "../utils";
+import type { Protector } from "~/builders";
+import type { Builders, Commands, Components } from "~/utils";
 
 export interface Builder {
     readonly type: Builders;

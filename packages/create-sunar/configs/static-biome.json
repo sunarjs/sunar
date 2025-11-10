@@ -1,31 +1,34 @@
 {
-	"organizeImports": {
-		"enabled": true
-	},
-	"linter": {
-		"enabled": true,
-		"rules": {
-			"recommended": true
-		}
-	},
-	"formatter": {
-		"enabled": true,
-		"indentStyle": "tab",
-		"indentWidth": 4,
-		"lineWidth": 80
-	},
-	"javascript": {
-		"formatter": {
-			"enabled": true,
-			"quoteStyle": "single",
-			"indentWidth": 4,
-			"lineWidth": 100,
-			"semicolons": "always",
-			"trailingCommas": "all"
-		}
-	},
-	"files": {
-		"include": ["**/*"],
-		"ignore": ["node_modules", "dist"]
-	}
+    "vcs": {
+        "enabled": false,
+        "clientKind": "git",
+        "useIgnoreFile": false
+    },
+    "files": {
+        "ignoreUnknown": false,
+        "includes": ["**", "!**/node_modules", "!**/dist", "!**/.turbo"]
+    },
+    "formatter": {
+        "enabled": true,
+        "indentStyle": "tab"
+    },
+    "linter": {
+        "enabled": true,
+        "rules": {
+            "recommended": true
+        }
+    },
+    "javascript": {
+        "formatter": {
+            "quoteStyle": "double"
+        }
+    },
+    "assist": {
+        "enabled": true,
+        "actions": {
+            "source": {
+                "organizeImports": "on"
+            }
+        }
+    }
 }

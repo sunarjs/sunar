@@ -1,5 +1,5 @@
-import { Builders, isBuilder } from "..";
-import { Modal } from "../../builders";
+import { Modal } from "~/builders";
+import { Builders, isBuilder } from "~/utils";
 
 export function isModalBuilder(builder: any): builder is Modal {
     if (!isBuilder(builder)) return false;

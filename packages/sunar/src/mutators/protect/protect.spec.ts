@@ -1,6 +1,6 @@
-import { Protector } from "../../builders";
-import { Builders } from "../../utils";
-import { type ProtectableBuilder, protect } from "./protect";
+import { Protector } from "~/builders";
+import { type ProtectableBuilder, protect } from "~/mutators";
+import { Builders } from "~/utils";
 
 describe("protect()", () => {
     it("should add protectors to the builder", () => {
@@ -9,10 +9,7 @@ describe("protect()", () => {
             protectors: [],
         };
 
-        const newProtectors: Protector[] = [
-            new Protector({ commands: ["slash"] }),
-            new Protector({ commands: ["contextMenu"] }),
-        ];
+        const newProtectors: Protector[] = [new Protector({ commands: ["slash"] }), new Protector({ commands: ["contextMenu"] })];
 
         const result = protect(builder, newProtectors);
 
@@ -29,10 +26,7 @@ describe("protect()", () => {
             protectors: [existingProtector],
         };
 
-        const newProtectors: Protector[] = [
-            new Protector({ components: ["button"] }),
-            new Protector({ components: ["modal"] }),
-        ];
+        const newProtectors: Protector[] = [new Protector({ components: ["button"] }), new Protector({ components: ["modal"] })];
 
         const result = protect(builder, newProtectors);
 

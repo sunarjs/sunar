@@ -5,30 +5,30 @@ description: Modules in Sunar encapsulate related commands, signals and componen
 
 ## Example
 
-All you have to do is use the `load` function and use a [glob](https://www.npmjs.com/package/glob) pattern:
+All you have to do is use the `load` function and use a [tinyglobby](https://www.npmjs.com/package/tinyglobby) pattern:
 
 ```js title="src/index.js"
 import { Client, load } from 'sunar';
 
 const client = new Client(/* your options */);
 
-const start = async () => {
-	// you can add more directories to load by
-	// passing them with a comma after "signals"
-	await load('src/{commands,signals}/**/*.{js,ts}'); // [!code highlight]
+// you can add more directories to load by
+// passing them with a comma after "signals"
+await load('src/{commands,signals}/**/*.{js,ts}'); // [!code highlight]
 
-	return client.login('YOUR_DISCORD_BOT_TOKEN');
-};
+client.login('YOUR_DISCORD_BOT_TOKEN');
 
-start();
 ```
 
-<Callout>
-	Replace `'YOUR_DISCORD_BOT_TOKEN'` with your actual bot token obtained from the [Discord Developer Portal](https://discord.com/developers/applications).
+<Callout type="info">
+The `{commands,signals}` part is a glob pattern that matches both `commands` and `signals` directories. You can add more directories by extending this pattern, for example:
+- `{commands,signals,events}` to include an events directory
+- `{commands,signals,buttons,modals}` for buttons and modals
+- `modules/**` to include all subdirectories inside a modules folder
 </Callout>
 
 <Callout>
-	If you are using ECMAScript modules, you can use the [top-level await](https://v8.dev/features/top-level-await) feature and avoid the `start` function.
+	Replace `'YOUR_DISCORD_BOT_TOKEN'` with your actual bot token obtained from the [Discord Developer Portal](https://discord.com/developers/applications).
 </Callout>
 
 ## File structure
@@ -49,3 +49,76 @@ Here's an overview of the project's file structure to help you visualize how fil
   	</Folder>
 	<File name="index.js" />
 </Files>
+
+## Usage in JavaScript and TypeScript
+
+Sunar supports both JavaScript and TypeScript projects. Below are examples for each environment and recommendations to ensure your glob pattern works in both development and production.
+
+### JavaScript (src)
+
+```js title="src/index.js"
+import { Client, load } from 'sunar';
+
+const client = new Client(/* your options */);
+
+await load('src/{commands,signals}/**/*.js'); // [!code highlight]
+
+client.login('YOUR_DISCORD_BOT_TOKEN');
+```
+
+### TypeScript (development)
+
+```ts title="src/index.ts"
+import { Client, load } from 'sunar';
+
+const client = new Client(/* your options */);
+
+// [!code word:.{js,ts}]
+await load('src/{commands,signals}/**/*.{js,ts}');
+
+client.login('YOUR_DISCORD_BOT_TOKEN');
+```
+
+### TypeScript (production, after build)
+
+If you build your bot (for example, using `tsup`, `tsc`, or similar), your code will be in the `dist` folder (or whichever you configure). Adjust the glob to target the compiled files:
+
+```js title="dist/index.js"
+import { Client, load } from 'sunar';
+
+const client = new Client(/* your options */);
+
+// [!code word:dist]
+// [!code word:.js]
+await load('dist/{commands,signals}/**/*.js');
+
+client.login('YOUR_DISCORD_BOT_TOKEN');
+```
+
+### Using `dirname` for absolute paths
+
+To make your code work the same in both development and production, use Sunar's `dirname` function with `import.meta.url`:
+
+```js title="src/index.ts"
+import { Client, load, dirname } from 'sunar';
+
+const client = new Client(/* your options */);
+
+// This gets the base path (src or dist) depending on the environment
+const base = dirname(import.meta.url); // [!code highlight]
+
+// [!code word:base]
+// [!code word:.{js,ts}]
+await load(`${base}/{commands,signals}/**/*.{js,ts}`);
+
+client.login('YOUR_DISCORD_BOT_TOKEN');
+```
+
+---
+
+## Tips and best practices
+
+- Always use absolute or project-root-relative paths to avoid issues after building.
+- If you use TypeScript, make sure your build copies all necessary files (not just `.js`, but also `.json`, etc.).
+- The glob pattern must match your actual build structure (`src` in development, `dist` in production).
+- If you have issues loading modules after building, check that the path and file extension are correct.

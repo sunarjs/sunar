@@ -1,5 +1,5 @@
+import type { Builder } from "~/types";
 import { Builders, isObject } from "..";
-import type { Builder } from "../../types";
 
 export function isBuilder(builder: any): builder is Builder {
     if (!isObject(builder)) return false;

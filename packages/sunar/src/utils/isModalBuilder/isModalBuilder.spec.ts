@@ -1,6 +1,5 @@
-import { Builders } from "..";
-import { Button, Modal } from "../../builders";
-import { isModalBuilder } from "./isModalBuilder";
+import { Button, Modal } from "~/builders";
+import { Builders, isModalBuilder } from "~/utils";
 
 describe("isModalBuilder()", () => {
     it("should return true for a valid Modal builder", () => {

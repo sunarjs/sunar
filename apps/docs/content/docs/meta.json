@@ -1,21 +1,22 @@
 {
-	"root": true,
-	"pages": [
-		"index",
-		"getting-started",
+    "root": true,
+    "pages": [
+        "index",
+        "getting-started",
 
-		"---Guides---",
-		"...guides",
+        "---Guides---",
+        "...guides",
 
-		"---Builders---",
-		"...builders",
+        "---Builders---",
+        "...builders",
 
-		"---Mutators---",
-		"...mutators",
+        "---Mutators---",
+        "...mutators",
 
-		"---Other---",
-		"[discord.js](https://discord.js.org)",
-		"[Ko-fi](https://ko-fi.com/tai03)",
-		"[Buy Me a Coffee](https://buymeacoffee.com/tai03)"
-	]
+        "---Other---",
+        "[discord.js docs](https://discord.js.org)",
+        "[discord.com docs](https://discord.com/developers/docs)",
+        "[Donate with Ko-fi](https://ko-fi.com/ussego)",
+        "[Buy Me a Coffee](https://buymeacoffee.com/ussego)"
+    ]
 }

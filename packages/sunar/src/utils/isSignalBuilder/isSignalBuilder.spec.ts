@@ -1,6 +1,5 @@
-import { Builders } from "..";
-import { Signal } from "../../builders";
-import { isSignalBuilder } from "./isSignalBuilder";
+import { Signal } from "~/builders";
+import { Builders, isSignalBuilder } from "~/utils";
 
 describe("isSignalBuilder()", () => {
     it("should return true for a valid Signal builder", () => {

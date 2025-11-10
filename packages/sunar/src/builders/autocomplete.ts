@@ -1,9 +1,10 @@
 import type { AutocompleteFocusedOption, AutocompleteInteraction, Awaitable } from "discord.js";
 
-import type { Protector } from ".";
-import { UNHANDLED_SYMBOL } from "../symbols";
-import type { Builder } from "../types";
-import { Builders } from "../utils";
+import { UNHANDLED_SYMBOL } from "~/symbols";
+import { Builders } from "~/utils";
+
+import type { Protector } from "~/builders";
+import type { Builder } from "~/types";
 
 export interface AutocompleteOptions {
     /** The name of the command option that has autocomplete enabled. */
@@ -13,17 +14,25 @@ export interface AutocompleteOptions {
 }
 
 /**
- * Autocomplete commands enhance the user experience by providing suggestions while the user is typing. They are particularly useful for commands with multiple options or extensive inputs.
+ * Autocomplete commands enhance the user experience by providing suggestions while the user is typing.
+ * They are particularly useful for commands with multiple options or extensive inputs.
  *
- * @see https://sunar.js.org/docs/builders/autocomplete
+ * @example
+ * ```typescript
+ * const cityAutocomplete = new Autocomplete({
+ *   name: 'city',
+ *   commandName: 'weather'
+ * });
+ * ```
+ *
+ * @see {@link https://sunar.js.org/docs/builders/autocomplete} for autocomplete documentation
  */
 export class Autocomplete implements Omit<Builder, "config"> {
-    public readonly type = Builders.Autocomplete;
-    public readonly options: AutocompleteOptions;
+    readonly type: Builders.Autocomplete = Builders.Autocomplete;
+    readonly options: AutocompleteOptions;
 
-    public protectors: Protector<{ commands: "autocomplete"[] }>[] = [];
-    public execute: (interaction: AutocompleteInteraction, option: AutocompleteFocusedOption) => Awaitable<unknown> =
-        () => UNHANDLED_SYMBOL;
+    protectors: Protector<{ commands: "autocomplete"[] }>[] = [];
+    execute: (interaction: AutocompleteInteraction, option: AutocompleteFocusedOption) => Awaitable<unknown> = () => UNHANDLED_SYMBOL;
 
     constructor(options: AutocompleteOptions) {
         this.options = options;

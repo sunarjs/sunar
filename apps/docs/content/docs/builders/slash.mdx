@@ -1,30 +1,29 @@
 ---
 title: Slash
 description: Slash commands are one of the primary ways users interact with bots. They provide a structured way for users to issue commands directly within the chat interface.
+references:
+  - source: github-sunar
+    title: Slash Builder Source Code
+    path: /src/builders/slash.ts
+  - source: github-sunar
+    title: SlashParent Source Code
+    path: /src/builders/slashParent.ts
+  - source: github-sunar
+    title: SlashSubcommand Source Code
+    path: /src/builders/slashSubcommand.ts
+  - source: discord-api
+    title: Slash Commands API Reference
+    path: /interactions/application-commands#slash-commands
+  - source: discord-api
+    title: Subcommands API Reference
+    path: /interactions/application-commands#subcommands-and-subcommand-groups
+  - source: discord.js
+    title: ChatInputApplicationCommandData
+    path: /ChatInputApplicationCommandData:Interface
+  - source: discord.js
+    title: ChatInputCommandInteraction
+    path: /ChatInputCommandInteraction:Class
 ---
-
-<Links>
-	<Link
-		label="Source"
-		icon="github"
-		link="https://github.com/sunarjs/sunar/blob/main/packages/sunar/src/builders/slash.ts"
-	/>
-	<Link
-		label="ChatInputApplicationCommandData"
-		icon="discordjs"
-		link="https://discord.js.org/docs/packages/discord.js/main/ChatInputApplicationCommandData:Interface"
-	/>
-	<Link
-		label="ChatInputCommandInteraction"
-		icon="discordjs"
-		link="https://discord.js.org/docs/packages/discord.js/main/ChatInputCommandInteraction:Class"
-	/>
-	<Link
-		label="API Reference"
-		icon="discord"
-		link="https://discord.com/developers/docs/interactions/application-commands#slash-commands"
-	/>
-</Links>
 
 ## Usage
 
@@ -80,13 +79,207 @@ execute(slash, (interaction) => {
 export { slash };
 ```
 
+## Subcommands
+
+Sunar supports both simple subcommands and subcommand groups. This helps organize complex commands into a more structured hierarchy.
+
+### Simple Subcommands
+
+First, create a parent command:
+
+```js title="src/commands/music.js"
+import { SlashParent } from 'sunar';
+
+const music = new SlashParent({
+	name: 'music',
+	description: 'Music player commands'
+});
+
+export { music };
+```
+
+A `SlashParent` command acts as a container and doesn't handle execution itself - it only defines the structure and available groups.
+
+Then, create subcommands:
+
+```js title="src/commands/music/play.js"
+import { SlashSubcommand, execute } from 'sunar';
+
+const play = new SlashSubcommand('music', {
+	name: 'play',
+	description: 'Play a song',
+	options: [
+		{
+			name: 'query',
+			description: 'Song name or URL',
+			type: ApplicationCommandOptionType.String,
+			required: true
+		}
+	]
+});
+
+execute(play, async (interaction) => {
+	const query = interaction.options.getString('query', true);
+	await interaction.reply(`Playing: ${query}`);
+});
+
+export { play };
+```
+
+Each `SlashSubcommand` must specify its parent command (first argument) and can optionally belong to a group. Subcommands contain the actual execution logic and can have their own options.
+
+### Subcommand Groups
+
+For more complex commands, you can use subcommand groups:
+
+```js title="src/commands/music.js"
+import { SlashParent } from 'sunar';
+
+const music = new SlashParent({
+	name: 'music',
+	description: 'Music player commands',
+	groups: [
+		{
+			name: 'playlist',
+			description: 'Playlist management commands'
+		}
+	]
+});
+
+export { music };
+```
+
+Groups allow you to organize related subcommands into categories, creating a three-level command structure.
+
+Create grouped subcommands:
+
+```js title="src/commands/music/playlist-add.js"
+import { SlashSubcommand, execute } from 'sunar';
+
+const add = new SlashSubcommand('music', 'playlist', {
+	name: 'add',
+	description: 'Add a song to a playlist',
+	options: [
+		{
+			name: 'name',
+			description: 'Playlist name',
+			type: ApplicationCommandOptionType.String,
+			required: true
+		},
+		{
+			name: 'song',
+			description: 'Song to add',
+			type: ApplicationCommandOptionType.String,
+			required: true
+		}
+	]
+});
+
+execute(add, async (interaction) => {
+	const playlist = interaction.options.getString('name', true);
+	const song = interaction.options.getString('song', true);
+	await interaction.reply(`Added "${song}" to playlist: ${playlist}`);
+});
+
+export { add };
+```
+
+Remember to export both the parent command and all subcommands, and ensure they match your glob pattern.
+
+The commands will be available as:
+- `/music play <query>`
+- `/music playlist add <name> <song>`
+
+This structure helps keep your commands organized and provides a better user experience for complex bots.
+
+## Using Protectors
+
+Protectors act as middleware for your commands, allowing you to add validation, permissions, or any other checks. When applied to a `SlashParent`, all its subcommands inherit the protection.
+
+### Basic Protection
+
+```js title="src/protectors/admin-only.js"
+import { Protector, execute } from 'sunar';
+
+const adminOnly = new Protector({
+	commands: ['slash'] // This protector works with slash commands
+});
+
+execute(adminOnly, (interaction, next) => {
+	if (!interaction.memberPermissions?.has('Administrator')) {
+		return interaction.reply({
+			content: 'This command is for administrators only!',
+			ephemeral: true
+		});
+	}
+	return next(); // Continue execution if user is admin
+});
+
+export { adminOnly };
+```
+
+### Protecting Parent Commands
+
+When you protect a parent command, all its subcommands automatically inherit that protection:
+
+```js title="src/commands/settings.js"
+import { SlashParent, protect } from 'sunar';
+import { adminOnly } from '../protectors/admin-only.js';
+
+const settings = new SlashParent({
+	name: 'settings',
+	description: 'Server settings commands'
+});
+
+// All subcommands of 'settings' will require admin permissions
+protect(settings, [adminOnly]);
+
+export { settings };
+```
+
+```js title="src/commands/settings/prefix.js"
+import { SlashSubcommand, execute } from 'sunar';
+
+const prefix = new SlashSubcommand('settings', {
+	name: 'prefix',
+	description: 'Change server prefix',
+	options: [
+		{
+			name: 'new-prefix',
+			description: 'The new prefix to use',
+			type: ApplicationCommandOptionType.String,
+			required: true
+		}
+	]
+});
+
+// This command automatically inherits the adminOnly protection
+execute(prefix, async (interaction) => {
+	const newPrefix = interaction.options.getString('new-prefix', true);
+	await interaction.reply(`Prefix updated to: ${newPrefix}`);
+});
+
+export { prefix };
+```
+
+<Callout>
+You can also apply additional protectors directly to subcommands. They will be executed after the parent's protectors.
+</Callout>
+
 ## Reference
 
 ### SlashConfig [#slash-config]
 
-```json doc-gen:typescript
-{
-	"file": "./content/docs/props.ts",
-	"name": "SlashConfig"
-}
-```
+<AutoTypeTable path="./content/docs/props.ts" name="SlashConfig" />
+
+### SlashParentConfig [#slash-parent-config]
+
+<AutoTypeTable path="./content/docs/props.ts" name="SlashParentConfig" />
+
+### SlashParentCommandDataInput [#slash-parent-command-data-input]
+
+<AutoTypeTable path="./content/docs/props.ts" name="SlashParentCommandDataInput" />
+
+### SlashSubcommandConfig [#slash-subcommand-config]
+
+<AutoTypeTable path="./content/docs/props.ts" name="SlashSubcommandConfig" />

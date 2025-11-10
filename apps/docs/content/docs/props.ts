@@ -1,41 +1,38 @@
-import type {
-	config,
-	execute,
-	protect,
-	CooldownResolvable,
-} from 'sunar';
+import type { CooldownResolvable, config, execute, protect } from "sunar";
 
 export type {
-	AutocompleteOptions,
-	ContextMenuData,
-	SignalOptions,
-	ButtonOptions,
-	SelectMenuOptions,
-	ModalOptions,
-} from 'sunar';
-
-export type {
-	ContextMenuConfig,
-	ModalConfig,
-	SlashConfig,
-	ButtonConfig,
-	SelectMenuConfig,
-	CooldownConfig,
-	GroupConfig,
-} from 'sunar';
+    AutocompleteOptions,
+    ButtonConfig,
+    ButtonOptions,
+    ContextMenuConfig,
+    ContextMenuData,
+    CooldownConfig,
+    GroupConfig,
+    ModalConfig,
+    ModalOptions,
+    ProtectorOptions,
+    SelectMenuConfig,
+    SelectMenuOptions,
+    SignalOptions,
+    SlashConfig,
+    SlashParentCommandDataInput,
+    SlashParentConfig,
+    SlashSubcommandConfig,
+    SunarSignals,
+} from "sunar";
 
 export interface ICooldownResolvable {
-	CooldownResolvable: CooldownResolvable
+    CooldownResolvable: CooldownResolvable;
 }
 
 export interface IExecuteMut {
-	execute: typeof execute
+    execute: typeof execute;
 }
 
 export interface IProtectMut {
-	protect: typeof protect
+    protect: typeof protect;
 }
 
 export interface IConfigMut {
-	config: typeof config
+    config: typeof config;
 }

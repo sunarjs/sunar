@@ -1,56 +1,47 @@
 ---
 title: Getting started
-description: If you're new to Sunar, you can follow these steps to get started building your discord bot!
+description: Learn how to create your first bot using Sunar in just a few steps.
 icon: Rocket
 ---
 
-## Automatic Installation
+## Prerequisites
 
-Create a new app with `create-sunar`, it requires Node.js 18+.
+- **Node.js** v22.12.0 or newer ([download](https://nodejs.org))
+- A **Discord account** and a bot token from the [Discord Developer Portal](https://discord.com/developers/applications)
 
-<InstallTabs items={['npm', 'pnpm', 'yarn', 'bun']}>
+## Quick Start (Recommended)
 
-```bash tab="npm"
-npm create sunar@latest
+Create a new app with `create-sunar`. This will scaffold your project and install all dependencies.
+
+```npm
+npm create sunar
 ```
 
-```bash tab="pnpm"
-pnpm create sunar@latest
-```
+You'll be prompted for your project name, language (TypeScript or JavaScript), and features (Biome, TSX, TSUP, Prettier, ESLint, etc).
 
-```bash tab="yarn"
-yarn create sunar@latest
-```
-
-```bash tab="bun"
-bun create sunar@latest
-```
-
-</InstallTabs>
-
-You will be prompted to enter some details about your project, such as the project name, preferred language (TypeScript or JavaScript), and desired features (e.g., Biome, TSX, TSUP, Prettier, ESLint).
+## Manual Setup
 
 <Steps>
 <Step>
 
+### Install dependencies
 
-## Manual Installation
+Ensure you have [Node.js](https://nodejs.org) (22.12.0 or newer) installed on your machine. Sunar requires [discord.js](https://npmjs.com/package/discord.js) as a peer dependency.
 
-Ensure you have [Node.js](https://nodejs.org) (18 or newer) installed on your machine. Sunar requires [discord.js](https://npmjs.com/package/discord.js) as a peer dependency.
-
-```package-install
-sunar discord.js
+```npm
+npm install sunar discord.js
 ```
 
 </Step>
 
 <Step>
-## Initialize the client
 
-Create a new file, e.g., `index.js`, and set up your Discord bot using Sunar.
+### Initialize your bot client
+
+Create a new file, e.g., `src/index.js`, and set up your Discord bot using Sunar:
 
 ```js title="src/index.js"
-import { Client, dirname, load } from 'sunar';
+import { Client, load } from 'sunar';
 
 const start = async () => {
 	const client = new Client({ intents: [] });
@@ -58,7 +49,7 @@ const start = async () => {
 	// stores all sunar modules, you can add more
 	// directories by passing them after the "signals"
 	// with a comma (e.g. signals,buttons,autocompletes)
-	await load(`${dirname(import.meta.url)}/{commands,signals}/**/*.{js,ts}`);
+	await load("src/{commands,signals}/**/*.{js,ts}");
 
 	client.login('YOUR_DISCORD_BOT_TOKEN');
 };
@@ -67,42 +58,49 @@ start();
 ```
 
 <Callout>
-	Replace `'YOUR_DISCORD_BOT_TOKEN'` with your actual bot token obtained from
-	the [Discord Developer Portal](https://discord.com/developers/applications).
+	To learn more about how `load()` works and how to customize what gets loaded, see the [Load modules guide](/docs/guides/load-modules).
 </Callout>
+
+<Callout>
+	Replace `'YOUR_DISCORD_BOT_TOKEN'` with your actual bot token from the [Discord Developer Portal](https://discord.com/developers/applications).
+</Callout>
+
 
 </Step>
 
 <Step>
-## Create your first signal
 
-Signals handle events in your Discord bot. Let's create a basic `ready` signal to log when the bot is online and ready.
+### Add a ready signal
+
+Signals handle Discord events. Let's log when the bot is online:
 
 ```js title="src/signals/ready.js"
-import { Signal, execute } from 'sunar';
+import { Signal, Signals, execute } from 'sunar';
 import { registerCommands } from 'sunar/registry';
 
-const signal = new Signal('ready', { once: true });
+const signal = new Signal(Signals.ClientReady, { once: true });
 
 execute(signal, async (client) => {
 	await registerCommands(client.application);
+	console.log("Commands registered");
+
 	console.log(`Logged in as ${client.user.tag}`);
 });
 
 export { signal };
 ```
 
-<Callout>
-This basically register all loaded application commands (by default globally). If you want to change this behavior read the [registering commands guide](/docs/guides/registering-commands).
+<Callout type="warning">
+	Avoid registering commands repeatedly in a short time—Discord rate limits apply. Use the `--register` flag to control registration timing. See [Using the `--register` flag](/docs/guides/registering-commands#using-the-register-flag) section.
 </Callout>
 
 </Step>
 
 <Step>
 
-## Create your first command
+### Create your first command
 
-Let's create a simple `ping` command that responds with the bot's ping when invoked.
+Let's add a simple `ping` command:
 
 ```js title="src/commands/ping.js"
 import { Slash, execute } from 'sunar';
@@ -125,9 +123,9 @@ export { slash };
 
 <Step>
 
-## Handle interactions
+### Handle interactions
 
-To make the ping command work, add the `interactionCreate` signal to your project to handle interactions:
+Add the `interactionCreate` signal to handle command execution:
 
 ```js title="src/signals/interaction-create.js"
 import { Signal, execute } from 'sunar';
@@ -142,35 +140,98 @@ execute(signal, async (interaction) => {
 export { signal };
 ```
 
+<Callout type="warning">
+	Make sure to include `interaction-create.js`, or your commands won't be executed!
+</Callout>
+
 <Callout>
-	For more information about the interaction handling, see [handle interactions guide](/docs/guides/interactions-handling).
+	For more on interaction handling, see the [handle interactions guide](/docs/guides/interactions-handling).
 </Callout>
 
 </Step>
 
+<Step>
+
+### Test your bot
+
+Run your bot and you should see:
+
+```
+Logged in as MyBot#1234
+```
+
+Try using `/ping` in your Discord server to verify everything works!
+
+</Step>
 </Steps>
 
 ## File structure
 
-Here's an overview of the project's file structure to help you visualize how files are organized within Sunar.
+Here's how your project should look:
 
 <Files>
-  	<Folder name="src" defaultOpen>
+	<Folder name="src" defaultOpen>
 		<Folder name="commands" defaultOpen>
 			<File name="ping.js" />
 		</Folder>
-
-    	<Folder name="signals" defaultOpen>
-    		<File name="interaction-create.js" />
-    		<File name="ready.js" />
-    	</Folder>
-
-  	</Folder>
+		<Folder name="signals" defaultOpen>
+			<File name="interaction-create.js" />
+			<File name="ready.js" />
+		</Folder>
+	</Folder>
 	<File name="index.js" />
 </Files>
 
-## Next steps
+## What next?
 
 - Customize and expand your commands and signals based on your bot's functionality.
 - Dive deeper into command options such as subcommands, options, and permissions to create more complex and versatile interactions.
 - Explore comprehensive features like context menu commands, buttons, modals, and more.
+
+## Troubleshooting
+
+<Accordions type="single" collapsible>
+	<Accordion title="My command doesn't show up">
+		**Check:**
+		- You're registering the commands, check [registering commands guide](/docs/guides/registering-commands).
+		- Commands are registered globally or per-guild as intended.
+		- If per-guild, `GUILD_ID` is set correctly.
+		- Global commands can take up to **~1 hour** to appear — use [guild registration](/docs/guides/registering-commands#registering-for-specific-guilds-recommended-for-development) for development.
+	</Accordion>
+
+	<Accordion title="My bot doesn't reply">
+		**Check:**
+		- `interactionCreate` signal is implemented and calls `handleInteraction`.
+		- Bot has permission to respond in the channel.
+		- Command has a valid `execute` function and returns a reply.
+		- No unhandled promise rejections in your console.
+	</Accordion>
+
+	<Accordion title="Changes to my commands are not reflected">
+		**Check:**
+		- Use guild registration for faster updates (Discord caches commands).
+		- Delete old commands manually in the Discord Developer Portal if needed.
+		- Restart your bot after changing command files.
+	</Accordion>
+
+	<Accordion title="I'm getting 'Missing Access' or 'Missing Permissions' errors">
+		**Check:**
+		- Bot has **OAuth2 scopes**: `bot` and `applications.commands`.
+		- Bot has required permissions in the server and channel.
+		- No permission middleware or protectors are blocking the command.
+	</Accordion>
+
+	<Accordion title="Modules are not being loaded">
+		**Check:**
+		- Use `/` (forward slash) in `load()` glob patterns, not `\\` (backslash).
+		- Export builders correctly (e.g., `export { slash }`).
+		- Use ESM only (`type: "module"` in `package.json`).
+	</Accordion>
+
+	<Accordion title="Bot is running, but nothing works">
+		**Check:**
+		- `client.login()` is called with a valid token.
+		- Use `console.log()` in your `ready` signal to confirm login.
+		- Files needed at runtime are not ignored in `.gitignore` or `.npmignore`.
+	</Accordion>
+</Accordions>

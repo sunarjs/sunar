@@ -1,17 +1,51 @@
 {
-	"editor.defaultFormatter": "biomejs.biome",
-	"typescript.tsdk": "node_modules\\typescript\\lib",
-
-	"conventionalCommits.scopes": ["readme", "vscode", "jsdoc", "biome"],
-	"cSpell.words": [
-		"autocompletes",
-		"biomejs",
-		"bunx",
-		"commitlint",
-		"cooldowns",
-		"Protectable",
-		"Repliable",
-		"sunar",
-		"treeshake"
-	]
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "editor.defaultFormatter": "biomejs.biome",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.biome": "explicit",
+        "source.organizeImports.biome": "explicit"
+    },
+    "files.associations": {
+        "*.css": "tailwindcss"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "biomejs.biome"
+    },
+    "[json]": {
+        "editor.defaultFormatter": "biomejs.biome"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "biomejs.biome"
+    },
+    "[jsonc]": {
+        "editor.defaultFormatter": "biomejs.biome"
+    },
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "biomejs.biome"
+    },
+    "conventionalCommits.scopes": ["readme", "vscode", "jsdoc", "biome"],
+    "cSpell.words": [
+        "algoliasearch",
+        "autocompletes",
+        "biomejs",
+        "bunx",
+        "commitlint",
+        "cooldown",
+        "cooldowns",
+        "fumadocs",
+        "geist",
+        "llms",
+        "orama",
+        "ORAMA",
+        "oramacloud",
+        "Protectable",
+        "repliable",
+        "Repliable",
+        "shiki",
+        "sunar",
+        "treeshake",
+        "tsdown",
+        "usse"
+    ]
 }

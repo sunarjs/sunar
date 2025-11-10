@@ -1,5 +1,5 @@
-import { Builders } from "../../utils";
-import { type ExecutableBuilder, execute } from "./execute";
+import { type ExecutableBuilder, execute } from "~/mutators";
+import { Builders } from "~/utils";
 
 describe("execute()", () => {
     it("should set the execute function on the builder", () => {

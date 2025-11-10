@@ -8,3 +8,4 @@ export * from "./protectors";
 export * from "./selectMenu";
 export * from "./signals";
 export * from "./slash";
+export * from "./subcommand";

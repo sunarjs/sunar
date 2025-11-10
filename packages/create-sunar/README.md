@@ -55,7 +55,7 @@ To learn more about Sunar, check out the following resources:
 - [Sunar GitHub Repository](https://github.com/sunarjs/sunar) - Your feedback and contributions are welcome!
 
 # Credits
-Special thanks to [discord.js](https://discord.js.org) for their incredible library that powers Sunar, to [Valibot](https://github.com/fabian-hiller/valibot) for inspiring our code structure, and to [Fumadocs](https://fumadocs.vercel.app/) for being an excellent framework for creating documentations.
+Special thanks to [discord.js](https://discord.js.org) for their incredible library that powers Sunar, to [Valibot](https://github.com/fabian-hiller/valibot) for inspiring our code structure, and to [Fumadocs](https://fumadocs.dev/) for being an excellent framework for creating documentations.
 
 # License
 Completely free and licensed under the [MIT license](https://github.com/sunarjs/sunar/blob/main/README.md). But if you want, you can give me a star on [GitHub](https://github.com/sunarjs/sunar).

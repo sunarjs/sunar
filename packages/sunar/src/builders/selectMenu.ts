@@ -10,10 +10,11 @@ import type {
     UserSelectMenuInteraction,
 } from "discord.js";
 
-import type { Protector } from ".";
-import { UNHANDLED_SYMBOL } from "../symbols";
-import type { Builder, CooldownResolvable } from "../types";
-import { Builders } from "../utils";
+import { UNHANDLED_SYMBOL } from "~/symbols";
+import { Builders } from "~/utils";
+
+import type { Protector } from "~/builders";
+import type { Builder, CooldownResolvable } from "~/types";
 
 export interface SelectMenuOptions {
     /** The select menu custom ID to target. */
@@ -27,17 +28,28 @@ export interface SelectMenuConfig {
 }
 
 /**
- * Select menus allow users to choose from a list of options. They are useful for forms, surveys, or any scenario where the user needs to make a selection from multiple choices.
+ * Select menus allow users to choose from a list of options.
+ * They are useful for forms, surveys, or any scenario where the user needs to make a selection from multiple choices.
  *
- * @see https://sunar.js.org/docs/builders/select-menu
+ * @template TOptions - The select menu options type extending SelectMenuOptions
+ *
+ * @example
+ * ```typescript
+ * const roleSelect = new SelectMenu({
+ *   id: 'role-selection',
+ *   type: ComponentType.RoleSelect
+ * });
+ * ```
+ *
+ * @see {@link https://sunar.js.org/docs/builders/select-menu} for select menu documentation
  */
 export class SelectMenu<TOptions extends SelectMenuOptions = SelectMenuOptions> implements Builder {
-    public readonly type = Builders.SelectMenu;
-    public readonly options: TOptions;
+    readonly type: Builders.SelectMenu = Builders.SelectMenu;
+    readonly options: TOptions;
 
-    public config: SelectMenuConfig = {};
-    public protectors: Protector<{ components: "selectMenu"[] }>[] = [];
-    public execute: (...args: SelectMenuArgs<TOptions>) => Awaitable<unknown> = () => UNHANDLED_SYMBOL;
+    config: SelectMenuConfig = {};
+    protectors: Protector<{ components: "selectMenu"[] }>[] = [];
+    execute: (...args: SelectMenuArgs<TOptions>) => Awaitable<unknown> = () => UNHANDLED_SYMBOL;
 
     constructor(options: TOptions) {
         this.options = options;

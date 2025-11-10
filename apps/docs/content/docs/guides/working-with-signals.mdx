@@ -15,9 +15,9 @@ Signals are event emitters that allow different parts of your bot to communicate
         Begin by defining a new signal using Sunar. Signals in Sunar are used to signify specific events or states within your bot's operation. For example, you can create a signal named `ready` to indicate when your bot has finished initializing and is ready to start processing commands.
 
         ```js title="src/signals/ready.js"
-        import { Signal } from 'sunar';
+        import { Signal, Signals } from 'sunar';
 
-        const signal = new Signal('ready', { once: true });
+        const signal = new Signal(Signals.ClientReady, { once: true });
         ```
         <Callout>
             The `once` option indicates that the signal should only be executed once.
@@ -30,9 +30,10 @@ Signals are event emitters that allow different parts of your bot to communicate
         Now, to manage what happens when a signal is emitted, we use the [execute mutator](/docs/mutators/execute). This involves passing our signal as the first parameter and providing a callback function that will be executed when the signal is triggered.
 
         ```js title="src/signals/ready.js"
-        import { Signal, execute } from 'sunar';
+        // [!code word:execute]
+        import { Signal, Signals, execute } from 'sunar';
 
-        const signal = new Signal('ready', { once: true });
+        const signal = new Signal(Signals.ClientReady, { once: true });
 
         execute(signal, () => { // [!code highlight]
             console.log('Bot is ready!'); // [!code highlight]
@@ -46,9 +47,9 @@ Signals are event emitters that allow different parts of your bot to communicate
         To ensure Sunar can properly load and utilize the signal you've defined, it must be exported from its file.
 
         ```js title="src/signals/ready.js"
-        import { Signal, execute } from 'sunar';
+        import { Signal, Signals, execute } from 'sunar';
 
-        const signal = new Signal('ready', { once: true });
+        const signal = new Signal(Signals.ClientReady, { once: true });
 
         execute(signal, () => {
             console.log('Bot is ready!');
@@ -64,12 +65,65 @@ Signals are event emitters that allow different parts of your bot to communicate
 The file names do not affect the behavior of your bot. You can use any name you prefer, as long as it matches the glob pattern specified when loading the Sunar modules.
 </Callout>
 
-## Conclusion
+## Common signal examples
 
-Working with signals in Sunar offers a flexible and powerful way to manage events and interactions within your Discord bot. Signals enable you to decouple different parts of your bot's functionality, promoting a modular and maintainable codebase. By defining and handling signals, you can efficiently respond to various events such as bot initialization, user interactions, or external triggers.
+Here are some practical examples of signals you might want to use in your bot:
 
-Throughout this guide, you've learned how to create signals, handle their execution using callbacks, and ensure they are properly exported for Sunar to utilize. Additionally, you explored the concept of using signals alongside middleware for enhanced control and validation of interactions.
+### Message creation
 
-Whether you're building a simple bot or a complex application, mastering signals empowers you to design scalable and responsive bot architectures. As you continue to explore Sunar, consider further integrating signals into your bot's workflows to streamline development and enhance user experiences.
+```ts title="src/signals/message-create.ts"
+import { Signal, Signals, execute } from 'sunar';
 
-Start leveraging signals today and discover new possibilities for your Discord bot development with Sunar!
+const signal = new Signal(Signals.MessageCreate);
+
+execute(signal, (message) => {
+    // Ignore bot messages to prevent loops
+    if (message.author.bot) return;
+
+    // Example: Log all messages sent in guilds
+    if (message.guild) {
+        console.log(`${message.author.tag}: ${message.content}`);
+    }
+});
+
+export { signal };
+```
+
+### Guild member join
+
+```ts title="src/signals/member-join.ts"
+import { Signal, Signals, execute } from 'sunar';
+
+const signal = new Signal(Signals.GuildMemberAdd);
+
+execute(signal, async (member) => {
+    // Send welcome message
+    const channel = member.guild.systemChannel;
+    if (channel) {
+        channel.send(`Welcome ${member}! 👋`);
+    }
+});
+
+export { signal };
+```
+
+### Error handling
+
+```ts title="src/signals/error.ts"
+import { Signal, Signals, execute } from 'sunar';
+
+const signal = new Signal(Signals.Error);
+
+execute(signal, (error) => {
+    console.error('An error occurred:', error);
+    // Add your error reporting logic here
+});
+
+export { signal };
+```
+
+---
+
+<Callout>
+Find all available events in the [discord.js documentation](https://discord.js.org/docs/packages/discord.js/main/Events:Enum).
+</Callout>

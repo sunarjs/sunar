@@ -1,6 +1,6 @@
 import { type ApplicationCommand, type ApplicationCommandData, type ClientApplication, Collection } from "discord.js";
 
-import { type SunarApplicationCommand, getSunarApplicationCommands } from "../../utils";
+import { getSunarApplicationCommands, type SunarApplicationCommand } from "~/utils";
 
 export interface DynamicRegistryResult {
     globalCommands: Collection<string, ApplicationCommand>;
@@ -8,19 +8,19 @@ export interface DynamicRegistryResult {
 }
 
 /**
- * Register global and guild commands, by default all will be global, to specify that is a guild command add their IDs in the command configuration with the config mutator.
+ * Registers both global and guild-specific commands in the given application context.
+ * By default, all commands are registered globally unless specified otherwise in their configuration.
  *
- * @param application The client application where the commands will be registered.
+ * @param {ClientApplication} application - The application instance where commands are registered.
  *
- * @returns An object with the registered global and guild commands
+ * @returns {Promise<DynamicRegistryResult>} An object containing collections of registered global and guild commands.
  *
- * @see https://sunar.js.org/docs/guides/registering-commands/dynamic
+ * @see {@link https://sunar.js.org/docs/guides/registering-commands#register-commands-dynamically} for dynamic command registration guide
  */
 export async function registerCommands(application: ClientApplication): Promise<DynamicRegistryResult> {
     const commands = getSunarApplicationCommands();
 
-    const isGuildCommand = (command: SunarApplicationCommand) =>
-        command.config.guildIds && command.config.guildIds.length > 0;
+    const isGuildCommand = (command: SunarApplicationCommand) => command.config.guildIds && command.config.guildIds.length > 0;
 
     const globalCommands = commands.filter((c) => !isGuildCommand(c));
     const guildCommands = commands.filter(isGuildCommand);

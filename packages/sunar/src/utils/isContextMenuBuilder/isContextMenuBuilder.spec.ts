@@ -1,7 +1,7 @@
 import { ApplicationCommandType } from "discord.js";
-import { Builders } from "..";
-import { Button, ContextMenu } from "../../builders";
-import { isContextMenuBuilder } from "./isContextMenuBuilder";
+
+import { Button, ContextMenu } from "~/builders";
+import { Builders, isContextMenuBuilder } from "~/utils";
 
 describe("isContextMenuBuilder()", () => {
     it("should return true for a valid ContextMenu builder", () => {

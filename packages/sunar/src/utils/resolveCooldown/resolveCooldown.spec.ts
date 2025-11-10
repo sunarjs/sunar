@@ -1,5 +1,4 @@
-import { CooldownScope } from "../enums";
-import { resolveCooldown } from "./resolveCooldown";
+import { CooldownScope, resolveCooldown } from "~/utils";
 
 describe("resolveCooldown()", () => {
     it("should resolve a simple number cooldown", () => {

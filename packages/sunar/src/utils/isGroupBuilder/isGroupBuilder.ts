@@ -1,6 +1,9 @@
-import { Builders, isBuilder } from "..";
-import { Group } from "../../builders";
+import { Group } from "~/builders";
+import { Builders, isBuilder } from "~/utils";
 
+/**
+ * @deprecated Use isSlashGroupBuilder and isSlashParentBuilder instead
+ */
 export function isGroupBuilder(builder: any): builder is Group {
     if (!isBuilder(builder)) return false;
 

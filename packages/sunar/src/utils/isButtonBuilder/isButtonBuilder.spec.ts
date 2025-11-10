@@ -1,5 +1,5 @@
-import { Button, ContextMenu } from "../../builders";
-import { isButtonBuilder } from "./isButtonBuilder";
+import { Button, ContextMenu } from "~/builders";
+import { isButtonBuilder } from "~/utils";
 
 describe("isButtonBuilder()", () => {
     it("should return true for a valid Button builder", () => {

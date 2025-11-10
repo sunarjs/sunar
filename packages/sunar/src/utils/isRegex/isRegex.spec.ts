@@ -1,4 +1,4 @@
-import { isRegex } from "./isRegex";
+import { isRegex } from "~/utils";
 
 describe("isRegex()", () => {
     it("should return true for a valid RegExp", () => {

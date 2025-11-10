@@ -1,4 +1,4 @@
-import type { CooldownScope } from "..";
+import type { CooldownScope } from "~/utils";
 
 /** Represents a timestamp for a cooldown. */
 export interface CooldownTimestamp {

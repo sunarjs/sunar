@@ -1,47 +1,40 @@
-import type { Dependency, Features, Language } from '../types';
-import { DEPENDENCIES } from '../utils/dependencies';
+import type { Dependency, Features, Language } from "../types";
+import { DEPENDENCIES } from "../utils/dependencies";
 
 interface PackageDependencies {
-	dependencies: Record<Dependency, string>;
-	devDependencies?: Record<Dependency, string>;
+    dependencies: Record<Dependency, string>;
+    devDependencies?: Record<Dependency, string>;
 }
 
 export function getDependencies(language: Language, features: Features): PackageDependencies {
-	const deps: Dependency[] = ['sunar', 'discord.js', 'dotenv'];
-	const devDeps: Dependency[] = [];
+    const deps: Dependency[] = ["sunar", "discord.js", "dotenv"];
+    const devDeps: Dependency[] = [];
 
-	if (features.eslint) devDeps.push('eslint');
+    if (features.eslint) devDeps.push("eslint");
 
-	if (language === 'javascript') {
-		if (features.nodemon) devDeps.push('nodemon');
-	}
+    if (language === "typescript") {
+        devDeps.push("@types/node", "typescript");
+        if (features.tsx) devDeps.push("tsx");
+        if (features.tsdown) devDeps.push("tsdown");
+        if (features.eslint) devDeps.push("typescript-eslint");
+    }
 
-	if (language === 'typescript') {
-		devDeps.push('@types/node', 'typescript');
+    if (features.biome) devDeps.push("@biomejs/biome");
+    if (features.prettier) devDeps.push("prettier");
 
-		if (features.tsx) devDeps.push('tsx');
-		if (features.tsup) devDeps.push('tsup');
-		if (features.eslint) {
-			devDeps.push('@typescript-eslint/parser', '@typescript-eslint/eslint-plugin');
-		}
-	}
+    const depsEntries = deps.map((dep) => [dep, DEPENDENCIES[dep]]);
+    const devDepsEntries = devDeps.map((dep) => [dep, DEPENDENCIES[dep]]);
 
-	if (features.biome) devDeps.push('@biomejs/biome');
-	if (features.prettier) devDeps.push('prettier');
+    depsEntries.sort();
+    devDepsEntries.sort();
 
-	const depsEntries = deps.map((dep) => [dep, DEPENDENCIES[dep]]);
-	const devDepsEntries = devDeps.map((dep) => [dep, DEPENDENCIES[dep]]);
+    const dependencies = Object.fromEntries(depsEntries);
+    const devDependencies = Object.fromEntries(devDepsEntries);
 
-	depsEntries.sort();
-	devDepsEntries.sort();
+    const devDepsLength = devDepsEntries.length;
 
-	const dependencies = Object.fromEntries(depsEntries);
-	const devDependencies = Object.fromEntries(devDepsEntries);
-
-	const devDepsLength = devDepsEntries.length;
-
-	return {
-		dependencies,
-		devDependencies: devDepsLength > 0 ? devDependencies : undefined,
-	};
+    return {
+        dependencies,
+        devDependencies: devDepsLength > 0 ? devDependencies : undefined,
+    };
 }

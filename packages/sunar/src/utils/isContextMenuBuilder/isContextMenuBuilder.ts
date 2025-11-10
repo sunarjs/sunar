@@ -1,5 +1,5 @@
-import { Builders, isBuilder } from "..";
-import { ContextMenu } from "../../builders";
+import { ContextMenu } from "~/builders";
+import { Builders, isBuilder } from "~/utils";
 
 export function isContextMenuBuilder(builder: any): builder is ContextMenu {
     if (!isBuilder(builder)) return false;

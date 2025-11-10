@@ -1,6 +1,5 @@
-import { Builders } from "..";
-import { Button, Slash } from "../../builders";
-import { isSlashBuilder } from "./isSlashBuilder";
+import { Button, Slash } from "~/builders";
+import { Builders, isSlashBuilder } from "~/utils";
 
 describe("isSlashBuilder()", () => {
     it("should return true for a valid Slash builder", () => {

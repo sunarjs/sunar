@@ -4,7 +4,8 @@
         "working-with-signals",
         "interactions-handling",
         "registering-commands",
-        "middlewares",
-        "implementing-cooldowns"
+        "using-components",
+        "implementing-cooldowns",
+        "middlewares"
     ]
 }

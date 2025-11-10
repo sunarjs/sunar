@@ -1,5 +1,5 @@
-import { Builders } from "../../utils";
-import { type ConfigurableBuilder, config } from "./config";
+import { type ConfigurableBuilder, config } from "~/mutators";
+import { Builders } from "~/utils";
 
 describe("config()", () => {
     it("should apply configuration to a builder", () => {

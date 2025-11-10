@@ -1,0 +1,27 @@
+@import "tailwindcss";
+@import "fumadocs-ui/css/solar.css";
+@import "fumadocs-ui/css/preset.css";
+
+@theme inline {
+    --default-mono-font-family: "GeistMono";
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+@theme inline {
+    --animate-cell-ripple: cell-ripple var(--duration, 200ms) ease-out none 1 var(--delay, 0ms);
+
+    @keyframes cell-ripple {
+        0% {
+            opacity: 0.4;
+        }
+        50% {
+            opacity: 0.8;
+        }
+        100% {
+            opacity: 0.4;
+        }
+    }
+}
