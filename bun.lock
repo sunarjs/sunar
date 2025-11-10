@@ -41,6 +41,7 @@
         "shiki": "^3.15.0",
         "sunar": "workspace:*",
         "tailwind-merge": "3.4.0",
+        "ts-morph": "^27.0.2",
         "zod": "4.1.12",
       },
       "devDependencies": {
@@ -59,7 +60,7 @@
     },
     "packages/create-sunar": {
       "name": "create-sunar",
-      "version": "1.3.0",
+      "version": "1.2.0",
       "bin": {
         "create-sunar": "dist/index.js",
       },
@@ -83,12 +84,12 @@
       "name": "sunar",
       "version": "0.7.0",
       "devDependencies": {
-        "bunup": "latest",
-        "typescript": "latest",
-        "vitest": "latest",
+        "bunup": "^0.15.14",
+        "typescript": "^5.9.3",
+        "vitest": "^4.0.8",
       },
       "peerDependencies": {
-        "discord.js": "latest",
+        "discord.js": ">=14.x",
       },
     },
   },
