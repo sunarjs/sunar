@@ -7,7 +7,7 @@ export const DEPENDENCIES = {
     dotenv: "^17.2.3",
     eslint: "^9.39.1",
     prettier: "^3.6.2",
-    sunar: "^0.7.0",
+    sunar: "^0.7.3",
     tsdown: "^0.16.1",
     tsx: "^4.20.6",
     typescript: "^5.9.3",
